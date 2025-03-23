@@ -1,0 +1,17 @@
+C:\Users\Usuario\Documents\NetBeansProjects\taskManager\src\main\java\controller\BoardController.java
+C:\Users\Usuario\Documents\NetBeansProjects\taskManager\src\main\java\controller\TaskController.java
+C:\Users\Usuario\Documents\NetBeansProjects\taskManager\src\main\java\controller\TMBoard.java
+C:\Users\Usuario\Documents\NetBeansProjects\taskManager\src\main\java\controller\UserController.java
+C:\Users\Usuario\Documents\NetBeansProjects\taskManager\src\main\java\Domain\Board.java
+C:\Users\Usuario\Documents\NetBeansProjects\taskManager\src\main\java\Domain\Endereco.java
+C:\Users\Usuario\Documents\NetBeansProjects\taskManager\src\main\java\Domain\Task.java
+C:\Users\Usuario\Documents\NetBeansProjects\taskManager\src\main\java\Domain\User.java
+C:\Users\Usuario\Documents\NetBeansProjects\taskManager\src\main\java\Infrastructure\IBoardRepository.java
+C:\Users\Usuario\Documents\NetBeansProjects\taskManager\src\main\java\Infrastructure\IBoardRepositoryImpl.java
+C:\Users\Usuario\Documents\NetBeansProjects\taskManager\src\main\java\Infrastructure\IUserRepository.java
+C:\Users\Usuario\Documents\NetBeansProjects\taskManager\src\main\java\Infrastructure\IUserRepositoryImpl.java
+C:\Users\Usuario\Documents\NetBeansProjects\taskManager\src\main\java\Utils\Utils.java
+C:\Users\Usuario\Documents\NetBeansProjects\taskManager\src\main\java\viewer\BoardRegisterDlg.java
+C:\Users\Usuario\Documents\NetBeansProjects\taskManager\src\main\java\viewer\ClientRegisterDlg.java
+C:\Users\Usuario\Documents\NetBeansProjects\taskManager\src\main\java\viewer\FrmPrincipal.java
+C:\Users\Usuario\Documents\NetBeansProjects\taskManager\src\main\java\viewer\TaskRegisterDlg.java
