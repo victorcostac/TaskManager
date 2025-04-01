@@ -15,7 +15,7 @@ import java.util.stream.Collectors;
  *
  * @author Usuario
  */
-public class IBoardRepositoryImpl implements IBoardRepository{
+public class IBoardRepositoryImpl implements IBoardRepository{ //EQUIVALENTE A UM DAO
     Set<Board> boards = new HashSet<>();
 
     public IBoardRepositoryImpl() {

@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package controller;
+package service;
 
 import Domain.User;
 import Infrastructure.IUserRepository;
@@ -12,10 +12,10 @@ import java.util.List;
  *
  * @author Usuario
  */
-public class UserController {
+public class UserService {
     private final IUserRepository iUserRepository;
 
-    public UserController(IUserRepository iUserRepository) {
+    public UserService(IUserRepository iUserRepository) {
         this.iUserRepository = iUserRepository;
     }
     
@@ -23,7 +23,7 @@ public class UserController {
         iUserRepository.createUser(user);
     }
     
-    public List<User> getUser(){
+    public List<User> getUsers(){
         return iUserRepository.getUsers();
     }
     
@@ -34,4 +34,5 @@ public class UserController {
     public void editUser(User user){
         iUserRepository.editUser(user);
     }
+    
 }

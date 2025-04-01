@@ -6,8 +6,9 @@ import Infrastructure.IBoardRepository;
 import Infrastructure.IBoardRepositoryImpl;
 import Infrastructure.IUserRepository;
 import Infrastructure.IUserRepositoryImpl;
-import controller.BoardController;
-import controller.UserController;
+import controller.GraphicInterfaceManager;
+import service.BoardService;
+import service.UserService;
 import java.util.List;
 
 /*
@@ -19,18 +20,12 @@ import java.util.List;
  *
  * @author Usuario
  */
-public class FrmPrincipal extends javax.swing.JFrame {
-    
-    private final IBoardRepository iBoardRepository = new IBoardRepositoryImpl();
-    private final BoardController boardController = new BoardController(this.iBoardRepository);
-    
-    private final IUserRepository iUserRepository = new IUserRepositoryImpl();
-    private final UserController userController = new UserController(this.iUserRepository);
+public class MainFrame extends javax.swing.JFrame {   
 
     /**
      * Creates new form FrmPrincipal
      */
-    public FrmPrincipal() {
+    public MainFrame() {
         initComponents();
     }
 
@@ -43,13 +38,14 @@ public class FrmPrincipal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jLabel2 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
-        cadUsuarioOpt = new javax.swing.JMenuItem();
-        jMenuItem2 = new javax.swing.JMenuItem();
-        boardMenuItem = new javax.swing.JMenuItem();
+        UserRegisterMenuItem = new javax.swing.JMenuItem();
+        taskRegisterMenuItem = new javax.swing.JMenuItem();
+        boardRegisterMenuItem = new javax.swing.JMenuItem();
         jSeparator1 = new javax.swing.JPopupMenu.Separator();
-        jMenuItem3 = new javax.swing.JMenuItem();
+        ExitMenuItem = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         boardMenu = new javax.swing.JMenu();
         jMenu4 = new javax.swing.JMenu();
@@ -61,44 +57,52 @@ public class FrmPrincipal extends javax.swing.JFrame {
         setTitle("Início");
         setResizable(false);
 
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/public/taskManagerFrase.png"))); // NOI18N
+        getContentPane().add(jLabel2, java.awt.BorderLayout.CENTER);
+
         jMenu1.setText("Cadastro");
 
-        cadUsuarioOpt.setText("Usuário");
-        cadUsuarioOpt.addMouseListener(new java.awt.event.MouseAdapter() {
+        UserRegisterMenuItem.setText("User");
+        UserRegisterMenuItem.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                cadUsuarioOptMouseClicked(evt);
+                UserRegisterMenuItemMouseClicked(evt);
             }
         });
-        cadUsuarioOpt.addActionListener(new java.awt.event.ActionListener() {
+        UserRegisterMenuItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cadUsuarioOptActionPerformed(evt);
+                UserRegisterMenuItemActionPerformed(evt);
             }
         });
-        jMenu1.add(cadUsuarioOpt);
+        jMenu1.add(UserRegisterMenuItem);
 
-        jMenuItem2.setText("Tarefa");
-        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+        taskRegisterMenuItem.setText("Task");
+        taskRegisterMenuItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem2ActionPerformed(evt);
+                taskRegisterMenuItemActionPerformed(evt);
             }
         });
-        jMenu1.add(jMenuItem2);
+        jMenu1.add(taskRegisterMenuItem);
 
-        boardMenuItem.setText("Board");
-        boardMenuItem.addActionListener(new java.awt.event.ActionListener() {
+        boardRegisterMenuItem.setText("Board");
+        boardRegisterMenuItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                boardMenuItemActionPerformed(evt);
+                boardRegisterMenuItemActionPerformed(evt);
             }
         });
-        jMenu1.add(boardMenuItem);
+        jMenu1.add(boardRegisterMenuItem);
         jMenu1.add(jSeparator1);
 
-        jMenuItem3.setText("Sair");
-        jMenu1.add(jMenuItem3);
+        ExitMenuItem.setText("Exit");
+        ExitMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ExitMenuItemActionPerformed(evt);
+            }
+        });
+        jMenu1.add(ExitMenuItem);
 
         jMenuBar1.add(jMenu1);
 
-        jMenu2.setText("Tarefas");
+        jMenu2.setText("Boards");
         jMenu2.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jMenu2MouseClicked(evt);
@@ -153,24 +157,12 @@ public class FrmPrincipal extends javax.swing.JFrame {
 
         setJMenuBar(jMenuBar1);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 398, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 277, Short.MAX_VALUE)
-        );
-
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void cadUsuarioOptActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cadUsuarioOptActionPerformed
-        ClientRegisterDlg clientRegisterDlg = new ClientRegisterDlg(this, true, this.userController);
-        clientRegisterDlg.setVisible(true);
-    }//GEN-LAST:event_cadUsuarioOptActionPerformed
+    private void UserRegisterMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UserRegisterMenuItemActionPerformed
+        GraphicInterfaceManager.getMyInstance().openClientRegisterDlg();
+    }//GEN-LAST:event_UserRegisterMenuItemActionPerformed
 
     private void jRadioButtonMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonMenuItem1ActionPerformed
         // TODO add your handling code here:
@@ -180,19 +172,12 @@ public class FrmPrincipal extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jRadioButtonMenuItem2ActionPerformed
 
-    private void cadUsuarioOptMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cadUsuarioOptMouseClicked
+    private void UserRegisterMenuItemMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_UserRegisterMenuItemMouseClicked
 
-    }//GEN-LAST:event_cadUsuarioOptMouseClicked
+    }//GEN-LAST:event_UserRegisterMenuItemMouseClicked
 
     private void boardMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boardMenuActionPerformed
 
-        List<Board> boardList = this.boardController.getBoards();
-        System.out.println("TO AQUIAQUI");
-        for(Board board: boardList){
-            System.out.println("NOME DO BOARD"+ board.getName());
-            javax.swing.JMenuItem novoMenuItem = new javax.swing.JMenuItem();
-            novoMenuItem.setText(board.getName());
-        }
     }//GEN-LAST:event_boardMenuActionPerformed
 
     private void boardMenuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_boardMenuMouseClicked
@@ -207,63 +192,58 @@ public class FrmPrincipal extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jMenu2ActionPerformed
 
-    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
-        TaskRegisterDlg taskRegisterDlg = new TaskRegisterDlg(this, true);
-        taskRegisterDlg.setVisible(true);
-    }//GEN-LAST:event_jMenuItem2ActionPerformed
+    private void taskRegisterMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_taskRegisterMenuItemActionPerformed
+        GraphicInterfaceManager.getMyInstance().openTaskRegisterDlg();        
+    }//GEN-LAST:event_taskRegisterMenuItemActionPerformed
 
-    private void boardMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boardMenuItemActionPerformed
-        BoardRegisterDlg boardRegisterDlg = new BoardRegisterDlg(this, true, this.boardController, this.userController);  
-        boardRegisterDlg.setVisible(true);
-    }//GEN-LAST:event_boardMenuItemActionPerformed
+    private void boardRegisterMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boardRegisterMenuItemActionPerformed
+        GraphicInterfaceManager.getMyInstance().openBoardRegisterDlg();
+    }//GEN-LAST:event_boardRegisterMenuItemActionPerformed
+
+    private void ExitMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ExitMenuItemActionPerformed
+        GraphicInterfaceManager.getMyInstance().exit();
+    }//GEN-LAST:event_ExitMenuItemActionPerformed
 
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
+    
+    /*public static void main(String args[]) {*/
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
          */
+         /*
         try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Windows".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(FrmPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(FrmPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(FrmPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(FrmPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            UIManager.setLookAndFeel(new FlatDarkLaf());
+        } catch (UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(MainFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        */
         //</editor-fold>
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
+        /*java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new FrmPrincipal().setVisible(true);
+                new MainFrame().setVisible(true);
             }
         });
         
-    }
+    }*/
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenuItem ExitMenuItem;
+    private javax.swing.JMenuItem UserRegisterMenuItem;
     private javax.swing.JMenu boardMenu;
-    private javax.swing.JMenuItem boardMenuItem;
-    private javax.swing.JMenuItem cadUsuarioOpt;
+    private javax.swing.JMenuItem boardRegisterMenuItem;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu4;
     private javax.swing.JMenu jMenu5;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem2;
-    private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JRadioButtonMenuItem jRadioButtonMenuItem1;
     private javax.swing.JRadioButtonMenuItem jRadioButtonMenuItem2;
     private javax.swing.JPopupMenu.Separator jSeparator1;
+    private javax.swing.JMenuItem taskRegisterMenuItem;
     // End of variables declaration//GEN-END:variables
 }

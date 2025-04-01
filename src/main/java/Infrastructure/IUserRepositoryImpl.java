@@ -14,7 +14,7 @@ import java.util.stream.Collectors;
  *
  * @author Usuario
  */
-public class IUserRepositoryImpl implements IUserRepository{
+public class IUserRepositoryImpl implements IUserRepository{ //EQUIVALENTE A UM DAO
     Set<User> users = new HashSet<>();
     @Override
     public void createUser(User user) {

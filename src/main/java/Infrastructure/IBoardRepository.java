@@ -12,7 +12,7 @@ import java.util.List;
  *
  * @author Usuario
  */
-public interface IBoardRepository {
+public interface IBoardRepository { //EQUIVALENTE A UM DAO
     
     void createBoard(Board board);
     void deleteBoardById(Long boardId);

@@ -126,7 +126,7 @@ public class User {
 
     @Override
     public String toString() {
-        return "User{" + "name=" + name + ", ssn=" + ssn + ", birthDate=" + birthDate + ", zip=" + zip + ", address=" + address + ", city=" + city + '}';
+        return getName();
     }
     
     public static class UserBuilder{

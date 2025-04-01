@@ -88,17 +88,21 @@ public class Board {
         this.owner = owner;
     }
     
-    public String verifyStatus(Boolean status){
+    private String verifyStatus(Boolean status){
         if(status.equals(Boolean.TRUE)){
             return "active";
         }else{
             return "unactive";
-            
         }
     }
     
     public  Object[] getData(){
         return new Object[]{this.id,this.name, this.description,  this.owner, verifyStatus(this.status)};
+    }
+
+    @Override
+    public String toString() {
+        return getName();
     }
     
 }

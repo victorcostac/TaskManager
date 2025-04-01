@@ -11,7 +11,7 @@ import java.util.List;
  *
  * @author Usuario
  */
-public interface IUserRepository {
+public interface IUserRepository { //EQUIVALENTE A UM DAO
     void createUser(User user);
     void deleteUserById(Long userId);
     List<User> getUsers();

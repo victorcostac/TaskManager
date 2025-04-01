@@ -2,11 +2,12 @@ package viewer;
 
 import Utils.Utils;
 import Domain.User;
-import controller.UserController;
+import service.UserService;
 import java.awt.Color;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import javax.swing.JOptionPane;
+import controller.GraphicInterfaceManager;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -22,16 +23,13 @@ public class ClientRegisterDlg extends javax.swing.JDialog {
     /**
      * Creates new form ClientRegisterDlg
      */
-    
-    private final UserController userController; 
     private static DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("dd/MM/yyyy");
     
     private String msgError = "";
     
-    public ClientRegisterDlg(java.awt.Frame parent, boolean modal, UserController userController) {
+    public ClientRegisterDlg(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        this.userController = userController;
     }
 
     /**
@@ -376,11 +374,13 @@ public class ClientRegisterDlg extends javax.swing.JDialog {
                 .name(nameTxt.getText())
                 .build();
         
-        this.userController.createUser(newUser);
-
+        GraphicInterfaceManager.getMyInstance().registerUserCreated(newUser);
+        
         setDefaultColorToPanels();
         dispose();
         }else{
+            JOptionPane.showMessageDialog(this, this.msgError, "Client Registered", JOptionPane.ERROR_MESSAGE);
+            this.msgError = "";
             System.out.println("An error occurred in the user creation.");
         }
     }//GEN-LAST:event_OKButtonActionPerformed
@@ -439,7 +439,7 @@ public class ClientRegisterDlg extends javax.swing.JDialog {
  
             return true;
         }else{
-            JOptionPane.showMessageDialog(this, this.msgError, "Client Registered", JOptionPane.INFORMATION_MESSAGE);
+            //JOptionPane.showMessageDialog(this, this.msgError, "Client Registered", JOptionPane.INFORMATION_MESSAGE);
             
             return false;
         }

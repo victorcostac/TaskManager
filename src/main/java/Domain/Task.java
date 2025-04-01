@@ -19,6 +19,15 @@ public class Task {
     private String upstreamPhase;
     private Date dueDate; 
     private String description;
+    private Boolean isOwner;
+
+    public Boolean IsOwner() {
+        return isOwner;
+    }
+
+    public void IsOwner(Boolean isOwner) {
+        this.isOwner = isOwner;
+    }
 
     public String getTaskId() {
         return taskId;

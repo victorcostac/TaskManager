@@ -6,20 +6,19 @@ package viewer;
 
 import Domain.Board;
 import Domain.User;
-import controller.BoardController;
-import controller.UserController;
+import service.BoardService;
+import service.UserService;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import controller.GraphicInterfaceManager;
 
 /**
  *
  * @author Usuario
  */
 public class BoardRegisterDlg extends javax.swing.JDialog {
-    private final BoardController boardController;
-    private final UserController userController; 
     private DefaultTableModel boardDefaultTable;
     private List<Board> boardList = new ArrayList<>();
     private String statusRepository[] = {"active", "unactive"};
@@ -27,28 +26,22 @@ public class BoardRegisterDlg extends javax.swing.JDialog {
     /**
      * Creates new form BoardRegisterDlg
      */
-    public BoardRegisterDlg(java.awt.Frame parent, boolean modal, BoardController boardController, UserController userController) {
+    public BoardRegisterDlg(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
-        this.boardController = boardController;
-        this.userController = userController;
         initComponents();
         setBoardTable();
-        System.out.println("TAMANHO DA LISTA DE BOARD VINDA DO BANCO: "+boardController.getBoards().size());
-        for (Board board : boardController.getBoards()) {
+        for (Board board : GraphicInterfaceManager.getMyInstance().loadBoards()) {
             this.boardDefaultTable.addRow(board.getData());
         }
-        
-        String userStr[] = new String[this.userController.getUser().size()];
+        List<User> userList = GraphicInterfaceManager.getMyInstance().getUsers();
+        User userArray[] = new User[userList.size()];
         int i = 0;
-        for(User user : this.userController.getUser()){
-            userStr[i] = user.getName();
+        for(User user : userList){
+            userArray[i] = user;
             i++;
         }
-        
-        
-        ownerComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(userStr));
+        //ownerComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(userArray));
         statusComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { statusRepository[0], statusRepository[1] }));
-        
     }
 
     /**
@@ -64,10 +57,6 @@ public class BoardRegisterDlg extends javax.swing.JDialog {
         clearMenuItem = new javax.swing.JMenuItem();
         editarMenuItem = new javax.swing.JMenuItem();
         cadastrarMenuItem = new javax.swing.JMenuItem();
-        jPopupMenu1 = new javax.swing.JPopupMenu();
-        nometalMenuItem = new javax.swing.JMenuItem();
-        jMenuItem2 = new javax.swing.JMenuItem();
-        jMenuItem3 = new javax.swing.JMenuItem();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         newBoardText = new javax.swing.JTextField();
@@ -105,16 +94,13 @@ public class BoardRegisterDlg extends javax.swing.JDialog {
         });
         boardTablePopupMenu.add(cadastrarMenuItem);
 
-        nometalMenuItem.setText("nome");
-        jPopupMenu1.add(nometalMenuItem);
-
-        jMenuItem2.setText("jMenuItem2");
-        jPopupMenu1.add(jMenuItem2);
-
-        jMenuItem3.setText("jMenuItem3");
-        jPopupMenu1.add(jMenuItem3);
-
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentShown(java.awt.event.ComponentEvent evt) {
+                formComponentShown(evt);
+            }
+        });
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Register a new Board"));
 
@@ -188,7 +174,7 @@ public class BoardRegisterDlg extends javax.swing.JDialog {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(ownerComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(statusComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(55, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -211,6 +197,8 @@ public class BoardRegisterDlg extends javax.swing.JDialog {
                 .addComponent(addBoardButton)
                 .addContainerGap())
         );
+
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 6, 462, -1));
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Board list"));
         jPanel2.setLayout(new java.awt.BorderLayout());
@@ -236,26 +224,7 @@ public class BoardRegisterDlg extends javax.swing.JDialog {
 
         jPanel2.add(jScrollPane1, java.awt.BorderLayout.CENTER);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(8, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
+        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 164, -1, 179));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -271,14 +240,15 @@ public class BoardRegisterDlg extends javax.swing.JDialog {
     private void addBoardButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addBoardButtonActionPerformed
         Boolean status;
         System.out.println("COMBOX:"+statusComboBox.getSelectedItem().toString());
-        if(statusComboBox.getSelectedItem().toString().equals("Active")){
+        if(statusComboBox.getSelectedItem().toString().equals("active")){
             status = true;
         }else{
             status = false;
         }
         
         Board newBoard = new Board(newBoardText.getText(), descriptionTextField.getText(), ownerComboBox.getSelectedItem().toString(),status);
-        this.boardController.createBoard(newBoard);
+        
+        GraphicInterfaceManager.getMyInstance().registerBoardCreated(newBoard);
         this.boardList.add(newBoard);
         
         newBoardText.setText("");
@@ -313,11 +283,15 @@ public class BoardRegisterDlg extends javax.swing.JDialog {
             if(JOptionPane.showConfirmDialog(this, "Delete it?") == JOptionPane.YES_OPTION){
             Long boardId = (Long)(this.boardDefaultTable).getValueAt(linha, 0);
             (this.boardDefaultTable).removeRow(linha);
-            this.boardController.deleteBoard(boardId);            
+            GraphicInterfaceManager.getMyInstance().deleteBoardById(boardId);        
             }
 
         }
     }//GEN-LAST:event_clearMenuItemActionPerformed
+
+    private void formComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentShown
+        GraphicInterfaceManager.getMyInstance().loadComboUsers(ownerComboBox);
+    }//GEN-LAST:event_formComponentShown
     
     private void setBoardTable() {
         this.boardDefaultTable = (DefaultTableModel) boardsTable.getModel();
@@ -337,14 +311,10 @@ public class BoardRegisterDlg extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JMenuItem jMenuItem2;
-    private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JPopupMenu jPopupMenu1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField newBoardText;
-    private javax.swing.JMenuItem nometalMenuItem;
     private javax.swing.JComboBox<String> ownerComboBox;
     private javax.swing.JComboBox<String> statusComboBox;
     // End of variables declaration//GEN-END:variables

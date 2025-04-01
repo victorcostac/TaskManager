@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package controller;
+package service;
 
 import Domain.Board;
 import Infrastructure.IBoardRepository;
@@ -12,10 +12,10 @@ import java.util.List;
  *
  * @author Usuario
  */
-public class BoardController {
+public class BoardService {
     private final IBoardRepository iBoardRepository;
     
-    public BoardController(IBoardRepository iBoardRepository){
+    public BoardService(IBoardRepository iBoardRepository){
         this.iBoardRepository = iBoardRepository;
     }
     
@@ -28,7 +28,7 @@ public class BoardController {
     }
     
     
-    public void deleteBoard(Long boardId){
+    public void deleteBoardById(Long boardId){
         iBoardRepository.deleteBoardById(boardId);
     }
 }
