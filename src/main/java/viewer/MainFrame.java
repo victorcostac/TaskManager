@@ -2,6 +2,7 @@ package viewer;
 
 
 import Domain.Board;
+import Domain.User;
 import Infrastructure.IBoardRepository;
 import Infrastructure.IBoardRepositoryImpl;
 import Infrastructure.IUserRepository;
@@ -10,6 +11,7 @@ import controller.GraphicInterfaceManager;
 import service.BoardService;
 import service.UserService;
 import java.util.List;
+import javax.swing.JOptionPane;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -129,9 +131,9 @@ public class MainFrame extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu2);
 
-        jMenu4.setText("Relatórios");
+        jMenu4.setText("Reports");
 
-        jMenu5.setText("exibir");
+        jMenu5.setText("display");
 
         jRadioButtonMenuItem1.setSelected(true);
         jRadioButtonMenuItem1.setText("Mais recentes");
@@ -193,10 +195,20 @@ public class MainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenu2ActionPerformed
 
     private void taskRegisterMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_taskRegisterMenuItemActionPerformed
+        List<Board> boards = GraphicInterfaceManager.getMyInstance().loadBoards();
+        if(boards.isEmpty()){
+            JOptionPane.showMessageDialog(this, "At least one board must to be registered.", "No board registered", JOptionPane.INFORMATION_MESSAGE);
+            return;
+        }
         GraphicInterfaceManager.getMyInstance().openTaskRegisterDlg();        
     }//GEN-LAST:event_taskRegisterMenuItemActionPerformed
 
     private void boardRegisterMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boardRegisterMenuItemActionPerformed
+        List<User> users = GraphicInterfaceManager.getMyInstance().loadUsers();
+        if(users.isEmpty()){
+            JOptionPane.showMessageDialog(this, "At least one user must to be registered.", "No user registered", JOptionPane.INFORMATION_MESSAGE);
+            return;
+        }
         GraphicInterfaceManager.getMyInstance().openBoardRegisterDlg();
     }//GEN-LAST:event_boardRegisterMenuItemActionPerformed
 

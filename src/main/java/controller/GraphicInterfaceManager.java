@@ -84,7 +84,7 @@ public class GraphicInterfaceManager { // Gerenciador de interface gráfica
     
     public void loadComboUsers(JComboBox combo){
         try {
-            List list = domainManager.getUsers();
+            List list = loadUsers();
             combo.setModel(new DefaultComboBoxModel(list.toArray()));
         } catch (Exception ex) {// adiconar  as exceptions depois 
             JOptionPane.showMessageDialog(boardRegisterDlg, ex, "board registration", JOptionPane.ERROR_MESSAGE);
@@ -93,7 +93,7 @@ public class GraphicInterfaceManager { // Gerenciador de interface gráfica
     
     public void loadComboBoards(JComboBox combo){
         try {
-            List list = domainManager.getBoards();
+            List list = loadBoards();
             combo.setModel(new DefaultComboBoxModel(list.toArray()));
         } catch (Exception ex) {// adiconar  as exceptions depois 
             JOptionPane.showMessageDialog(taskRegisterDlg, ex, "Task registration", JOptionPane.ERROR_MESSAGE);
@@ -102,6 +102,10 @@ public class GraphicInterfaceManager { // Gerenciador de interface gráfica
     
     public List<Board> loadBoards(){
         return domainManager.getBoards();
+    }
+    
+    public List<User> loadUsers() {
+        return domainManager.getUsers();
     }
     
     public List<User> getUsers(){

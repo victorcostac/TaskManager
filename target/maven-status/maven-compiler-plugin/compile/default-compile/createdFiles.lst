@@ -2,11 +2,12 @@ viewer\TaskRegisterDlg$4.class
 viewer\BoardRegisterDlg$3.class
 Utils\Utils.class
 viewer\TaskRegisterDlg$1.class
+viewer\ClientRegisterDlg$14.class
 Domain\Board.class
 Infrastructure\IBoardRepositoryImpl.class
+viewer\BoardRegisterDlg$11.class
 Domain\User.class
 viewer\NewJDialog$1$1.class
-viewer\TaskRegisterDlg$6$1.class
 viewer\BoardRegisterDlg$6.class
 Domain\User$UserBuilder.class
 Infrastructure\IUserRepository.class
@@ -22,6 +23,7 @@ Infrastructure\IUserRepositoryImpl.class
 viewer\BoardRegisterDlg$8.class
 viewer\TaskRegisterDlg.class
 viewer\BoardRegisterDlg$1.class
+viewer\ClientRegisterDlg$13.class
 viewer\TaskRegisterDlg$3.class
 viewer\NewJDialog.class
 Domain\Endereco.class

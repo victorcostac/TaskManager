@@ -4,6 +4,7 @@ import Domain.Task;
 import controller.GraphicInterfaceManager;
 import java.util.Date;
 
+
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JDialog.java to edit this template
@@ -190,16 +191,16 @@ public class TaskRegisterDlg extends javax.swing.JDialog {
         );
 
         cancelButton.setText("Cancel");
+        cancelButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cancelButtonActionPerformed(evt);
+            }
+        });
 
         createButton.setText("Create");
         createButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 createButtonMouseClicked(evt);
-            }
-        });
-        createButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                createButtonActionPerformed(evt);
             }
         });
 
@@ -241,19 +242,8 @@ public class TaskRegisterDlg extends javax.swing.JDialog {
         
     }//GEN-LAST:event_taskNameTxtActionPerformed
 
-    private void createButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createButtonActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_createButtonActionPerformed
-
     private void createButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_createButtonMouseClicked
-        Task newTask = Task.TaskBuilder.builder()
-                .priority((String)taskPriorityComboBox.getSelectedItem())
-                .responsible((String) taskResponsibleComboBox.getSelectedItem())
-                .decription((String) descriptionText.getSelectedText())
-                .dueDate((Date) dueDateFormattedTextField.getValue())
-                .name(taskNameTxt.getText())
-                .taskId(taskIdField.getText())
-                .build();      
+ 
         
     }//GEN-LAST:event_createButtonMouseClicked
 
@@ -266,6 +256,10 @@ public class TaskRegisterDlg extends javax.swing.JDialog {
         GraphicInterfaceManager.getMyInstance().loadComboBoards(boradComboBox);
         
     }//GEN-LAST:event_formComponentShown
+
+    private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
+        dispose();
+    }//GEN-LAST:event_cancelButtonActionPerformed
 
     /**
      * @param args the command line arguments

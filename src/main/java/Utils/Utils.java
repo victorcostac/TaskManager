@@ -10,6 +10,10 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import java.awt.Image;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -118,6 +122,16 @@ public class Utils {
         } catch (Exception e) {
             return null;
         }
+    }
+    
+    public static void mostrarFoto(JLabel lbl, Icon ic) {
+
+        // Redimensionar
+        ImageIcon imagem = (ImageIcon) ic;
+        imagem.setImage(imagem.getImage().getScaledInstance(lbl.getWidth(), lbl.getHeight(), Image.SCALE_DEFAULT));
+
+        lbl.setText("");
+        lbl.setIcon(imagem);
     }
 }
 
