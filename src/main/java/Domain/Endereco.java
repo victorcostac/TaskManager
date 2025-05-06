@@ -10,9 +10,11 @@ package Domain;
  */
 
 public class Endereco {
+    private String Id;
+    private String cep;
     private String logradouro;
     private String bairro;
-    private String localidade;
+    private String cidade;
     private String uf;
 
     public String getLogradouro() {
@@ -23,16 +25,74 @@ public class Endereco {
         return bairro;
     }
 
-    public String getLocalidade() {
-        return localidade;
+    public String getCidade() {
+        return cidade;
     }
 
     public String getUf() {
         return uf;
     }
 
+    public void setLogradouro(String logradouro) {
+        this.logradouro = logradouro;
+    }
+
+    public void setBairro(String bairro) {
+        this.bairro = bairro;
+    }
+
+    public void setCidade(String cidade) {
+        this.cidade = cidade;
+    } 
+    
+
+    public void setUf(String uf) {
+        this.uf = uf;
+    }
+
+    public String getId() {
+        return Id;
+    }
+
+    public void setId(String Id) {
+        this.Id = Id;
+    }
+
+    public String getCep() {
+        return cep;
+    }
+
+    public void setCep(String cep) {
+        this.cep = cep;
+    }
+    
+    
+
+    public Endereco() {
+    }
+
+    public Endereco(String Id, String logradouro, String bairro, String cidade, String uf, String cep) {
+        this.Id = Id;
+        this.logradouro = logradouro;
+        this.bairro = bairro;
+        this.cidade = cidade;
+        this.uf = uf;
+        this.cep = cep;
+    }
+
+    public Endereco(String logradouro, String bairro, String cidade, String uf, String cep) {
+        this.logradouro = logradouro;
+        this.bairro = bairro;
+        this.cidade = cidade;
+        this.uf = uf;
+        this.cep = cep;
+    }
+    
+    
+    
+
     @Override
     public String toString() {
-        return String.format("Rua: %s, Bairro: %s, Cidade: %s - %s", logradouro, bairro, localidade, uf);
+        return String.format("Rua: %s, Bairro: %s, Cidade: %s - %s, cep: %s", logradouro, bairro, cidade, uf, cep);
     }
 }

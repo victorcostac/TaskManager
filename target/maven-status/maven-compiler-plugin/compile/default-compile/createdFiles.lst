@@ -12,15 +12,16 @@ viewer\MainFrame$6.class
 viewer\BoardRegisterDlg$11.class
 viewer\ClientRegisterDlg$8.class
 Domain\User.class
-viewer\NewJDialog$1$1.class
 viewer\BoardRegisterDlg$6.class
 Domain\User$UserBuilder.class
 Infrastructure\IUserRepository.class
 viewer\BoardRegisterDlg$9.class
 viewer\MainFrame$8.class
 viewer\ClientRegisterDlg$7.class
+viewer\Tasks$1.class
 Infrastructure\ITaskRepositoryImpl.class
 viewer\ClientRegisterDlg$10.class
+viewer\Tasks$1$1.class
 viewer\BoardRegisterDlg$2.class
 viewer\ClientRegisterDlg$1.class
 viewer\BoardRegisterDlg$10.class
@@ -30,7 +31,6 @@ viewer\BoardRegisterDlg.class
 controller\DomainManager.class
 viewer\ClientRegisterDlg$4.class
 controller\GraphicInterfaceManager.class
-viewer\NewJDialog$1.class
 viewer\MainFrame$2.class
 viewer\ClientRegisterDlg.class
 Domain\Task.class
@@ -42,6 +42,7 @@ Infrastructure\IUserRepositoryImpl.class
 viewer\MainFrame$4.class
 viewer\BoardRegisterDlg$8.class
 viewer\ClientRegisterDlg$2.class
+Infrastructure\SqlImplementations\IUserRepositorySqlImpl.class
 viewer\MainFrame$10.class
 viewer\TaskRegisterDlg$7$1.class
 viewer\TaskRegisterDlg.class
@@ -51,7 +52,8 @@ viewer\ClientRegisterDlg$3.class
 viewer\MainFrame$1.class
 service\TaskService.class
 viewer\TaskRegisterDlg$3.class
-viewer\NewJDialog.class
+Infrastructure\SqlImplementations\PostGreSqlConnection.class
+viewer\Tasks.class
 viewer\MainFrame$3.class
 viewer\ClientRegisterDlg$5.class
 Domain\Endereco.class
