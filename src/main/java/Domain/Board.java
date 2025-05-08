@@ -6,70 +6,65 @@ package Domain;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
+import javax.persistence.*;
 
 /**
  *
  * @author Usuario
  */
+
+@Entity(name = "board")
 public class Board {
+    
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private List<Task> taskList;
-    private String name;
-    private String description;
+    @Column
+    private String nome;
+    @Column
+    private String descricao;
+    @Column
     private Boolean status;
-    private String owner;
-    private static Long idCount = 1L;
+    @Column
+    private User proprietario;
+    
+    @OneToMany(mappedBy = )
+    private List<Task> taskList;
+    
+    
     public Board() {
     }
 
-    public Board(String name, String description, String owner,Boolean status) {
-        this.id = countId(Board.idCount);
+    public Board(String nome, String descricao, User proprietario,Boolean status) {
         this.taskList = new ArrayList<>();
-        this.name = name;
-        this.description = description;
+        this.nome = nome;
+        this.descricao = descricao;
         this.status = status;
-        this.owner = owner;
+        this.proprietario = proprietario;
     }
 
     public Long getId() {
         return id;
     }
-    
-    private static Long countId(Long id){
-           return idCount++;
-    }
-    
-    
-    public List<Task> getTaskList() {
-        return taskList;
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
-    public void setTaskList(List<Task> taskList) {
-        this.taskList = taskList;
+    public String getNome() {
+        return nome;
     }
 
-    public String getName() {
-        return name;
+    public void setNome(String nome) {
+        this.nome = nome;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-    
-    public void inserNewTask(Task task){
-      this.taskList.add(task);
-    }
-    
-    public void deleteTask(Task task){
-        this.taskList.remove(task);
+    public String getDescricao() {
+        return descricao;
     }
 
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
     }
 
     public Boolean getStatus() {
@@ -80,29 +75,79 @@ public class Board {
         this.status = status;
     }
 
-    public String getOwner() {
-        return owner;
+    public User getProprietario() {
+        return proprietario;
     }
 
-    public void setOwner(String owner) {
-        this.owner = owner;
+    public void setProprietario(User proprietario) {
+        this.proprietario = proprietario;
     }
-    
-    private String verifyStatus(Boolean status){
-        if(status.equals(Boolean.TRUE)){
-            return "active";
-        }else{
-            return "unactive";
-        }
+
+    public List<Task> getTaskList() {
+        return taskList;
     }
-    
-    public  Object[] getData(){
-        return new Object[]{this.id,this.name, this.description,  this.owner, verifyStatus(this.status)};
+
+    public void setTaskList(List<Task> taskList) {
+        this.taskList = taskList;
+    }
+
+    public Board(String nome, String descricao, Boolean status, User proprietario, List<Task> taskList) {
+        this.nome = nome;
+        this.descricao = descricao;
+        this.status = status;
+        this.proprietario = proprietario;
+        this.taskList = taskList;
+    }
+
+    public Board(String nome, String descricao, Boolean status, User proprietario) {
+        this.nome = nome;
+        this.descricao = descricao;
+        this.status = status;
+        this.proprietario = proprietario;
     }
 
     @Override
+    public int hashCode() {
+        int hash = 7;
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Board other = (Board) obj;
+        if (!Objects.equals(this.nome, other.nome)) {
+            return false;
+        }
+        if (!Objects.equals(this.descricao, other.descricao)) {
+            return false;
+        }
+        if (!Objects.equals(this.id, other.id)) {
+            return false;
+        }
+        if (!Objects.equals(this.status, other.status)) {
+            return false;
+        }
+        if (!Objects.equals(this.proprietario, other.proprietario)) {
+            return false;
+        }
+        return Objects.equals(this.taskList, other.taskList);
+    }
+
+    
+    
+    
+    @Override
     public String toString() {
-        return getName();
+        return null;
     }
     
 }

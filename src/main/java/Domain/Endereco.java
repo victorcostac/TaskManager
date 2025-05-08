@@ -4,19 +4,28 @@
  */
 package Domain;
 
+import javax.persistence.*;
+import javax.persistence.OneToOne;
+import lombok.Generated;
+
 /**
  *
  * @author Usuario
  */
 
 public class Endereco {
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private String Id;
     private String cep;
     private String logradouro;
     private String bairro;
     private String cidade;
     private String uf;
-
+    
+    @OneToOne(mappedBy = "endereco")
+    private User user;
+    
+    
     public String getLogradouro() {
         return logradouro;
     }
