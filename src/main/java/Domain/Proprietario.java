@@ -20,8 +20,14 @@ import lombok.NoArgsConstructor;
 @Entity(name = "proprietario")
 @AllArgsConstructor
 @NoArgsConstructor
+@SuperBuilder
 public class Proprietario extends Usuario{
     
+    public Proprietario(String nome, String cpf, Date birthDate, Endereco endereco, List<Tarefa> tarefasDesignadas, List<Board> boards, List<Board> boardsDesignadas) {
+        super(nome, cpf, birthDate, endereco, tarefasDesignadas, boards);
+        this.boardsDesignados = boardsDesignadas;
+    }
+
     @OneToMany(mappedBy = "proprietario", fetch = FetchType.LAZY)
     private List<Board> boardsDesignados;
     

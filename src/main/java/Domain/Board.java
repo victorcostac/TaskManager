@@ -39,7 +39,12 @@ public class Board {
     @JoinColumn(name = "proprietario_id")
     private Proprietario proprietario;
     
-    @ManyToMany(mappedBy = "boards", fetch = FetchType.LAZY)
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(
+        name = "usuario_board",
+        joinColumns = @JoinColumn(name = "board_id"),
+        inverseJoinColumns = @JoinColumn(name = "usuario_id")
+    )
     private List<Usuario> usuarios;
     
 }

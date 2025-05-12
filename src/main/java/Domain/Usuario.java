@@ -19,6 +19,17 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Usuario implements Serializable {
+
+    public Usuario(String nome, String cpf, Date birthDate, Endereco endereco, List<Tarefa> tarefasDesignadas, List<Board> boards) {
+        this.nome = nome;
+        this.cpf = cpf;
+        this.birthDate = birthDate;
+        this.endereco = endereco;
+        this.tarefasDesignadas = tarefasDesignadas;
+        this.boards = boards;
+    }
+
+    
     
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -39,12 +50,7 @@ public class Usuario implements Serializable {
     @OneToMany (mappedBy = "responsavel") 
     private List<Tarefa> tarefasDesignadas;
 
-    @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(
-            name = "usuario_board",
-            joinColumns = @JoinColumn(name = "usuario_id"),
-            inverseJoinColumns = @JoinColumn(name = "board_id")
-    )
+    @ManyToMany(mappedBy = "usuarios", fetch = FetchType.LAZY)
     private List<Board> boards;
 
 }
