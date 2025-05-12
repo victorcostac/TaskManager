@@ -1,0 +1,50 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
+package Domain;
+
+import java.io.Serializable;
+import java.util.Date;
+import java.util.List;
+import javax.persistence.*; 
+import lombok.*;
+
+/**
+ *
+ * @author Usuario
+ */
+@Entity(name = "usuario")
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+public class Usuario implements Serializable {
+    
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    
+    @Column
+    private String nome;
+    
+    @Column
+    private String cpf;
+    
+    @Temporal ( value = TemporalType.DATE )
+    private Date birthDate;
+    
+    @OneToOne
+    @JoinColumn(name = "endereco_id")
+    private Endereco endereco;
+    
+    @OneToMany (mappedBy = "responsavel") 
+    private List<Tarefa> tarefasDesignadas;
+
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(
+            name = "usuario_board",
+            joinColumns = @JoinColumn(name = "usuario_id"),
+            inverseJoinColumns = @JoinColumn(name = "board_id")
+    )
+    private List<Board> boards;
+
+}

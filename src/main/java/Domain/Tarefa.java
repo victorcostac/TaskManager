@@ -25,7 +25,7 @@ public class Tarefa {
     
     @ManyToOne ( fetch = FetchType.EAGER )
     @JoinColumn ( name = "responsavel_id" ) 
-    private User responsavel;
+    private Usuario responsavel;
     
     @Column
     private String prioridade;
@@ -39,7 +39,7 @@ public class Tarefa {
     @Column
     private String descricao;
     
-    @ManyToOne ( fetch = FetchType.EAGER )
+    @ManyToOne ( fetch = FetchType.LAZY )
     @JoinColumn ( name = "board_id" ) 
     private Board board;
     

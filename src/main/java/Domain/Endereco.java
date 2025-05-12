@@ -4,104 +4,40 @@
  */
 package Domain;
 
+import java.io.Serializable;
 import javax.persistence.*;
-import javax.persistence.OneToOne;
-import lombok.Generated;
+import lombok.*;
 
 /**
  *
  * @author Usuario
  */
-
-public class Endereco {
+@Entity(name = "endereco")
+@Data
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
+public class Endereco implements Serializable {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private String Id;
+    @Column
     private String cep;
+    @Column
     private String logradouro;
+    @Column
     private String bairro;
+    @Column
     private String cidade;
+    @Column
     private String uf;
-    
-    @OneToOne(mappedBy = "endereco")
-    private User user;
-    
-    
-    public String getLogradouro() {
-        return logradouro;
-    }
 
-    public String getBairro() {
-        return bairro;
-    }
 
-    public String getCidade() {
-        return cidade;
-    }
-
-    public String getUf() {
-        return uf;
-    }
-
-    public void setLogradouro(String logradouro) {
-        this.logradouro = logradouro;
-    }
-
-    public void setBairro(String bairro) {
-        this.bairro = bairro;
-    }
-
-    public void setCidade(String cidade) {
-        this.cidade = cidade;
-    } 
-    
-
-    public void setUf(String uf) {
-        this.uf = uf;
-    }
-
-    public String getId() {
-        return Id;
-    }
-
-    public void setId(String Id) {
-        this.Id = Id;
-    }
-
-    public String getCep() {
-        return cep;
-    }
-
-    public void setCep(String cep) {
+    public Endereco(String cep, String logradouro, String bairro, String cidade, String uf) {
         this.cep = cep;
-    }
-    
-    
-
-    public Endereco() {
-    }
-
-    public Endereco(String Id, String logradouro, String bairro, String cidade, String uf, String cep) {
-        this.Id = Id;
         this.logradouro = logradouro;
         this.bairro = bairro;
         this.cidade = cidade;
         this.uf = uf;
-        this.cep = cep;
     }
 
-    public Endereco(String logradouro, String bairro, String cidade, String uf, String cep) {
-        this.logradouro = logradouro;
-        this.bairro = bairro;
-        this.cidade = cidade;
-        this.uf = uf;
-        this.cep = cep;
-    }
-    
-    
-    
-
-    @Override
-    public String toString() {
-        return String.format("Rua: %s, Bairro: %s, Cidade: %s - %s, cep: %s", logradouro, bairro, cidade, uf, cep);
-    }
 }
