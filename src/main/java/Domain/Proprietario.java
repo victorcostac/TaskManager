@@ -4,6 +4,7 @@
  */
 package Domain;
 
+import java.util.Date;
 import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -12,6 +13,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.experimental.SuperBuilder;
 
 /**
  *
@@ -28,7 +30,7 @@ public class Proprietario extends Usuario{
         this.boardsDesignados = boardsDesignadas;
     }
 
-    @OneToMany(mappedBy = "proprietario", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "proprietario", fetch = FetchType.LAZY)                                                                              
     private List<Board> boardsDesignados;
     
 }

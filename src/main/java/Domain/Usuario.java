@@ -18,6 +18,7 @@ import lombok.*;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Inheritance ( strategy = InheritanceType.JOINED )
 public class Usuario implements Serializable {
 
     public Usuario(String nome, String cpf, Date birthDate, Endereco endereco, List<Tarefa> tarefasDesignadas, List<Board> boards) {
