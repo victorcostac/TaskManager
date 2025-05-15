@@ -4,6 +4,7 @@
  */
 package Domain;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.UUID;
 import javax.persistence.*;
@@ -19,7 +20,7 @@ import org.hibernate.annotations.Type;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Tarefa {
+public class Tarefa implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Type(type = "uuid-char")

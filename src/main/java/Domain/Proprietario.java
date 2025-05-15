@@ -9,11 +9,8 @@ import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
+import lombok.*;
 
 /**
  *
@@ -23,6 +20,8 @@ import lombok.experimental.SuperBuilder;
 @AllArgsConstructor
 @NoArgsConstructor
 @SuperBuilder
+@Data
+@EqualsAndHashCode(callSuper=true)
 public class Proprietario extends Usuario{
     
     public Proprietario(String nome, String cpf, Date birthDate, Endereco endereco, List<Tarefa> tarefasDesignadas, List<Board> boards, List<Board> boardsDesignadas) {

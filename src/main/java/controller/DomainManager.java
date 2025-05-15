@@ -5,17 +5,17 @@
 package controller;
 
 import Domain.Board;
-import Domain.User;
+import Domain.Usuario;
 import Infrastructure.IBoardRepository;
 import Infrastructure.IBoardRepositoryImpl;
-import Infrastructure.ITaskRepository;
 import Infrastructure.ITaskRepositoryImpl;
 import Infrastructure.IUserRepository;
 import Infrastructure.IUserRepositoryImpl;
 import java.util.List;
 import service.BoardService;
-import service.TaskService;
+import service.TarefaService;
 import service.UserService;
+import Infrastructure.ITarefaRepository;
 
 /**
  *
@@ -24,7 +24,7 @@ import service.UserService;
 public class DomainManager { // Gerenciador de domínio
     
     private final BoardService boardService;
-    private final TaskService taskService;
+    private final TarefaService taskService;
     private final UserService userService;
     
     
@@ -34,8 +34,8 @@ public class DomainManager { // Gerenciador de domínio
         boardService = new BoardService(iBoardRepository);
         IUserRepository iUserdRepository = new IUserRepositoryImpl();
         userService = new UserService(iUserdRepository);
-        ITaskRepository iTaskRepository = new ITaskRepositoryImpl();
-        taskService = new TaskService(iTaskRepository);
+        ITarefaRepository iTaskRepository = new ITaskRepositoryImpl();
+        taskService = new TarefaService(iTaskRepository);
     }
     
     public List<User> getUsers(){

@@ -4,8 +4,7 @@
  */
 package Infrastructure;
 
-import Domain.Board;
-import Domain.Task;
+import Domain.Tarefa;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -15,22 +14,22 @@ import java.util.stream.Collectors;
  *
  * @author Usuário
  */
-public class ITaskRepositoryImpl implements ITaskRepository{ //EQUIVALENTE A UM DAO
-    Set<Task> tasks = new HashSet<>();
+public class ITaskRepositoryImpl implements ITarefaRepository{ //EQUIVALENTE A UM DAO
+    Set<Tarefa> tarefas = new HashSet<>();
     @Override
-    public void createTask(Task task) {
-        tasks.add(task);
+    public void criarTarefa(Tarefa tarefa) {
+        tarefas.add(tarefa);
     }
 
     @Override
-    public void deleteTaskById(Long taskId) {
-        Task taskRecord = tasks.stream().filter(task -> task.getTaskId().equals(taskId)).findFirst().orElse(null);
-        tasks.remove(taskRecord);
+    public void deletarTarefaPorId(Long tarefaId) {
+        Tarefa TarefaRecord = tarefas.stream().filter(tarefa -> tarefa.getId().equals(tarefaId)).findFirst().orElse(null);
+        tarefas.remove(TarefaRecord);
     }
 
     @Override
-    public List<Task> getTasks() {
-        return tasks.stream().collect(Collectors.toList());
+    public List<Tarefa> getTarefas() {
+        return tarefas.stream().collect(Collectors.toList());
     }
     
 }

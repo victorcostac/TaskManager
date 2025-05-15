@@ -4,16 +4,15 @@
  */
 package Infrastructure;
 
-import Domain.Board;
-import Domain.Task;
+import Domain.Tarefa;
 import java.util.List;
 
 /**
  *
  * @author Usuário
  */
-public interface ITaskRepository { //EQUIVALENTE A UM DAO
-    void createTask(Task task);
-    void deleteTaskById(Long taskId);
-    List<Task> getTasks();
+public interface ITarefaRepository { //EQUIVALENTE A UM DAO
+    void criarTarefa(Tarefa task);
+    void deletarTarefaPorId(Long taskId);
+    List<Tarefa> getTarefas();
 }

@@ -14,7 +14,7 @@ D:\Users\2023122760093\Documents\NetBeansProjects\TaskManager\src\main\java\Infr
 D:\Users\2023122760093\Documents\NetBeansProjects\TaskManager\src\main\java\Infrastructure\IUserRepository.java
 D:\Users\2023122760093\Documents\NetBeansProjects\TaskManager\src\main\java\Infrastructure\IUserRepositoryImpl.java
 D:\Users\2023122760093\Documents\NetBeansProjects\TaskManager\src\main\java\Infrastructure\SqlImplementations\IUserRepositorySqlImpl.java
-D:\Users\2023122760093\Documents\NetBeansProjects\TaskManager\src\main\java\Infrastructure\SqlImplementations\PostGreSqlConnection.java
+D:\Users\2023122760093\Documents\NetBeansProjects\TaskManager\src\main\java\Infrastructure\SqlImplementations\PostsresqlConnection.java
 D:\Users\2023122760093\Documents\NetBeansProjects\TaskManager\src\main\java\service\BoardService.java
 D:\Users\2023122760093\Documents\NetBeansProjects\TaskManager\src\main\java\service\TaskService.java
 D:\Users\2023122760093\Documents\NetBeansProjects\TaskManager\src\main\java\service\UserService.java

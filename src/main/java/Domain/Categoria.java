@@ -4,6 +4,7 @@
  */
 package Domain;
 
+import java.io.Serializable;
 import java.util.UUID;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -23,7 +24,7 @@ import org.hibernate.annotations.Type;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class Categoria {
+public class Categoria implements Serializable {
     
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)

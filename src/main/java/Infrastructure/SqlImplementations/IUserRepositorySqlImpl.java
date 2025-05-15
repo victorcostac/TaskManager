@@ -2,13 +2,13 @@ package Infrastructure.SqlImplementations;
 
 import java.util.List;
 
-import Domain.User;
+import Domain.Usuario;
 import Infrastructure.IUserRepository;
 
 public class IUserRepositorySqlImpl implements IUserRepository{
 
     @Override
-    public void createUser(User user) {
+    public void createUser(Usuario user) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'createUser'");
     }
@@ -20,13 +20,13 @@ public class IUserRepositorySqlImpl implements IUserRepository{
     }
 
     @Override
-    public List<User> getUsers() {
+    public List<Usuario> getUsers() {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'getUsers'");
     }
 
     @Override
-    public void editUser(User user) {
+    public void editUser(Usuario user) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'editUser'");
     }

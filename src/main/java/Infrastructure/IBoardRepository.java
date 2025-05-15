@@ -5,7 +5,7 @@
 package Infrastructure;
 
 import Domain.Board;
-import Domain.Task;
+import Domain.Tarefa;
 import java.util.List;
 
 /**
@@ -14,11 +14,11 @@ import java.util.List;
  */
 public interface IBoardRepository { //EQUIVALENTE A UM DAO
     
-    void createBoard(Board board);
-    void deleteBoardById(Long boardId);
+    void criarBoard(Board board);
+    void deletarBoardPorId(Long boardId);
     List<Board> getBoards();
-    void addTaskToBoardList(Task task);
-    void deleteTaskFromBoardList(Task task);
-    List<Task> getTasksfromBoard(Board board);
+    void adicionarTarefaNaLista(Tarefa task);
+    void deletarTarefadaLista(Tarefa task);
+    List<Tarefa> getTarefasDoBoard(Board board);
     
 }

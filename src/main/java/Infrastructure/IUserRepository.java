@@ -4,7 +4,7 @@
  */
 package Infrastructure;
 
-import Domain.User;
+import Domain.Usuario;
 import java.util.List;
 
 /**
@@ -12,8 +12,8 @@ import java.util.List;
  * @author Usuario
  */
 public interface IUserRepository { //EQUIVALENTE A UM DAO
-    void createUser(User user);
+    void createUser(Usuario user);
     void deleteUserById(Long userId);
-    List<User> getUsers();
-    void editUser(User user);
+    List<Usuario> getUsers();
+    void editUser(Usuario user);
 }
