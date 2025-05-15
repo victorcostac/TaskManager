@@ -5,11 +5,13 @@
 package Domain;
 
 import java.util.List;
+import java.util.UUID;
 import javax.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.Type;
 
 /**
  *
@@ -23,8 +25,10 @@ import lombok.NoArgsConstructor;
 @Builder
 public class Board {
     
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Type(type = "uuid-char")
+    private UUID id;
     @Column
     private String nome;
     @Column
@@ -32,7 +36,7 @@ public class Board {
     @Column
     private Boolean status;
     
-    @OneToMany(mappedBy = "board")
+    @OneToMany(mappedBy = "board", fetch = FetchType.LAZY)
     private List<Tarefa> tarefas;    
     
     @ManyToOne(fetch = FetchType.EAGER)

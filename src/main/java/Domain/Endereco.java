@@ -5,8 +5,10 @@
 package Domain;
 
 import java.io.Serializable;
+import java.util.UUID;
 import javax.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.Type;
 
 /**
  *
@@ -18,8 +20,10 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Endereco implements Serializable {
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private String Id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Type(type = "uuid-char")
+    private UUID id;
     @Column
     private String cep;
     @Column

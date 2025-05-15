@@ -5,20 +5,25 @@
 package Domain;
 
 import java.util.Date;
+import java.util.UUID;
 import javax.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.Type;
 
 /**
  *
  * @author Usuario
  */
+@Entity(name = "tarefa")
 @Builder
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class Tarefa {
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private String id; 
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Type(type = "uuid-char")
+    private UUID id;
     
     @Column
     private String nome;
@@ -43,5 +48,19 @@ public class Tarefa {
     @JoinColumn ( name = "board_id" ) 
     private Board board;
     
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "categoria_id")
+    private Categoria categoria;
+
+    public Tarefa(String nome, Usuario responsavel, String prioridade, String fase, Date dataVencimento, String descricao, Board board, Categoria categoria) {
+        this.nome = nome;
+        this.responsavel = responsavel;
+        this.prioridade = prioridade;
+        this.fase = fase;
+        this.dataVencimento = dataVencimento;
+        this.descricao = descricao;
+        this.board = board;
+        this.categoria = categoria;
+    }
     
 }
