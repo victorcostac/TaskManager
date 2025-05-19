@@ -14,7 +14,8 @@ import java.util.stream.Collectors;
  *
  * @author Usuário
  */
-public class ITaskRepositoryImpl implements ITarefaRepository{ //EQUIVALENTE A UM DAO
+
+public class ITarefaRepositoryImpl implements ITarefaRepository{ //EQUIVALENTE A UM DAO
     Set<Tarefa> tarefas = new HashSet<>();
     @Override
     public void criarTarefa(Tarefa tarefa) {

@@ -19,8 +19,8 @@ public class BoardService {
         this.iBoardRepository = iBoardRepository;
     }
     
-    public void createBoard(Board board){
-        iBoardRepository.createBoard(board);
+    public void criarBoard(Board board){
+        iBoardRepository.criarBoard(board);
     }
     
     public List<Board> getBoards(){
@@ -28,7 +28,7 @@ public class BoardService {
     }
     
     
-    public void deleteBoardById(Long boardId){
-        iBoardRepository.deleteBoardById(boardId);
+    public void deletarBoardPorId(Long boardId){
+        iBoardRepository.deletarBoardPorId(boardId);
     }
 }

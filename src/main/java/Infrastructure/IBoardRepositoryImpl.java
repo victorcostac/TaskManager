@@ -5,7 +5,7 @@
 package Infrastructure;
 
 import Domain.Board;
-import Domain.Task;
+import Domain.Tarefa;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -15,32 +15,11 @@ import java.util.stream.Collectors;
  *
  * @author Usuario
  */
+
 public class IBoardRepositoryImpl implements IBoardRepository{ //EQUIVALENTE A UM DAO
     Set<Board> boards = new HashSet<>();
 
     public IBoardRepositoryImpl() {
-    }
-    
-    
-    @Override
-    public void addTaskToBoardList(Task task) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    @Override
-    public void deleteTaskFromBoardList(Task task) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    @Override
-    public void createBoard(Board board) {
-        boards.add(board);
-    }
-
-    @Override
-    public void deleteBoardById(Long boardId) {
-        Board boardRecorded = boards.stream().filter(board -> board.getId().equals(boardId)).findFirst().orElse(null);
-        boards.remove(boardRecorded);
     }
 
     @Override
@@ -49,8 +28,31 @@ public class IBoardRepositoryImpl implements IBoardRepository{ //EQUIVALENTE A U
     }
 
     @Override
-    public List<Task> getTasksfromBoard(Board board) {
+    public void criarBoard(Board board) {
+         boards.add(board);
+    }
+
+    @Override
+    public void deletarBoardPorId(Long boardId) {
+        Board boardRecorded = boards.stream().filter(board -> board.getId().equals(boardId)).findFirst().orElse(null);
+        boards.remove(boardRecorded);
+    }
+
+    @Override
+    public void adicionarTarefaNaLista(Tarefa task) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
+
+    @Override
+    public void deletarTarefadaLista(Tarefa task) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public List<Tarefa> getTarefasDoBoard(Board board) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+
     
 }

@@ -4,7 +4,7 @@
  */
 package service;
 
-import Domain.User;
+import Domain.Usuario;
 import Infrastructure.IUserRepository;
 import java.util.List;
 
@@ -19,20 +19,20 @@ public class UserService {
         this.iUserRepository = iUserRepository;
     }
     
-    public void createUser(User user){
-        iUserRepository.createUser(user);
+    public void criarUsuario(Usuario user){
+        iUserRepository.criarUsuario(user);
     }
     
-    public List<User> getUsers(){
-        return iUserRepository.getUsers();
+    public List<Usuario> getUsuarios(){
+        return iUserRepository.getUsuarios();
     }
     
-    public void deleteUser(Long userId){
-        iUserRepository.deleteUserById(userId);
+    public void deletarUsuarioPorId(Long userId){
+        iUserRepository.deletarUsuarioPorId(userId);
     }
     
-    public void editUser(User user){
-        iUserRepository.editUser(user);
+    public void editarUsuario(Usuario user){
+        iUserRepository.editarUsuario(user);
     }
     
 }

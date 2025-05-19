@@ -5,8 +5,7 @@
 package controller;
 //controller.GraphicInterfaceManager
 import Domain.Board;
-import Domain.User;
-import com.formdev.flatlaf.FlatDarkLaf;
+import Domain.Usuario;
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 import viewer.BoardRegisterDlg;
@@ -15,38 +14,35 @@ import viewer.MainFrame;
 import viewer.TaskRegisterDlg;
 import java.awt.Frame;
 import java.lang.reflect.InvocationTargetException;
-import java.sql.SQLException;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
-import javax.swing.UIManager;
-import javax.swing.UnsupportedLookAndFeelException;
 
 /**
  *
  * @author Usuário
  */
-public class GraphicInterfaceManager { // Gerenciador de interface gráfica
+public class GerenciadorInterGrafica { // Gerenciador de interface gráfica
     private BoardRegisterDlg boardRegisterDlg = null;
     private ClientRegisterDlg userRegisterDlg = null;
     private MainFrame mainFrame = null;
     private TaskRegisterDlg taskRegisterDlg = null;
     
-    private DomainManager domainManager; // Gerenciador de Dompinio
+    private GerenciadorDominio gerenciadorDominio; // Gerenciador de Dompinio
     
     // ########  SINGLETON  #########
-    private static final GraphicInterfaceManager myInstance = new GraphicInterfaceManager();
+    private static final GerenciadorInterGrafica myInstance = new GerenciadorInterGrafica();
     
-    private GraphicInterfaceManager(){
+    private GerenciadorInterGrafica(){
         try {
-            this.domainManager = new DomainManager();
+            this.gerenciadorDominio = new GerenciadorDominio();
         }catch(Exception e){ //trocar pelo Exception certo depois
             JOptionPane.showMessageDialog(null, e, "ERROR AT INITIALIZATION",JOptionPane.ERROR_MESSAGE);
             System.exit(0);
         }
     }
     
-    public static GraphicInterfaceManager getMyInstance(){
+    public static GerenciadorInterGrafica getMyInstance(){
         return myInstance;
     }
     
@@ -84,7 +80,7 @@ public class GraphicInterfaceManager { // Gerenciador de interface gráfica
     
     public void loadComboUsers(JComboBox combo){
         try {
-            List list = loadUsers();
+            List list = getUsuarios();
             combo.setModel(new DefaultComboBoxModel(list.toArray()));
         } catch (Exception ex) {// adiconar  as exceptions depois 
             JOptionPane.showMessageDialog(boardRegisterDlg, ex, "board registration", JOptionPane.ERROR_MESSAGE);
@@ -93,35 +89,31 @@ public class GraphicInterfaceManager { // Gerenciador de interface gráfica
     
     public void loadComboBoards(JComboBox combo){
         try {
-            List list = loadBoards();
+            List list = getBoards();
             combo.setModel(new DefaultComboBoxModel(list.toArray()));
         } catch (Exception ex) {// adiconar  as exceptions depois 
             JOptionPane.showMessageDialog(taskRegisterDlg, ex, "Task registration", JOptionPane.ERROR_MESSAGE);
         }
     }
     
-    public List<Board> loadBoards(){
-        return domainManager.getBoards();
+    public List<Board> getBoards(){
+        return gerenciadorDominio.getBoards();
     }
     
-    public List<User> loadUsers() {
-        return domainManager.getUsers();
+    public List<Usuario> getUsuarios(){
+        return gerenciadorDominio.getUsuarios();
     }
     
-    public List<User> getUsers(){
-        return domainManager.getUsers();
+    public void criarUsuario(Usuario usuario){
+        gerenciadorDominio.criarUsuario(usuario);
     }
     
-    public void registerUserCreated(User user){
-        domainManager.createUser(user);
+    public void criarBoard(Board board) {
+        gerenciadorDominio.criarBoard(board);
     }
     
-    public void registerBoardCreated(Board board) {
-        domainManager.createBoard(board);
-    }
-    
-    public void deleteBoardById(Long boardId){
-        domainManager.deleteBoardById(boardId);
+    public void deletarBoardPorId(Long boardId){
+        gerenciadorDominio.deletarBoardPorId(boardId);
     }
     
     
@@ -168,10 +160,10 @@ public class GraphicInterfaceManager { // Gerenciador de interface gráfica
                 }
             }
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(GraphicInterfaceManager.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(GerenciadorInterGrafica.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         /* Create and display the form */
-        GraphicInterfaceManager GIManager = GraphicInterfaceManager.getMyInstance();
+        GerenciadorInterGrafica GIManager = GerenciadorInterGrafica.getMyInstance();
         GIManager.openMainFrame();
 
     }

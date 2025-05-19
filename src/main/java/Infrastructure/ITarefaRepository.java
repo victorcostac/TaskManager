@@ -12,7 +12,7 @@ import java.util.List;
  * @author Usuário
  */
 public interface ITarefaRepository { //EQUIVALENTE A UM DAO
-    void criarTarefa(Tarefa task);
-    void deletarTarefaPorId(Long taskId);
+    void criarTarefa(Tarefa tarefa);
+    void deletarTarefaPorId(Long tarefaId);
     List<Tarefa> getTarefas();
 }

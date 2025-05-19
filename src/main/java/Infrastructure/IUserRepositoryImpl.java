@@ -4,7 +4,7 @@
  */
 package Infrastructure;
 
-import Domain.User;
+import Domain.Usuario;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -14,37 +14,36 @@ import java.util.stream.Collectors;
  *
  * @author Usuario
  */
+
 public class IUserRepositoryImpl implements IUserRepository{ //EQUIVALENTE A UM DAO
-    Set<User> users = new HashSet<>();
+    Set<Usuario> users = new HashSet<>();
     @Override
-    public void createUser(User user) {
+    public void criarUsuario(Usuario user) {
         users.add(user);
     }
 
     @Override
-    public void deleteUserById(Long userId) {
-        User userRecorded  = users.stream().filter(user -> user.getId().equals(userId)).findFirst().orElse(null);
+    public void deletarUsuarioPorId(Long userId) {
+        Usuario userRecorded  = users.stream().filter(user -> user.getId().equals(userId)).findFirst().orElse(null);
         users.remove(userRecorded);
     }
 
     @Override
-    public List<User> getUsers() {
+    public List<Usuario> getUsuarios() {
         return users.stream().collect(Collectors.toList());
     }
 
     @Override
-    public void editUser(User user) {
-        User editUser = users.stream().filter(u ->  u.getSsn().equals(user.getSsn())).findFirst().orElse(null);
+    public void editarUsuario(Usuario usuario) {
+        Usuario editUser = users.stream().filter(u ->  u.getCpf().equals(usuario.getCpf())).findFirst().orElse(null);
         
         users.remove(editUser);
         
         if(editUser != null){
-            editUser.setAddress(user.getAddress());
-            editUser.setBirthDate(user.getBirthDate());
-            editUser.setCity(user.getCity());
-            editUser.setName(user.getName());
-            editUser.setSsn(user.getSsn());
-            editUser.setZip(user.getZip());
+            editUser.setEndereco(usuario.getEndereco());
+            editUser.setDataNasc(usuario.getDataNasc());
+            editUser.setNome(usuario.getNome());
+            editUser.setCpf(usuario.getCpf());
             users.add(editUser);
         }
     }

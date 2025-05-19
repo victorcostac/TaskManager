@@ -52,4 +52,17 @@ public class Board implements Serializable {
     )
     private List<Usuario> usuarios;
     
+    private String verifyStatus(Boolean status){
+        if(status.equals(Boolean.TRUE)){
+            return "active";
+        }else{
+             return "unactive";
+        }
+    }
+        
+    
+    public Object[] getData() {
+        return new Object[]{this.id, this.nome, this.descricao, this.proprietario, verifyStatus(this.status)};
+    }
+
 }

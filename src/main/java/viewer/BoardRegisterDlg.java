@@ -5,14 +5,13 @@
 package viewer;
 
 import Domain.Board;
-import Domain.User;
-import service.BoardService;
-import service.UserService;
+import Domain.Proprietario;
+import Domain.Usuario;
+import controller.GerenciadorInterGrafica;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import controller.GraphicInterfaceManager;
 
 /**
  *
@@ -30,14 +29,14 @@ public class BoardRegisterDlg extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         setBoardTable();
-        for (Board board : GraphicInterfaceManager.getMyInstance().loadBoards()) {
+        for (Board board : GerenciadorInterGrafica.getMyInstance().getBoards()) {
             this.boardDefaultTable.addRow(board.getData());
         }
-        List<User> userList = GraphicInterfaceManager.getMyInstance().getUsers();
-        User userArray[] = new User[userList.size()];
+        List<Usuario> usuarioList = GerenciadorInterGrafica.getMyInstance().getUsuarios();
+        Usuario usuarioArray[] = new Usuario[usuarioList.size()];
         int i = 0;
-        for(User user : userList){
-            userArray[i] = user;
+        for(Usuario usuario : usuarioList){
+            usuarioArray[i] = usuario;
             i++;
         }
         //ownerComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(userArray));
@@ -257,17 +256,20 @@ public class BoardRegisterDlg extends javax.swing.JDialog {
             status = false;
         }
         
-        Board newBoard = new Board(newBoardText.getText(), descriptionTextField.getText(), ownerComboBox.getSelectedItem().toString(),status);
-        
-        GraphicInterfaceManager.getMyInstance().registerBoardCreated(newBoard);
-        this.boardList.add(newBoard);
+        Board novoBoard = Board.builder().descricao(descriptionTextField.getText())
+                .nome(newBoardText.getText())
+                .proprietario((Proprietario)ownerComboBox.getSelectedItem())
+                .status(status)
+                .build();
+        GerenciadorInterGrafica.getMyInstance().criarBoard(novoBoard);
+        this.boardList.add(novoBoard);
         
         newBoardText.setText("");
         descriptionTextField.setText("");
         ownerComboBox.setSelectedIndex(0);
         statusComboBox.setSelectedIndex(0);
         
-        this.boardDefaultTable.addRow(newBoard.getData());
+        this.boardDefaultTable.addRow(novoBoard.getData());
         
     }//GEN-LAST:event_addBoardButtonActionPerformed
 
@@ -294,14 +296,14 @@ public class BoardRegisterDlg extends javax.swing.JDialog {
             if(JOptionPane.showConfirmDialog(this, "Delete it?") == JOptionPane.YES_OPTION){
             Long boardId = (Long)(this.boardDefaultTable).getValueAt(linha, 0);
             (this.boardDefaultTable).removeRow(linha);
-            GraphicInterfaceManager.getMyInstance().deleteBoardById(boardId);        
+            GerenciadorInterGrafica.getMyInstance().deletarBoardPorId(boardId);        
             }
 
         }
     }//GEN-LAST:event_clearMenuItemActionPerformed
 
     private void formComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentShown
-        GraphicInterfaceManager.getMyInstance().loadComboUsers(ownerComboBox);
+        GerenciadorInterGrafica.getMyInstance().loadComboUsers(ownerComboBox);
     }//GEN-LAST:event_formComponentShown
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed

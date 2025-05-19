@@ -2,9 +2,7 @@ package Infrastructure.SqlImplementations;
 
 import java.util.List;
 
-import Domain.Usuario;
-import Infrastructure.IUserRepository;
-
+/*
 public class IUserRepositorySqlImpl implements IUserRepository{
 
     @Override
@@ -32,3 +30,4 @@ public class IUserRepositorySqlImpl implements IUserRepository{
     }
 
 }
+*/

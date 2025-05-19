@@ -8,7 +8,7 @@ import Domain.Board;
 import Domain.Usuario;
 import Infrastructure.IBoardRepository;
 import Infrastructure.IBoardRepositoryImpl;
-import Infrastructure.ITaskRepositoryImpl;
+import Infrastructure.ITarefaRepositoryImpl;
 import Infrastructure.IUserRepository;
 import Infrastructure.IUserRepositoryImpl;
 import java.util.List;
@@ -21,40 +21,40 @@ import Infrastructure.ITarefaRepository;
  *
  * @author Usuário
  */
-public class DomainManager { // Gerenciador de domínio
+public class GerenciadorDominio { // Gerenciador de domínio
     
     private final BoardService boardService;
-    private final TarefaService taskService;
-    private final UserService userService;
+    private final TarefaService tarefaService;
+    private final UserService usuarioService;
     
     
     
-    public DomainManager(){ //adicionar os throws depois  que fazer a integração com banco de dados
+    public GerenciadorDominio(){ //adicionar os throws depois  que fazer a integração com banco de dados
         IBoardRepository iBoardRepository = new IBoardRepositoryImpl();
         boardService = new BoardService(iBoardRepository);
         IUserRepository iUserdRepository = new IUserRepositoryImpl();
-        userService = new UserService(iUserdRepository);
-        ITarefaRepository iTaskRepository = new ITaskRepositoryImpl();
-        taskService = new TarefaService(iTaskRepository);
+        usuarioService = new UserService(iUserdRepository);
+        ITarefaRepository iTaskRepository = new ITarefaRepositoryImpl();
+        tarefaService = new TarefaService(iTaskRepository);
     }
     
-    public List<User> getUsers(){
-        return userService.getUsers();
+    public List<Usuario> getUsuarios(){
+        return usuarioService.getUsuarios();
     }
     
-    public void createUser(User user){
-        userService.createUser(user);
+    public void criarUsuario(Usuario user){
+        usuarioService.criarUsuario(user);
     }
     
-    public void createBoard(Board board) {
-        boardService.createBoard(board);
+    public void criarBoard(Board board) {
+        boardService.criarBoard(board);
     }
     
     public List<Board> getBoards(){
         return boardService.getBoards();
     }
     
-    public void  deleteBoardById(Long boardId){
-        boardService.deleteBoardById(boardId);
+    public void  deletarBoardPorId(Long boardId){
+        boardService.deletarBoardPorId(boardId);
     } 
 }

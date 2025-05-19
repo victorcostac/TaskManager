@@ -12,8 +12,8 @@ import java.util.List;
  * @author Usuario
  */
 public interface IUserRepository { //EQUIVALENTE A UM DAO
-    void createUser(Usuario user);
-    void deleteUserById(Long userId);
-    List<Usuario> getUsers();
-    void editUser(Usuario user);
+    void criarUsuario(Usuario usuario);
+    void deletarUsuarioPorId(Long userId);
+    List<Usuario> getUsuarios();
+    void editarUsuario(Usuario usuario);
 }
