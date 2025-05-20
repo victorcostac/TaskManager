@@ -4,8 +4,9 @@
  */
 package service;
 
-import Domain.Usuario;
-import Infrastructure.IUserRepository;
+import domain.Usuario;
+import infrastructure.IUserRepository;
+
 import java.util.List;
 
 /**

@@ -4,9 +4,10 @@
  */
 package controller;
 
-import Domain.Board;
 import java.util.List;
 import javax.swing.table.AbstractTableModel;
+
+import domain.Board;
 
 /**
  *

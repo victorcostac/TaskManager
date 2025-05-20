@@ -1,4 +1,4 @@
-package Infrastructure.SqlImplementations;
+package infrastructure.SqlImplementations;
 
 import java.util.List;
 

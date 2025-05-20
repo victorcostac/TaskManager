@@ -4,10 +4,11 @@
  */
 package viewer;
 
-import Domain.Board;
-import Domain.Proprietario;
-import Domain.Usuario;
 import controller.GerenciadorInterGrafica;
+import domain.Board;
+import domain.Proprietario;
+import domain.Usuario;
+
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;

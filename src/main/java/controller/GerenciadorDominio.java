@@ -4,18 +4,23 @@
  */
 package controller;
 
-import Domain.Board;
-import Domain.Usuario;
-import Infrastructure.IBoardRepository;
-import Infrastructure.IBoardRepositoryImpl;
-import Infrastructure.ITarefaRepositoryImpl;
-import Infrastructure.IUserRepository;
-import Infrastructure.IUserRepositoryImpl;
+import domain.Board;
+import domain.Usuario;
+import infrastructure.IBoardRepository;
+import infrastructure.IBoardRepositoryImpl;
+import infrastructure.ITarefaRepository;
+import infrastructure.ITarefaRepositoryImpl;
+import infrastructure.IUserRepository;
+import infrastructure.IUserRepositoryImpl;
+import infrastructure.SqlImplementations.PostsresqlConnection;
+
 import java.util.List;
+
+import org.hibernate.HibernateException;
+
 import service.BoardService;
 import service.TarefaService;
 import service.UserService;
-import Infrastructure.ITarefaRepository;
 
 /**
  *
@@ -29,13 +34,16 @@ public class GerenciadorDominio { // Gerenciador de domínio
     
     
     
-    public GerenciadorDominio(){ //adicionar os throws depois  que fazer a integração com banco de dados
+    public GerenciadorDominio() throws java.lang.ExceptionInInitializerError, HibernateException{ //adicionar os throws depois  que fazer a integração com banco de dados
         IBoardRepository iBoardRepository = new IBoardRepositoryImpl();
         boardService = new BoardService(iBoardRepository);
         IUserRepository iUserdRepository = new IUserRepositoryImpl();
         usuarioService = new UserService(iUserdRepository);
         ITarefaRepository iTaskRepository = new ITarefaRepositoryImpl();
         tarefaService = new TarefaService(iTaskRepository);
+
+        PostsresqlConnection.getSessionFactory().openSession();
+
     }
     
     public List<Usuario> getUsuarios(){

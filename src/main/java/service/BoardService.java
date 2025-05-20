@@ -4,8 +4,9 @@
  */
 package service;
 
-import Domain.Board;
-import Infrastructure.IBoardRepository;
+import domain.Board;
+import infrastructure.IBoardRepository;
+
 import java.util.List;
 
 /**

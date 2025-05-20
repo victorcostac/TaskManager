@@ -1,13 +1,13 @@
 package viewer;
 
 
-import Domain.Board;
-import Domain.User;
-import Infrastructure.IBoardRepository;
-import Infrastructure.IBoardRepositoryImpl;
-import Infrastructure.IUserRepository;
-import Infrastructure.IUserRepositoryImpl;
-import controller.GraphicInterfaceManager;
+import controller.GerenciadorInterGrafica;
+import domain.Board;
+import domain.Usuario;
+import infrastructure.IBoardRepository;
+import infrastructure.IBoardRepositoryImpl;
+import infrastructure.IUserRepository;
+import infrastructure.IUserRepositoryImpl;
 import service.BoardService;
 import service.UserService;
 import java.util.List;
@@ -163,7 +163,7 @@ public class MainFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void UserRegisterMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UserRegisterMenuItemActionPerformed
-        GraphicInterfaceManager.getMyInstance().openClientRegisterDlg();
+        GerenciadorInterGrafica.getMyInstance().openClientRegisterDlg();
     }//GEN-LAST:event_UserRegisterMenuItemActionPerformed
 
     private void jRadioButtonMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonMenuItem1ActionPerformed
@@ -195,25 +195,25 @@ public class MainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenu2ActionPerformed
 
     private void taskRegisterMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_taskRegisterMenuItemActionPerformed
-        List<Board> boards = GraphicInterfaceManager.getMyInstance().loadBoards();
+        List<Board> boards = GerenciadorInterGrafica.getMyInstance().getBoards();
         if(boards.isEmpty()){
             JOptionPane.showMessageDialog(this, "At least one board must to be registered.", "No board registered", JOptionPane.INFORMATION_MESSAGE);
             return;
         }
-        GraphicInterfaceManager.getMyInstance().openTaskRegisterDlg();        
+        GerenciadorInterGrafica.getMyInstance().openTaskRegisterDlg();        
     }//GEN-LAST:event_taskRegisterMenuItemActionPerformed
 
     private void boardRegisterMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boardRegisterMenuItemActionPerformed
-        List<User> users = GraphicInterfaceManager.getMyInstance().loadUsers();
+        List<Usuario> users = GerenciadorInterGrafica.getMyInstance().getUsuarios();
         if(users.isEmpty()){
             JOptionPane.showMessageDialog(this, "At least one user must to be registered.", "No user registered", JOptionPane.INFORMATION_MESSAGE);
             return;
         }
-        GraphicInterfaceManager.getMyInstance().openBoardRegisterDlg();
+        GerenciadorInterGrafica.getMyInstance().openBoardRegisterDlg();
     }//GEN-LAST:event_boardRegisterMenuItemActionPerformed
 
     private void ExitMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ExitMenuItemActionPerformed
-        GraphicInterfaceManager.getMyInstance().exit();
+        GerenciadorInterGrafica.getMyInstance().exit();
     }//GEN-LAST:event_ExitMenuItemActionPerformed
 
     /**

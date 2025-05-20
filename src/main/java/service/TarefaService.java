@@ -4,9 +4,10 @@
  */
 package service;
 
-import Domain.Tarefa;
 import java.util.List;
-import Infrastructure.ITarefaRepository;
+
+import domain.Tarefa;
+import infrastructure.ITarefaRepository;
 
 /**
  *

@@ -3,11 +3,13 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package controller;
-//controller.GraphicInterfaceManager
-import Domain.Board;
-import Domain.Usuario;
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
+
+import org.hibernate.HibernateException;
+
+import domain.Board;
+import domain.Usuario;
 import viewer.BoardRegisterDlg;
 import viewer.ClientRegisterDlg;
 import viewer.MainFrame;
@@ -36,8 +38,9 @@ public class GerenciadorInterGrafica { // Gerenciador de interface gráfica
     private GerenciadorInterGrafica(){
         try {
             this.gerenciadorDominio = new GerenciadorDominio();
-        }catch(Exception e){ //trocar pelo Exception certo depois
-            JOptionPane.showMessageDialog(null, e, "ERROR AT INITIALIZATION",JOptionPane.ERROR_MESSAGE);
+        } catch (java.lang.ExceptionInInitializerError | HibernateException ex) {
+            System.err.println("Initial SessionFactory creation failed." + ex.getCause());
+            JOptionPane.showMessageDialog(null, ex, "Erro ao inicializar.", JOptionPane.ERROR_MESSAGE);
             System.exit(0);
         }
     }

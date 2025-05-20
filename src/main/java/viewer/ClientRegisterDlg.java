@@ -1,14 +1,22 @@
 package viewer;
 
 import Utils.Utils;
-import Domain.User;
+import controller.GerenciadorInterGrafica;
+import domain.Endereco;
+import domain.Usuario;
 import service.UserService;
 import java.awt.Color;
 import java.time.LocalDate;
+import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.Date;
+
 import javax.swing.JOptionPane;
-import controller.GraphicInterfaceManager;
 import java.io.File;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
@@ -368,22 +376,32 @@ public class ClientRegisterDlg extends javax.swing.JDialog {
     private void OKButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_OKButtonActionPerformed
 
         if (validateFields()){
-        LocalDate date = parseLocalDate(birthDateTxt.getText());
 
-        // Convertendo LocalDate para String formatada novamente
-        String formattedDate = date.format(FORMATTER);
 
-        System.out.println("Data formatada" + formattedDate);
-        User newUser = User.UserBuilder.builder()
-                .address(addressTxt.getText())
-                .birthDate(date)
-                .city(cityTxt.getText())
-                .ssn(ssnTxt.getText())
-                .zip(zipTxt.getText())
-                .name(nameTxt.getText())
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        Date data;
+        try {
+            data = sdf.parse(birthDateTxt.getText());
+        } catch (ParseException e) {
+            e.printStackTrace();
+            throw new RuntimeException(e.getMessage());
+        }
+        
+
+        Endereco endereco = Endereco.builder().cep(zipTxt.getText()).cidade(cityTxt.getText()).logradouro(addressTxt.getText()).build();
+        
+
+        System.out.println("Data formatada" + data);
+        Usuario newUser = Usuario.builder().
+                endereco(endereco)
+                .cpf(ssnTxt.getText())
+                .dataNasc(data)
+                .nome(nameTxt.getText())
+                .tarefasDesignadas(new ArrayList<>())
+                .boards(new ArrayList<>())
                 .build();
         
-        GraphicInterfaceManager.getMyInstance().registerUserCreated(newUser);
+        GerenciadorInterGrafica.getMyInstance().criarUsuario(newUser);
         
         setDefaultColorToPanels();
         dispose();
@@ -413,26 +431,6 @@ public class ClientRegisterDlg extends javax.swing.JDialog {
             this.msgError = this.msgError + "Invalid name. Try again.\n";
             NameLabel.setForeground(Color.red);
         }
-        
-        /*System.out.println("ZIP TXT: " + zipTxt.getText());
-        if (!(Utils.searchAddress(zipTxt.getText()) == null)) {
-            //SE O CAMPO CEP NAÃO FOR NULO CAI AQUI
-            System.out.println("CEP: "+Utils.searchAddress(zipTxt.getText()));
-            if (!(Utils.searchAddress(zipTxt.getText()).getUf() != null)) {
-                //SE O CEP NÃO FOR NULO MAS NÃO FOR VÁLIDO CAI AQUI
-                msgError = invalidateZipField(msgError);
-                addressTxt.setText("");
-                cityTxt.setText("");
-            } else {
-                //SE O CEP FOR VÁLIDO CAI AQUI
-                addressTxt.setText(Utils.searchAddress(zipTxt.getText()).getLogradouro());
-                cityTxt.setText(Utils.searchAddress(zipTxt.getText()).getLocalidade());
-            }
-        }else{
-            //  SE FOR NULO CAI AQUI
-            msgError = invalidateZipField(msgError);
-        }*/
-        
         
         if (cityTxt.getText().isEmpty()) {
             this.msgError = this.msgError + "Invalid city name. Try again.\n";
@@ -495,7 +493,7 @@ public class ClientRegisterDlg extends javax.swing.JDialog {
             } else {
                 //SE O CEP FOR VÁLIDO CAI AQUI
                 addressTxt.setText(Utils.searchAddress(zipTxt.getText()).getLogradouro());
-                cityTxt.setText(Utils.searchAddress(zipTxt.getText()).getLocalidade());
+                cityTxt.setText(Utils.searchAddress(zipTxt.getText()).getCidade());
             }
         }else{
             //  SE FOR NULO CAI AQUI

@@ -2,13 +2,15 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package Domain;
+package domain;
 
 import java.io.Serializable;
 import java.util.UUID;
 import javax.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.Type;
+
+import com.google.gson.annotations.SerializedName;
 
 /**
  *
@@ -31,6 +33,7 @@ public class Endereco implements Serializable {
     @Column
     private String bairro;
     @Column
+    @SerializedName("localidade")
     private String cidade;
     @Column
     private String uf;

@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package Domain;
+package domain;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -10,6 +10,8 @@ import java.util.List;
 import java.util.UUID;
 import javax.persistence.*; 
 import lombok.*;
+import lombok.experimental.SuperBuilder;
+
 import org.hibernate.annotations.Type;
 
 /**
@@ -20,6 +22,7 @@ import org.hibernate.annotations.Type;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@SuperBuilder
 @Inheritance ( strategy = InheritanceType.JOINED )
 public class Usuario implements Serializable {
     
@@ -55,4 +58,11 @@ public class Usuario implements Serializable {
         this.tarefasDesignadas = tarefasDesignadas;
         this.boards = boards;
     }
+
+    @Override
+    public String toString() {
+        return getNome();
+    }
+
+    
 }

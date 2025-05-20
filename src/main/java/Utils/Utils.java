@@ -1,15 +1,14 @@
 package Utils;
 
-import Domain.Endereco;
 import com.google.gson.Gson;
-import java.util.InputMismatchException;
+
+import domain.Endereco;
+
 import java.util.regex.Pattern;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
 import java.awt.Image;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;

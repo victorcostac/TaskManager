@@ -1,8 +1,8 @@
 package viewer;
 
-import Domain.Task;
-import controller.GraphicInterfaceManager;
 import java.util.Date;
+
+import controller.GerenciadorInterGrafica;
 
 
 /*
@@ -252,8 +252,8 @@ public class TaskRegisterDlg extends javax.swing.JDialog {
     }//GEN-LAST:event_dueDateFormattedTextFieldActionPerformed
 
     private void formComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentShown
-        GraphicInterfaceManager.getMyInstance().loadComboUsers(taskResponsibleComboBox);  
-        GraphicInterfaceManager.getMyInstance().loadComboBoards(boradComboBox);
+        GerenciadorInterGrafica.getMyInstance().loadComboUsers(taskResponsibleComboBox);  
+        GerenciadorInterGrafica.getMyInstance().loadComboBoards(boradComboBox);
         
     }//GEN-LAST:event_formComponentShown
 
