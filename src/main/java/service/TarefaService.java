@@ -8,28 +8,29 @@ import java.util.List;
 
 import domain.Tarefa;
 import infrastructure.ITarefaRepository;
+import infrastructure.ITarefaRepositoryImpl;
 
 /**
  *
  * @author Usuario
  */
 public class TarefaService {
-    private final ITarefaRepository iTaskRepository; //EQUIVALENTE A UM DAO
+    private final ITarefaRepositoryImpl iTaskRepository; //EQUIVALENTE A UM DAO
     
     public TarefaService(ITarefaRepository iTaskRepository){
-        this.iTaskRepository = iTaskRepository;
+        this.iTaskRepository = (ITarefaRepositoryImpl) iTaskRepository;
     }
     
     public void criarTarefaPorId(Tarefa tarefa){
-        iTaskRepository.criarTarefa(tarefa);
+        iTaskRepository.inserir(tarefa);
     }
     
-    void deletarTarefaPorId(Long taskId){
-        iTaskRepository.deletarTarefaPorId(taskId);
-    }
+    void deletarTarefa(Class task){
+        iTaskRepository.excluir(task);
+    }    
     
-    List<Tarefa> getTarefas(){
-        return iTaskRepository.getTarefas();
+    List<Tarefa> getTarefas(Class classe){
+        return iTaskRepository.listar(classe);
     }
        
 }

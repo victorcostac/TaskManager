@@ -15,9 +15,6 @@ import domain.Tarefa;
  */
 public interface IBoardRepository { //EQUIVALENTE A UM DAO
     
-    void criarBoard(Board board);
-    void deletarBoardPorId(Long boardId);
-    List<Board> getBoards();
     void adicionarTarefaNaLista(Tarefa task);
     void deletarTarefadaLista(Tarefa task);
     List<Tarefa> getTarefasDoBoard(Board board);

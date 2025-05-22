@@ -4,10 +4,15 @@
  */
 package infrastructure;
 
+import java.util.List;
 /**
  *
  * @author 2023122760093
  */
-public interface IUserRepository {
-    
+public interface IGenericRepository {
+    void inserir(Object obj);
+    void alterar(Object obj);
+    List listar(Class classe);
+    Object get(Class classe, int id);
+    void excluir(Object obj);
 }

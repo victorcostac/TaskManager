@@ -12,7 +12,7 @@ import infrastructure.ITarefaRepository;
 import infrastructure.ITarefaRepositoryImpl;
 import infrastructure.IUserRepository;
 import infrastructure.IUserRepositoryImpl;
-import infrastructure.SqlImplementations.PostsresqlConnection;
+import infrastructure.SqlImplementations.ConexaoHibernate;
 
 import java.util.List;
 
@@ -42,7 +42,7 @@ public class GerenciadorDominio { // Gerenciador de domínio
         ITarefaRepository iTaskRepository = new ITarefaRepositoryImpl();
         tarefaService = new TarefaService(iTaskRepository);
 
-        PostsresqlConnection.getSessionFactory().openSession();
+        ConexaoHibernate.getSessionFactory().openSession();
 
     }
     

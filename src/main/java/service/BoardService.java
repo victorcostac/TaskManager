@@ -5,7 +5,7 @@
 package service;
 
 import domain.Board;
-import infrastructure.IBoardRepository;
+import infrastructure.IBoardRepositoryImpl;
 
 import java.util.List;
 
@@ -14,22 +14,22 @@ import java.util.List;
  * @author Usuario
  */
 public class BoardService {
-    private final IBoardRepository iBoardRepository;
+    private final IBoardRepositoryImpl iBoardRepository;
     
-    public BoardService(IBoardRepository iBoardRepository){
+    public BoardService(IBoardRepositoryImpl iBoardRepository){
         this.iBoardRepository = iBoardRepository;
     }
     
     public void criarBoard(Board board){
-        iBoardRepository.criarBoard(board);
+        iBoardRepository.inserir(board);
     }
     
-    public List<Board> getBoards(){
-        return iBoardRepository.getBoards();
+    public List<Board> getBoards(Class obg){
+        return iBoardRepository.listar(obg);
     }
     
-    
-    public void deletarBoardPorId(Long boardId){
-        iBoardRepository.deletarBoardPorId(boardId);
+    public void deletarBoard(Object board) {
+        iBoardRepository.excluir(board);
     }
+
 }

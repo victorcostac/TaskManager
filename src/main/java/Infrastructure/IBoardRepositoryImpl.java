@@ -4,39 +4,18 @@
  */
 package infrastructure;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-import java.util.stream.Collectors;
-
 import domain.Board;
 import domain.Tarefa;
+import java.util.List;
 
 /**
  *
  * @author Usuario
  */
 
-public class IBoardRepositoryImpl implements IBoardRepository{ //EQUIVALENTE A UM DAO
-    Set<Board> boards = new HashSet<>();
+public class IBoardRepositoryImpl extends GenericRepository implements IBoardRepository{ //EQUIVALENTE A UM DAO
 
     public IBoardRepositoryImpl() {
-    }
-
-    @Override
-    public List<Board> getBoards() {
-        return boards.stream().collect(Collectors.toList());
-    }
-
-    @Override
-    public void criarBoard(Board board) {
-         boards.add(board);
-    }
-
-    @Override
-    public void deletarBoardPorId(Long boardId) {
-        Board boardRecorded = boards.stream().filter(board -> board.getId().equals(boardId)).findFirst().orElse(null);
-        boards.remove(boardRecorded);
     }
 
     @Override
@@ -54,6 +33,4 @@ public class IBoardRepositoryImpl implements IBoardRepository{ //EQUIVALENTE A U
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
-
-    
 }

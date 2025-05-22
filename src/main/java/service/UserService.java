@@ -6,6 +6,7 @@ package service;
 
 import domain.Usuario;
 import infrastructure.IUserRepository;
+import infrastructure.IUserRepositoryImpl;
 
 import java.util.List;
 
@@ -14,7 +15,7 @@ import java.util.List;
  * @author Usuario
  */
 public class UserService {
-    private final IUserRepository iUserRepository;
+    private final IUserRepositoryImpl iUserRepository;
 
     public UserService(IUserRepository iUserRepository) {
         this.iUserRepository = iUserRepository;
