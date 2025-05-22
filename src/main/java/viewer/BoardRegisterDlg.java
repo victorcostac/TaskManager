@@ -219,7 +219,7 @@ public class BoardRegisterDlg extends javax.swing.JDialog {
 
             },
             new String [] {
-                "Id", "Name", "Description", "Owner", "Status"
+                "Id", "Nome", "Descrição", "Proprietário", "Status"
             }
         ) {
             boolean[] canEdit = new boolean [] {
