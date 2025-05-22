@@ -24,8 +24,8 @@ public class BoardService {
         iBoardRepository.inserir(board);
     }
     
-    public List<Board> getBoards(Class obg){
-        return iBoardRepository.listar(obg);
+    public List<Board> getBoards(){
+        return iBoardRepository.listar(Board.class);
     }
     
     public void deletarBoard(Object board) {

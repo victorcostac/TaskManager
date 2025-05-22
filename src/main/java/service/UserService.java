@@ -5,7 +5,6 @@
 package service;
 
 import domain.Usuario;
-import infrastructure.IUserRepository;
 import infrastructure.IUserRepositoryImpl;
 
 import java.util.List;
@@ -17,24 +16,20 @@ import java.util.List;
 public class UserService {
     private final IUserRepositoryImpl iUserRepository;
 
-    public UserService(IUserRepository iUserRepository) {
+    public UserService(IUserRepositoryImpl iUserRepository) {
         this.iUserRepository = iUserRepository;
     }
     
     public void criarUsuario(Usuario user){
-        iUserRepository.criarUsuario(user);
+        iUserRepository.inserir(user);
     }
     
     public List<Usuario> getUsuarios(){
-        return iUserRepository.getUsuarios();
-    }
-    
-    public void deletarUsuarioPorId(Long userId){
-        iUserRepository.deletarUsuarioPorId(userId);
+        return iUserRepository.listar(Usuario.class);
     }
     
     public void editarUsuario(Usuario user){
-        iUserRepository.editarUsuario(user);
+        iUserRepository.alterar(user);
     }
     
 }

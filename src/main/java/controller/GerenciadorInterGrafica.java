@@ -115,8 +115,8 @@ public class GerenciadorInterGrafica { // Gerenciador de interface gráfica
         gerenciadorDominio.criarBoard(board);
     }
     
-    public void deletarBoardPorId(Long boardId){
-        gerenciadorDominio.deletarBoardPorId(boardId);
+    public void deletarBoardPorId(Board board){
+        gerenciadorDominio.deletarBoard(board);
     }
     
     

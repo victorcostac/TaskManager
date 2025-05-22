@@ -6,11 +6,8 @@ package controller;
 
 import domain.Board;
 import domain.Usuario;
-import infrastructure.IBoardRepository;
 import infrastructure.IBoardRepositoryImpl;
-import infrastructure.ITarefaRepository;
 import infrastructure.ITarefaRepositoryImpl;
-import infrastructure.IUserRepository;
 import infrastructure.IUserRepositoryImpl;
 import infrastructure.SqlImplementations.ConexaoHibernate;
 
@@ -35,11 +32,11 @@ public class GerenciadorDominio { // Gerenciador de domínio
     
     
     public GerenciadorDominio() throws java.lang.ExceptionInInitializerError, HibernateException{ //adicionar os throws depois  que fazer a integração com banco de dados
-        IBoardRepository iBoardRepository = new IBoardRepositoryImpl();
+        IBoardRepositoryImpl iBoardRepository = new IBoardRepositoryImpl();
         boardService = new BoardService(iBoardRepository);
-        IUserRepository iUserdRepository = new IUserRepositoryImpl();
+        IUserRepositoryImpl iUserdRepository = new IUserRepositoryImpl();
         usuarioService = new UserService(iUserdRepository);
-        ITarefaRepository iTaskRepository = new ITarefaRepositoryImpl();
+        ITarefaRepositoryImpl iTaskRepository = new ITarefaRepositoryImpl();
         tarefaService = new TarefaService(iTaskRepository);
 
         ConexaoHibernate.getSessionFactory().openSession();
@@ -62,7 +59,7 @@ public class GerenciadorDominio { // Gerenciador de domínio
         return boardService.getBoards();
     }
     
-    public void  deletarBoardPorId(Long boardId){
-        boardService.deletarBoardPorId(boardId);
+    public void  deletarBoard(Board board){
+        boardService.deletarBoard(board);
     } 
 }
