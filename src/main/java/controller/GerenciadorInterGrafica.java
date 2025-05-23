@@ -8,8 +8,6 @@ import javax.swing.JOptionPane;
 
 import org.hibernate.HibernateException;
 
-import domain.Board;
-import domain.Usuario;
 import viewer.BoardRegisterDlg;
 import viewer.ClientRegisterDlg;
 import viewer.MainFrame;

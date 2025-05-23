@@ -24,8 +24,8 @@ public class GenericService {
         repository.inserir(obj);
     }
 
-    public List<Board> listar() {
-        return repository.listar(Board.class);
+    public List<Board> listar(Class classe) {
+        return repository.listar(classe);
     }
 
     public void deletar(Object obj) {
