@@ -5,6 +5,7 @@
 package viewer;
 
 import controller.GerenciadorInterGrafica;
+import controller.TMBoard;
 import domain.Board;
 import domain.Proprietario;
 import domain.Usuario;
@@ -12,16 +13,16 @@ import domain.Usuario;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
-import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author Usuario
  */
 public class BoardRegisterDlg extends javax.swing.JDialog {
-    private DefaultTableModel boardDefaultTable;
+    //private DefaultTableModel boardDefaultTable;
     private List<Board> boardList = new ArrayList<>();
     private String statusRepository[] = {"active", "unactive"};
+    private TMBoard tmBoard;
 
     /**
      * Creates new form BoardRegisterDlg
@@ -29,14 +30,21 @@ public class BoardRegisterDlg extends javax.swing.JDialog {
     public BoardRegisterDlg(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        setBoardTable();
-        for (Board board : GerenciadorInterGrafica.getMyInstance().getBoards()) {
-            this.boardDefaultTable.addRow(board.getData());
+        //setBoardTable();
+        // Amarro o JTable com o meu Abstract Table Model
+        tmBoard = new TMBoard();
+        boardsTable.setModel(tmBoard);
+        
+        for (Object boardObj : GerenciadorInterGrafica.getMyInstance().getGerenciadorDominio().listar(Board.class)) {
+            Board board = (Board) boardObj;
+            this.tmBoard.adicionar(board);
         }
-        List<Usuario> usuarioList = GerenciadorInterGrafica.getMyInstance().getUsuarios();
-        Usuario usuarioArray[] = new Usuario[usuarioList.size()];
+        GerenciadorInterGrafica gerGrafica = GerenciadorInterGrafica.getMyInstance();
+        List<Object> usuarioList =  gerGrafica.getGerenciadorDominio().listar(Usuario.class);
+        Object usuarioArray[] = new Usuario[usuarioList.size()];
         int i = 0;
-        for(Usuario usuario : usuarioList){
+        for(Object usuarioObj : usuarioList){
+            Usuario usuario = (Usuario) usuarioObj;
             usuarioArray[i] = usuario;
             i++;
         }
@@ -262,7 +270,7 @@ public class BoardRegisterDlg extends javax.swing.JDialog {
                 .proprietario((Proprietario)ownerComboBox.getSelectedItem())
                 .status(status)
                 .build();
-        GerenciadorInterGrafica.getMyInstance().criarBoard(novoBoard);
+        GerenciadorInterGrafica.getMyInstance().getGerenciadorDominio().criar(novoBoard);
         this.boardList.add(novoBoard);
         
         newBoardText.setText("");
@@ -270,7 +278,7 @@ public class BoardRegisterDlg extends javax.swing.JDialog {
         ownerComboBox.setSelectedIndex(0);
         statusComboBox.setSelectedIndex(0);
         
-        this.boardDefaultTable.addRow(novoBoard.getData());
+        this.tmBoard.adicionar(novoBoard);
         
     }//GEN-LAST:event_addBoardButtonActionPerformed
 
@@ -295,25 +303,26 @@ public class BoardRegisterDlg extends javax.swing.JDialog {
         int linha = boardsTable.getSelectedRow();
         if(linha >= 0){
             if(JOptionPane.showConfirmDialog(this, "Delete it?") == JOptionPane.YES_OPTION){
-            Long boardId = (Long)(this.boardDefaultTable).getValueAt(linha, 0);
-            (this.boardDefaultTable).removeRow(linha);
-            GerenciadorInterGrafica.getMyInstance().deletarBoard(boardId);        
+            Board board = (Board)(this.tmBoard).getItem(linha);
+            (this.tmBoard).remover(linha);
+            GerenciadorInterGrafica.getMyInstance().getGerenciadorDominio().deletar(board);        
             }
 
         }
     }//GEN-LAST:event_clearMenuItemActionPerformed
 
     private void formComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentShown
-        GerenciadorInterGrafica.getMyInstance().loadComboUsers(ownerComboBox);
+        GerenciadorInterGrafica.getMyInstance().loadCombo(ownerComboBox, Usuario.class);
+        
     }//GEN-LAST:event_formComponentShown
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
     
-    private void setBoardTable() {
+    /*private void setBoardTable() {
         this.boardDefaultTable = (DefaultTableModel) boardsTable.getModel();
-    }
+    }*/
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

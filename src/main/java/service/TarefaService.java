@@ -7,16 +7,18 @@ package service;
 import java.util.List;
 
 import domain.Tarefa;
+import infrastructure.GenericRepository;
 import infrastructure.ITarefaRepositoryImpl;
 
 /**
  *
  * @author Usuario
  */
-public class TarefaService {
+public class TarefaService  extends GenericService {
     private final ITarefaRepositoryImpl iTaskRepository; //EQUIVALENTE A UM DAO
     
     public TarefaService(ITarefaRepositoryImpl iTaskRepository){
+        super(new GenericRepository());
         this.iTaskRepository = iTaskRepository;
     }
     

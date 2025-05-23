@@ -4,10 +4,8 @@ import Utils.Utils;
 import controller.GerenciadorInterGrafica;
 import domain.Endereco;
 import domain.Usuario;
-import service.UserService;
 import java.awt.Color;
 import java.time.LocalDate;
-import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
@@ -401,7 +399,7 @@ public class ClientRegisterDlg extends javax.swing.JDialog {
                 .boards(new ArrayList<>())
                 .build();
         
-        GerenciadorInterGrafica.getMyInstance().criarUsuario(newUser);
+        GerenciadorInterGrafica.getMyInstance().getGerenciadorDominio().criar(newUser);
         
         setDefaultColorToPanels();
         dispose();

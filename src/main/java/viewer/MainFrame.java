@@ -195,7 +195,7 @@ public class MainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenu2ActionPerformed
 
     private void taskRegisterMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_taskRegisterMenuItemActionPerformed
-        List<Board> boards = GerenciadorInterGrafica.getMyInstance().getBoards();
+        List<Object> boards = GerenciadorInterGrafica.getMyInstance().getGerenciadorDominio().listar(Board.class);
         if(boards.isEmpty()){
             JOptionPane.showMessageDialog(this, "At least one board must to be registered.", "No board registered", JOptionPane.INFORMATION_MESSAGE);
             return;
@@ -204,7 +204,7 @@ public class MainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_taskRegisterMenuItemActionPerformed
 
     private void boardRegisterMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boardRegisterMenuItemActionPerformed
-        List<Usuario> users = GerenciadorInterGrafica.getMyInstance().getUsuarios();
+        List<Object> users = GerenciadorInterGrafica.getMyInstance().getGerenciadorDominio().listar(Usuario.class);
         if(users.isEmpty()){
             JOptionPane.showMessageDialog(this, "At least one user must to be registered.", "No user registered", JOptionPane.INFORMATION_MESSAGE);
             return;

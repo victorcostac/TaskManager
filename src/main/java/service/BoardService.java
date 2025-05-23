@@ -5,6 +5,7 @@
 package service;
 
 import domain.Board;
+import infrastructure.GenericRepository;
 import infrastructure.IBoardRepositoryImpl;
 
 import java.util.List;
@@ -13,10 +14,15 @@ import java.util.List;
  *
  * @author Usuario
  */
-public class BoardService {
+public class BoardService extends GenericService{
     private final IBoardRepositoryImpl iBoardRepository;
     
+    /**
+     *
+     * @param iBoardRepository
+     */
     public BoardService(IBoardRepositoryImpl iBoardRepository){
+        super(new GenericRepository());
         this.iBoardRepository = iBoardRepository;
     }
     

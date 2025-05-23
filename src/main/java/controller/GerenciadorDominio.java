@@ -57,8 +57,8 @@ public class GerenciadorDominio { // Gerenciador de domínio
         genericService.criar(obj);
     }
     
-    public List<Board> listar(Class calsse){
-        return genericService.listar(calsse);
+    public List<Object> listar(Class classe){
+        return genericService.listar(classe);
     }
     
     public void  deletar(Object obj){

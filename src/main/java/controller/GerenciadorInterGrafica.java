@@ -148,6 +148,8 @@ public class GerenciadorInterGrafica { // Gerenciador de interface gráfica
         GIManager.openMainFrame();
 
     }
-    
-    
+
+    public GerenciadorDominio getGerenciadorDominio() {
+        return gerenciadorDominio;
+    }
 }

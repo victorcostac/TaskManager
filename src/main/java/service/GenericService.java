@@ -16,7 +16,7 @@ public class GenericService {
     
     private final GenericRepository repository;
     
-    public GenericService(infrastructure.GenericRepository repository) {
+    public GenericService(GenericRepository repository) {
         this.repository = repository;
     }
 
@@ -24,7 +24,7 @@ public class GenericService {
         repository.inserir(obj);
     }
 
-    public List<Board> listar(Class classe) {
+    public List<Object> listar(Class classe) {
         return repository.listar(classe);
     }
 
