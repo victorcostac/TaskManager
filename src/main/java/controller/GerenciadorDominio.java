@@ -6,6 +6,7 @@ package controller;
 
 import domain.Board;
 import domain.Usuario;
+import infrastructure.GenericRepository;
 import infrastructure.IBoardRepositoryImpl;
 import infrastructure.ITarefaRepositoryImpl;
 import infrastructure.IUserRepositoryImpl;
@@ -16,6 +17,7 @@ import java.util.List;
 import org.hibernate.HibernateException;
 
 import service.BoardService;
+import service.GenericService;
 import service.TarefaService;
 import service.UserService;
 
@@ -28,6 +30,7 @@ public class GerenciadorDominio { // Gerenciador de domínio
     private final BoardService boardService;
     private final TarefaService tarefaService;
     private final UserService usuarioService;
+    private final GenericService genericService;
     
     
     
@@ -38,28 +41,27 @@ public class GerenciadorDominio { // Gerenciador de domínio
         usuarioService = new UserService(iUserdRepository);
         ITarefaRepositoryImpl iTaskRepository = new ITarefaRepositoryImpl();
         tarefaService = new TarefaService(iTaskRepository);
+        GenericRepository genericRepository = new GenericRepository();
+        genericService = new GenericService(genericRepository);
 
         ConexaoHibernate.getSessionFactory().openSession();
 
     }
     
-    public List<Usuario> getUsuarios(){
-        return usuarioService.getUsuarios();
+    
+    public void alterar(Object obj){
+        genericService.alterar(obj);
     }
     
-    public void criarUsuario(Usuario user){
-        usuarioService.criarUsuario(user);
+    public void criar(Object obj) {
+        genericService.criar(obj);
     }
     
-    public void criarBoard(Board board) {
-        boardService.criarBoard(board);
+    public List<Board> listar(Class calsse){
+        return genericService.listar(calsse);
     }
     
-    public List<Board> getBoards(){
-        return boardService.getBoards();
-    }
-    
-    public void  deletarBoard(Board board){
-        boardService.deletarBoard(board);
+    public void  deletar(Object obj){
+        boardService.deletarBoard(obj);
     } 
 }

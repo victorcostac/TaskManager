@@ -297,7 +297,7 @@ public class BoardRegisterDlg extends javax.swing.JDialog {
             if(JOptionPane.showConfirmDialog(this, "Delete it?") == JOptionPane.YES_OPTION){
             Long boardId = (Long)(this.boardDefaultTable).getValueAt(linha, 0);
             (this.boardDefaultTable).removeRow(linha);
-            GerenciadorInterGrafica.getMyInstance().deletarBoardPorId(boardId);        
+            GerenciadorInterGrafica.getMyInstance().deletarBoard(boardId);        
             }
 
         }

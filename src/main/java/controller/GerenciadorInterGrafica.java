@@ -81,42 +81,22 @@ public class GerenciadorInterGrafica { // Gerenciador de interface gráfica
         taskRegisterDlg = (TaskRegisterDlg) openWindow(mainFrame, taskRegisterDlg, TaskRegisterDlg.class);
     }
     
-    public void loadComboUsers(JComboBox combo){
+    /*public void loadComboUsers(JComboBox combo){
         try {
             List list = getUsuarios();
             combo.setModel(new DefaultComboBoxModel(list.toArray()));
         } catch (Exception ex) {// adiconar  as exceptions depois 
             JOptionPane.showMessageDialog(boardRegisterDlg, ex, "board registration", JOptionPane.ERROR_MESSAGE);
         }
-    }
+    }*/
     
-    public void loadComboBoards(JComboBox combo){
+    public void loadCombo(JComboBox combo, Class classe){
         try {
-            List list = getBoards();
+            List list = this.gerenciadorDominio.listar(classe);
             combo.setModel(new DefaultComboBoxModel(list.toArray()));
         } catch (Exception ex) {// adiconar  as exceptions depois 
             JOptionPane.showMessageDialog(taskRegisterDlg, ex, "Task registration", JOptionPane.ERROR_MESSAGE);
         }
-    }
-    
-    public List<Board> getBoards(){
-        return gerenciadorDominio.getBoards();
-    }
-    
-    public List<Usuario> getUsuarios(){
-        return gerenciadorDominio.getUsuarios();
-    }
-    
-    public void criarUsuario(Usuario usuario){
-        gerenciadorDominio.criarUsuario(usuario);
-    }
-    
-    public void criarBoard(Board board) {
-        gerenciadorDominio.criarBoard(board);
-    }
-    
-    public void deletarBoardPorId(Board board){
-        gerenciadorDominio.deletarBoard(board);
     }
     
     
