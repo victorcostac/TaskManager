@@ -23,6 +23,7 @@ public class BoardRegisterDlg extends javax.swing.JDialog {
     private List<Board> boardList = new ArrayList<>();
     private String statusRepository[] = {"active", "unactive"};
     private TMBoard tmBoard;
+    private GerenciadorInterGrafica gerGrafica = GerenciadorInterGrafica.getMyInstance(); 
 
     /**
      * Creates new form BoardRegisterDlg
@@ -33,13 +34,11 @@ public class BoardRegisterDlg extends javax.swing.JDialog {
         //setBoardTable();
         // Amarro o JTable com o meu Abstract Table Model
         tmBoard = new TMBoard();
-        boardsTable.setModel(tmBoard);
-        
-        for (Object boardObj : GerenciadorInterGrafica.getMyInstance().getGerenciadorDominio().listar(Board.class)) {
+        boardsTable.setModel(tmBoard);      
+        for (Object boardObj : gerGrafica.getGerenciadorDominio().listar(Board.class)) {
             Board board = (Board) boardObj;
             this.tmBoard.adicionar(board);
         }
-        GerenciadorInterGrafica gerGrafica = GerenciadorInterGrafica.getMyInstance();
         List<Object> usuarioList =  gerGrafica.getGerenciadorDominio().listar(Usuario.class);
         Object usuarioArray[] = new Usuario[usuarioList.size()];
         int i = 0;
@@ -267,10 +266,10 @@ public class BoardRegisterDlg extends javax.swing.JDialog {
         
         Board novoBoard = Board.builder().descricao(descriptionTextField.getText())
                 .nome(newBoardText.getText())
-                .proprietario((Proprietario)ownerComboBox.getSelectedItem())
+                .proprietario((Proprietario) ownerComboBox.getSelectedItem())
                 .status(status)
                 .build();
-        GerenciadorInterGrafica.getMyInstance().getGerenciadorDominio().criar(novoBoard);
+        gerGrafica.getGerenciadorDominio().criar(novoBoard);
         this.boardList.add(novoBoard);
         
         newBoardText.setText("");
@@ -305,14 +304,14 @@ public class BoardRegisterDlg extends javax.swing.JDialog {
             if(JOptionPane.showConfirmDialog(this, "Delete it?") == JOptionPane.YES_OPTION){
             Board board = (Board)(this.tmBoard).getItem(linha);
             (this.tmBoard).remover(linha);
-            GerenciadorInterGrafica.getMyInstance().getGerenciadorDominio().deletar(board);        
+            gerGrafica.getGerenciadorDominio().deletar(board);        
             }
 
         }
     }//GEN-LAST:event_clearMenuItemActionPerformed
 
     private void formComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentShown
-        GerenciadorInterGrafica.getMyInstance().loadCombo(ownerComboBox, Usuario.class);
+        gerGrafica.loadCombo(ownerComboBox, Usuario.class);
         
     }//GEN-LAST:event_formComponentShown
 
