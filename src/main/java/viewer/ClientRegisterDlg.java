@@ -57,32 +57,37 @@ public class ClientRegisterDlg extends javax.swing.JDialog {
         sex_group = new javax.swing.ButtonGroup();
         picturePanel = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
-        ssnTxt = new javax.swing.JFormattedTextField();
-        birthDateTxt = new javax.swing.JFormattedTextField();
+        cpfTxt = new javax.swing.JFormattedTextField();
+        dataNascTxt = new javax.swing.JFormattedTextField();
         zipLabel = new javax.swing.JLabel();
-        zipTxt = new javax.swing.JFormattedTextField();
+        cepTxt = new javax.swing.JFormattedTextField();
         addressLabel = new javax.swing.JLabel();
         NameLabel = new javax.swing.JLabel();
-        addressTxt = new javax.swing.JTextField();
-        nameTxt = new javax.swing.JTextField();
+        enderecoTxt = new javax.swing.JTextField();
+        nomeTxt = new javax.swing.JTextField();
         ssnLabel = new javax.swing.JLabel();
         bDateLabel = new javax.swing.JLabel();
         cityLabel = new javax.swing.JLabel();
-        cityTxt = new javax.swing.JTextField();
+        cidadeTxt = new javax.swing.JTextField();
         sexPanel = new javax.swing.JPanel();
-        femaleRadio = new javax.swing.JRadioButton();
-        maleRadio = new javax.swing.JRadioButton();
+        fRadio = new javax.swing.JRadioButton();
+        mRadio = new javax.swing.JRadioButton();
         positionPanel = new javax.swing.JPanel();
         POCheckBox = new javax.swing.JCheckBox();
-        DeveloperCheckBox = new javax.swing.JCheckBox();
+        DesenvolvedorCheckBox = new javax.swing.JCheckBox();
         ScrumMasterCheckBox = new javax.swing.JCheckBox();
-        porpuseComboBox = new javax.swing.JComboBox<>();
+        usoComboBox = new javax.swing.JComboBox<>();
         porpuseLabel = new javax.swing.JLabel();
         OKButton = new javax.swing.JButton();
-        cancelButton = new javax.swing.JButton();
+        CancelarButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Client Register");
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosed(java.awt.event.WindowEvent evt) {
+                formWindowClosed(evt);
+            }
+        });
 
         picturePanel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         picturePanel.setText("Foto");
@@ -96,77 +101,77 @@ public class ClientRegisterDlg extends javax.swing.JDialog {
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 
         try {
-            ssnTxt.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("###.###.###-##")));
+            cpfTxt.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("###.###.###-##")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
-        ssnTxt.addFocusListener(new java.awt.event.FocusAdapter() {
+        cpfTxt.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
-                ssnTxtFocusLost(evt);
+                cpfTxtFocusLost(evt);
             }
         });
-        ssnTxt.addActionListener(new java.awt.event.ActionListener() {
+        cpfTxt.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ssnTxtActionPerformed(evt);
+                cpfTxtActionPerformed(evt);
             }
         });
 
         try {
-            birthDateTxt.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
+            dataNascTxt.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
-        birthDateTxt.addActionListener(new java.awt.event.ActionListener() {
+        dataNascTxt.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                birthDateTxtActionPerformed(evt);
+                dataNascTxtActionPerformed(evt);
             }
         });
 
-        zipLabel.setText("ZIP (CEP)");
+        zipLabel.setText("CEP");
 
         try {
-            zipTxt.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("#####-###")));
+            cepTxt.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("#####-###")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
-        zipTxt.addFocusListener(new java.awt.event.FocusAdapter() {
+        cepTxt.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
-                zipTxtFocusLost(evt);
+                cepTxtFocusLost(evt);
             }
         });
-        zipTxt.addActionListener(new java.awt.event.ActionListener() {
+        cepTxt.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                zipTxtActionPerformed(evt);
-            }
-        });
-
-        addressLabel.setText("address");
-
-        NameLabel.setText("Name");
-
-        addressTxt.setEditable(false);
-        addressTxt.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                addressTxtActionPerformed(evt);
+                cepTxtActionPerformed(evt);
             }
         });
 
-        nameTxt.addActionListener(new java.awt.event.ActionListener() {
+        addressLabel.setText("Endereço");
+
+        NameLabel.setText("Nome");
+
+        enderecoTxt.setEditable(false);
+        enderecoTxt.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                nameTxtActionPerformed(evt);
+                enderecoTxtActionPerformed(evt);
             }
         });
 
-        ssnLabel.setText("SSN (CPF)");
-
-        bDateLabel.setText("Birth date");
-
-        cityLabel.setText("city");
-
-        cityTxt.setEditable(false);
-        cityTxt.addActionListener(new java.awt.event.ActionListener() {
+        nomeTxt.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cityTxtActionPerformed(evt);
+                nomeTxtActionPerformed(evt);
+            }
+        });
+
+        ssnLabel.setText("CPF");
+
+        bDateLabel.setText("Data Nasc");
+
+        cityLabel.setText("Cidade");
+
+        cidadeTxt.setEditable(false);
+        cidadeTxt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cidadeTxtActionPerformed(evt);
             }
         });
 
@@ -190,12 +195,12 @@ public class ClientRegisterDlg extends javax.swing.JDialog {
                             .addComponent(cityLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(22, 22, 22)))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(cityTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(zipTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(ssnTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(birthDateTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(nameTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(addressTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cidadeTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cepTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cpfTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(dataNascTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(nomeTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(enderecoTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(14, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -204,47 +209,49 @@ public class ClientRegisterDlg extends javax.swing.JDialog {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(NameLabel)
-                    .addComponent(nameTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(nomeTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(ssnTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cpfTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(ssnLabel))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(birthDateTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(dataNascTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(bDateLabel))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(zipTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cepTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(zipLabel))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(addressTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(enderecoTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(addressLabel))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cityLabel)
-                    .addComponent(cityTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cidadeTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(23, Short.MAX_VALUE))
         );
 
         sexPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Sexo"));
         sexPanel.setLayout(new java.awt.BorderLayout());
 
-        sex_group.add(femaleRadio);
-        femaleRadio.setText("Female");
-        sexPanel.add(femaleRadio, java.awt.BorderLayout.CENTER);
+        sex_group.add(fRadio);
+        fRadio.setText("F");
+        sexPanel.add(fRadio, java.awt.BorderLayout.CENTER);
 
-        sex_group.add(maleRadio);
-        maleRadio.setText("Male");
-        maleRadio.addActionListener(new java.awt.event.ActionListener() {
+        sex_group.add(mRadio);
+        mRadio.setText("M");
+        mRadio.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                maleRadioActionPerformed(evt);
+                mRadioActionPerformed(evt);
             }
         });
-        sexPanel.add(maleRadio, java.awt.BorderLayout.PAGE_START);
+        sexPanel.add(mRadio, java.awt.BorderLayout.PAGE_START);
 
-        positionPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createTitledBorder("Position")), "Position"));
+        positionPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createTitledBorder("Position")), "Posição"));
+        positionPanel.setToolTipText("");
+        positionPanel.setDoubleBuffered(false);
         positionPanel.setLayout(new java.awt.BorderLayout());
 
         POCheckBox.setText("Product Owner");
@@ -255,8 +262,8 @@ public class ClientRegisterDlg extends javax.swing.JDialog {
         });
         positionPanel.add(POCheckBox, java.awt.BorderLayout.CENTER);
 
-        DeveloperCheckBox.setText("Developer");
-        positionPanel.add(DeveloperCheckBox, java.awt.BorderLayout.PAGE_START);
+        DesenvolvedorCheckBox.setText("Desenvolvedor");
+        positionPanel.add(DesenvolvedorCheckBox, java.awt.BorderLayout.PAGE_START);
 
         ScrumMasterCheckBox.setText("Scrum Master");
         ScrumMasterCheckBox.addActionListener(new java.awt.event.ActionListener() {
@@ -266,9 +273,9 @@ public class ClientRegisterDlg extends javax.swing.JDialog {
         });
         positionPanel.add(ScrumMasterCheckBox, java.awt.BorderLayout.PAGE_END);
 
-        porpuseComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Select", "Work", "Study" }));
+        usoComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione", "Trabalho", "Estudo" }));
 
-        porpuseLabel.setText("Porpuse");
+        porpuseLabel.setText("Uso");
 
         OKButton.setText("Ok");
         OKButton.addActionListener(new java.awt.event.ActionListener() {
@@ -277,10 +284,10 @@ public class ClientRegisterDlg extends javax.swing.JDialog {
             }
         });
 
-        cancelButton.setText("Cancel");
-        cancelButton.addActionListener(new java.awt.event.ActionListener() {
+        CancelarButton.setText("Cancelar");
+        CancelarButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cancelButtonActionPerformed(evt);
+                CancelarButtonActionPerformed(evt);
             }
         });
 
@@ -298,18 +305,18 @@ public class ClientRegisterDlg extends javax.swing.JDialog {
                             .addComponent(positionPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(sexPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 51, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 79, Short.MAX_VALUE)
                                 .addComponent(picturePanel, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(110, 110, 110)
-                        .addComponent(cancelButton)
+                        .addComponent(CancelarButton)
                         .addGap(63, 63, 63)
                         .addComponent(OKButton))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(porpuseLabel)
                         .addGap(31, 31, 31)
-                        .addComponent(porpuseComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(usoComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(14, 14, 14))
         );
         layout.setVerticalGroup(
@@ -328,10 +335,10 @@ public class ClientRegisterDlg extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(porpuseLabel)
-                    .addComponent(porpuseComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(usoComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cancelButton)
+                    .addComponent(CancelarButton)
                     .addComponent(OKButton))
                 .addGap(26, 26, 26))
         );
@@ -339,29 +346,29 @@ public class ClientRegisterDlg extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void nameTxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nameTxtActionPerformed
+    private void nomeTxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nomeTxtActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_nameTxtActionPerformed
+    }//GEN-LAST:event_nomeTxtActionPerformed
 
-    private void addressTxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addressTxtActionPerformed
+    private void enderecoTxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_enderecoTxtActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_addressTxtActionPerformed
+    }//GEN-LAST:event_enderecoTxtActionPerformed
 
-    private void zipTxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_zipTxtActionPerformed
+    private void cepTxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cepTxtActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_zipTxtActionPerformed
+    }//GEN-LAST:event_cepTxtActionPerformed
 
-    private void birthDateTxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_birthDateTxtActionPerformed
+    private void dataNascTxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dataNascTxtActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_birthDateTxtActionPerformed
+    }//GEN-LAST:event_dataNascTxtActionPerformed
 
-    private void ssnTxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ssnTxtActionPerformed
+    private void cpfTxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cpfTxtActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_ssnTxtActionPerformed
+    }//GEN-LAST:event_cpfTxtActionPerformed
 
-    private void maleRadioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_maleRadioActionPerformed
+    private void mRadioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mRadioActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_maleRadioActionPerformed
+    }//GEN-LAST:event_mRadioActionPerformed
 
     private void ScrumMasterCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ScrumMasterCheckBoxActionPerformed
         // TODO add your handling code here:
@@ -379,29 +386,30 @@ public class ClientRegisterDlg extends javax.swing.JDialog {
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
         Date data;
         try {
-            data = sdf.parse(birthDateTxt.getText());
+            data = sdf.parse(dataNascTxt.getText());
         } catch (ParseException e) {
             e.printStackTrace();
             throw new RuntimeException(e.getMessage());
         }
         
 
-        Endereco endereco = Endereco.builder().cep(zipTxt.getText()).cidade(cityTxt.getText()).logradouro(addressTxt.getText()).build();
+        Endereco endereco = Endereco.builder().cep(cepTxt.getText()).cidade(cidadeTxt.getText()).logradouro(enderecoTxt.getText()).build();
         
 
         System.out.println("Data formatada" + data);
         Usuario newUser = Usuario.builder().
                 endereco(endereco)
-                .cpf(ssnTxt.getText())
+                .cpf(cpfTxt.getText())
                 .dataNasc(data)
-                .nome(nameTxt.getText())
+                .nome(nomeTxt.getText())
                 .tarefasDesignadas(new ArrayList<>())
                 .boards(new ArrayList<>())
                 .build();
-        
+        GerenciadorInterGrafica.getMyInstance().getGerenciadorDominio().criar(newUser.getEndereco());
         GerenciadorInterGrafica.getMyInstance().getGerenciadorDominio().criar(newUser);
         
         setDefaultColorToPanels();
+        limparCampos();
         dispose();
         }else{
             JOptionPane.showMessageDialog(this, this.msgError, "Client Registered", JOptionPane.ERROR_MESSAGE);
@@ -412,32 +420,33 @@ public class ClientRegisterDlg extends javax.swing.JDialog {
     private Boolean validateFields(){
         setDefaultColorToPanels();
         
-        if (!birthDateTxt.getText().isEmpty()) {
+        if (!dataNascTxt.getText().isEmpty()) {
             try {
-                parseLocalDate(birthDateTxt.getText());
+                parseLocalDate(dataNascTxt.getText());
             } catch (Exception e) {
                 this.msgError = this.msgError + "Invalid birth date. Try again.\n";
                 bDateLabel.setForeground(Color.red);
                 System.out.println("An error occurred: "+e.getMessage());
             }
         }
-        if (!Utils.isCPF(ssnTxt.getText())) {
+        if (!Utils.isCPF(cpfTxt.getText()) || cpfTxt.getText().isEmpty()) {
             this.msgError = this.msgError + "Invalid ssn number. Try again.\n";
             ssnLabel.setForeground(Color.red);
         }
-        if (nameTxt.getText().isEmpty()) {
+        if (nomeTxt.getText().isEmpty()) {
             this.msgError = this.msgError + "Invalid name. Try again.\n";
             NameLabel.setForeground(Color.red);
         }
         
-        if (cityTxt.getText().isEmpty()) {
+        if (cidadeTxt.getText().isEmpty()) {
             this.msgError = this.msgError + "Invalid city name. Try again.\n";
             cityLabel.setForeground(Color.red);
         }
-        if (addressTxt.getText().isEmpty()) {
+        if (enderecoTxt.getText().isEmpty()) {
             this.msgError = this.msgError + "Invalid address. Try again.\n";
             addressLabel.setForeground(Color.red);
         }
+        invalidateZipField(this.msgError);
 
         
         if(this.msgError.isEmpty()){
@@ -458,9 +467,12 @@ public class ClientRegisterDlg extends javax.swing.JDialog {
         zipLabel.setForeground(Color.black);
     }
     private String invalidateZipField(String msgParam){
+        if(!zipLabel.getForeground().equals(Color.red)){
         zipLabel.setForeground(Color.red);
-        zipTxt.setText("");
+        cepTxt.setText("");
         return msgParam + "Invalid zip number. Try again.\n";
+        }
+        return msgParam;
     }
     
     private LocalDate parseLocalDate(String dateStr){
@@ -468,37 +480,37 @@ public class ClientRegisterDlg extends javax.swing.JDialog {
     }
     
     
-    private void cityTxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cityTxtActionPerformed
+    private void cidadeTxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cidadeTxtActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_cityTxtActionPerformed
+    }//GEN-LAST:event_cidadeTxtActionPerformed
 
-    private void ssnTxtFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_ssnTxtFocusLost
+    private void cpfTxtFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_cpfTxtFocusLost
 
-    }//GEN-LAST:event_ssnTxtFocusLost
+    }//GEN-LAST:event_cpfTxtFocusLost
 
-    private void zipTxtFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_zipTxtFocusLost
+    private void cepTxtFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_cepTxtFocusLost
         this.msgError = "";
-        System.out.println("ZIP TXT: " + zipTxt.getText());
+        System.out.println("ZIP TXT: " + cepTxt.getText());
         
-        if (!(Utils.searchAddress(zipTxt.getText()) == null)) {
+        if (!(Utils.searchAddress(cepTxt.getText()) == null)) {
             //SE O CAMPO CEP NAÃO FOR NULO CAI AQUI
-            System.out.println("CEP: "+Utils.searchAddress(zipTxt.getText()));
-            if (!(Utils.searchAddress(zipTxt.getText()).getUf() != null)) {
+            System.out.println("CEP: "+Utils.searchAddress(cepTxt.getText()));
+            if (!(Utils.searchAddress(cepTxt.getText()).getUf() != null)) {
                 //SE O CEP NÃO FOR NULO MAS NÃO FOR VÁLIDO CAI AQUI
                 this.msgError = invalidateZipField(this.msgError);
-                addressTxt.setText("");
-                cityTxt.setText("");
+                enderecoTxt.setText("");
+                cidadeTxt.setText("");
             } else {
                 //SE O CEP FOR VÁLIDO CAI AQUI
-                addressTxt.setText(Utils.searchAddress(zipTxt.getText()).getLogradouro());
-                cityTxt.setText(Utils.searchAddress(zipTxt.getText()).getCidade());
+                enderecoTxt.setText(Utils.searchAddress(cepTxt.getText()).getLogradouro());
+                cidadeTxt.setText(Utils.searchAddress(cepTxt.getText()).getCidade());
             }
         }else{
             //  SE FOR NULO CAI AQUI
             this.msgError = invalidateZipField(this.msgError);
         }
         
-    }//GEN-LAST:event_zipTxtFocusLost
+    }//GEN-LAST:event_cepTxtFocusLost
 
     private void picturePanelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_picturePanelMouseClicked
         JFileChooser fileChoser = new JFileChooser();
@@ -520,37 +532,49 @@ public class ClientRegisterDlg extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_picturePanelMouseClicked
 
-    private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
+    private void CancelarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CancelarButtonActionPerformed
+        limparCampos();
+        setDefaultColorToPanels();
         dispose();
-    }//GEN-LAST:event_cancelButtonActionPerformed
+        
+    }//GEN-LAST:event_CancelarButtonActionPerformed
 
+    private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
+        limparCampos();
+        setDefaultColorToPanels();
+        dispose();
+    }//GEN-LAST:event_formWindowClosed
+    private void limparCampos(){
+        setDefaultColorToPanels();
+        
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JCheckBox DeveloperCheckBox;
+    private javax.swing.JButton CancelarButton;
+    private javax.swing.JCheckBox DesenvolvedorCheckBox;
     private javax.swing.JLabel NameLabel;
     private javax.swing.JButton OKButton;
     private javax.swing.JCheckBox POCheckBox;
     private javax.swing.JCheckBox ScrumMasterCheckBox;
     private javax.swing.JLabel addressLabel;
-    private javax.swing.JTextField addressTxt;
     private javax.swing.JLabel bDateLabel;
-    private javax.swing.JFormattedTextField birthDateTxt;
-    private javax.swing.JButton cancelButton;
+    private javax.swing.JFormattedTextField cepTxt;
+    private javax.swing.JTextField cidadeTxt;
     private javax.swing.JLabel cityLabel;
-    private javax.swing.JTextField cityTxt;
-    private javax.swing.JRadioButton femaleRadio;
+    private javax.swing.JFormattedTextField cpfTxt;
+    private javax.swing.JFormattedTextField dataNascTxt;
+    private javax.swing.JTextField enderecoTxt;
+    private javax.swing.JRadioButton fRadio;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JRadioButton maleRadio;
-    private javax.swing.JTextField nameTxt;
+    private javax.swing.JRadioButton mRadio;
+    private javax.swing.JTextField nomeTxt;
     private javax.swing.JLabel picturePanel;
-    private javax.swing.JComboBox<String> porpuseComboBox;
     private javax.swing.JLabel porpuseLabel;
     private javax.swing.JPanel positionPanel;
     private javax.swing.JPanel sexPanel;
     private javax.swing.ButtonGroup sex_group;
     private javax.swing.JLabel ssnLabel;
-    private javax.swing.JFormattedTextField ssnTxt;
+    private javax.swing.JComboBox<String> usoComboBox;
     private javax.swing.JLabel zipLabel;
-    private javax.swing.JFormattedTextField zipTxt;
     // End of variables declaration//GEN-END:variables
 }

@@ -13,6 +13,9 @@
     <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
     <SyntheticProperty name="generateCenter" type="boolean" value="false"/>
   </SyntheticProperties>
+  <Events>
+    <EventHandler event="windowClosed" listener="java.awt.event.WindowListener" parameters="java.awt.event.WindowEvent" handler="formWindowClosed"/>
+  </Events>
   <AuxValues>
     <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="0"/>
     <AuxValue name="FormSettings_autoSetComponentName" type="java.lang.Boolean" value="false"/>
@@ -38,14 +41,14 @@
                           <Component id="positionPanel" min="-2" max="-2" attributes="0"/>
                           <Group type="102" alignment="0" attributes="0">
                               <Component id="sexPanel" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace pref="51" max="32767" attributes="0"/>
+                              <EmptySpace pref="79" max="32767" attributes="0"/>
                               <Component id="picturePanel" min="-2" pref="86" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="110" max="-2" attributes="0"/>
-                      <Component id="cancelButton" min="-2" max="-2" attributes="0"/>
+                      <Component id="CancelarButton" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="63" max="-2" attributes="0"/>
                       <Component id="OKButton" min="-2" max="-2" attributes="0"/>
                   </Group>
@@ -53,7 +56,7 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="porpuseLabel" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
-                      <Component id="porpuseComboBox" min="-2" pref="110" max="-2" attributes="0"/>
+                      <Component id="usoComboBox" min="-2" pref="110" max="-2" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
@@ -79,11 +82,11 @@
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="porpuseLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="porpuseComboBox" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="usoComboBox" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace pref="32" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="cancelButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="CancelarButton" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="OKButton" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
@@ -139,12 +142,12 @@
                       </Group>
                   </Group>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="cityTxt" min="-2" pref="112" max="-2" attributes="0"/>
-                      <Component id="zipTxt" min="-2" pref="112" max="-2" attributes="0"/>
-                      <Component id="ssnTxt" min="-2" pref="112" max="-2" attributes="0"/>
-                      <Component id="birthDateTxt" min="-2" pref="112" max="-2" attributes="0"/>
-                      <Component id="nameTxt" alignment="0" min="-2" pref="112" max="-2" attributes="0"/>
-                      <Component id="addressTxt" alignment="0" min="-2" pref="112" max="-2" attributes="0"/>
+                      <Component id="cidadeTxt" min="-2" pref="112" max="-2" attributes="0"/>
+                      <Component id="cepTxt" min="-2" pref="112" max="-2" attributes="0"/>
+                      <Component id="cpfTxt" min="-2" pref="112" max="-2" attributes="0"/>
+                      <Component id="dataNascTxt" min="-2" pref="112" max="-2" attributes="0"/>
+                      <Component id="nomeTxt" alignment="0" min="-2" pref="112" max="-2" attributes="0"/>
+                      <Component id="enderecoTxt" alignment="0" min="-2" pref="112" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace pref="14" max="32767" attributes="0"/>
               </Group>
@@ -156,32 +159,32 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="NameLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="nameTxt" alignment="3" min="-2" pref="19" max="-2" attributes="0"/>
+                      <Component id="nomeTxt" alignment="3" min="-2" pref="19" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="ssnTxt" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="cpfTxt" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="ssnLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="birthDateTxt" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="dataNascTxt" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="bDateLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="zipTxt" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="cepTxt" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="zipLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="addressTxt" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="enderecoTxt" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="addressLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="cityLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="cityTxt" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="cidadeTxt" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace pref="23" max="32767" attributes="0"/>
               </Group>
@@ -189,87 +192,87 @@
         </DimensionLayout>
       </Layout>
       <SubComponents>
-        <Component class="javax.swing.JFormattedTextField" name="ssnTxt">
+        <Component class="javax.swing.JFormattedTextField" name="cpfTxt">
           <Properties>
             <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor" preCode="try {" postCode="} catch (java.text.ParseException ex) {&#xa;ex.printStackTrace();&#xa;}">
               <Format format="###.###.###-##" subtype="-1" type="5"/>
             </Property>
           </Properties>
           <Events>
-            <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="ssnTxtFocusLost"/>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ssnTxtActionPerformed"/>
+            <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="cpfTxtFocusLost"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cpfTxtActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JFormattedTextField" name="birthDateTxt">
+        <Component class="javax.swing.JFormattedTextField" name="dataNascTxt">
           <Properties>
             <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor" preCode="try {" postCode="} catch (java.text.ParseException ex) {&#xa;ex.printStackTrace();&#xa;}">
               <Format format="##/##/####" subtype="-1" type="5"/>
             </Property>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="birthDateTxtActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="dataNascTxtActionPerformed"/>
           </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="zipLabel">
           <Properties>
-            <Property name="text" type="java.lang.String" value="ZIP (CEP)"/>
+            <Property name="text" type="java.lang.String" value="CEP"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JFormattedTextField" name="zipTxt">
+        <Component class="javax.swing.JFormattedTextField" name="cepTxt">
           <Properties>
             <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor" preCode="try {" postCode="} catch (java.text.ParseException ex) {&#xa;ex.printStackTrace();&#xa;}">
               <Format format="#####-###" subtype="-1" type="5"/>
             </Property>
           </Properties>
           <Events>
-            <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="zipTxtFocusLost"/>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="zipTxtActionPerformed"/>
+            <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="cepTxtFocusLost"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cepTxtActionPerformed"/>
           </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="addressLabel">
           <Properties>
-            <Property name="text" type="java.lang.String" value="address"/>
+            <Property name="text" type="java.lang.String" value="Endere&#xe7;o"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="NameLabel">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Name"/>
+            <Property name="text" type="java.lang.String" value="Nome"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="addressTxt">
+        <Component class="javax.swing.JTextField" name="enderecoTxt">
           <Properties>
             <Property name="editable" type="boolean" value="false"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="addressTxtActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="enderecoTxtActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JTextField" name="nameTxt">
+        <Component class="javax.swing.JTextField" name="nomeTxt">
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="nameTxtActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="nomeTxtActionPerformed"/>
           </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="ssnLabel">
           <Properties>
-            <Property name="text" type="java.lang.String" value="SSN (CPF)"/>
+            <Property name="text" type="java.lang.String" value="CPF"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="bDateLabel">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Birth date"/>
+            <Property name="text" type="java.lang.String" value="Data Nasc"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="cityLabel">
           <Properties>
-            <Property name="text" type="java.lang.String" value="city"/>
+            <Property name="text" type="java.lang.String" value="Cidade"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="cityTxt">
+        <Component class="javax.swing.JTextField" name="cidadeTxt">
           <Properties>
             <Property name="editable" type="boolean" value="false"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cityTxtActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cidadeTxtActionPerformed"/>
           </Events>
         </Component>
       </SubComponents>
@@ -285,12 +288,12 @@
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout"/>
       <SubComponents>
-        <Component class="javax.swing.JRadioButton" name="femaleRadio">
+        <Component class="javax.swing.JRadioButton" name="fRadio">
           <Properties>
             <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
               <ComponentRef name="sex_group"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Female"/>
+            <Property name="text" type="java.lang.String" value="F"/>
           </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout" value="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout$BorderConstraintsDescription">
@@ -298,15 +301,15 @@
             </Constraint>
           </Constraints>
         </Component>
-        <Component class="javax.swing.JRadioButton" name="maleRadio">
+        <Component class="javax.swing.JRadioButton" name="mRadio">
           <Properties>
             <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
               <ComponentRef name="sex_group"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Male"/>
+            <Property name="text" type="java.lang.String" value="M"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="maleRadioActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mRadioActionPerformed"/>
           </Events>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout" value="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout$BorderConstraintsDescription">
@@ -320,7 +323,7 @@
       <Properties>
         <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
           <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
-            <TitledBorder title="Position">
+            <TitledBorder title="Posi&#xe7;&#xe3;o">
               <Border PropertyName="innerBorder" info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
                 <TitledBorder>
                   <Border PropertyName="innerBorder" info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
@@ -331,6 +334,8 @@
             </TitledBorder>
           </Border>
         </Property>
+        <Property name="toolTipText" type="java.lang.String" value=""/>
+        <Property name="doubleBuffered" type="boolean" value="false"/>
       </Properties>
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout"/>
@@ -348,9 +353,9 @@
             </Constraint>
           </Constraints>
         </Component>
-        <Component class="javax.swing.JCheckBox" name="DeveloperCheckBox">
+        <Component class="javax.swing.JCheckBox" name="DesenvolvedorCheckBox">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Developer"/>
+            <Property name="text" type="java.lang.String" value="Desenvolvedor"/>
           </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout" value="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout$BorderConstraintsDescription">
@@ -373,13 +378,13 @@
         </Component>
       </SubComponents>
     </Container>
-    <Component class="javax.swing.JComboBox" name="porpuseComboBox">
+    <Component class="javax.swing.JComboBox" name="usoComboBox">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
           <StringArray count="3">
-            <StringItem index="0" value="Select"/>
-            <StringItem index="1" value="Work"/>
-            <StringItem index="2" value="Study"/>
+            <StringItem index="0" value="Selecione"/>
+            <StringItem index="1" value="Trabalho"/>
+            <StringItem index="2" value="Estudo"/>
           </StringArray>
         </Property>
       </Properties>
@@ -389,7 +394,7 @@
     </Component>
     <Component class="javax.swing.JLabel" name="porpuseLabel">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Porpuse"/>
+        <Property name="text" type="java.lang.String" value="Uso"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JButton" name="OKButton">
@@ -400,12 +405,12 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="OKButtonActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="cancelButton">
+    <Component class="javax.swing.JButton" name="CancelarButton">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Cancel"/>
+        <Property name="text" type="java.lang.String" value="Cancelar"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cancelButtonActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="CancelarButtonActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>
