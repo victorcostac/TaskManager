@@ -408,7 +408,6 @@ public class ClientRegisterDlg extends javax.swing.JDialog {
         GerenciadorInterGrafica.getMyInstance().getGerenciadorDominio().criar(newUser.getEndereco());
         GerenciadorInterGrafica.getMyInstance().getGerenciadorDominio().criar(newUser);
         
-        setDefaultColorToPanels();
         limparCampos();
         dispose();
         }else{
@@ -534,18 +533,28 @@ public class ClientRegisterDlg extends javax.swing.JDialog {
 
     private void CancelarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CancelarButtonActionPerformed
         limparCampos();
-        setDefaultColorToPanels();
         dispose();
         
     }//GEN-LAST:event_CancelarButtonActionPerformed
 
     private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
         limparCampos();
-        setDefaultColorToPanels();
         dispose();
     }//GEN-LAST:event_formWindowClosed
     private void limparCampos(){
         setDefaultColorToPanels();
+        nomeTxt.setText("");
+        cpfTxt.setText("");
+        dataNascTxt.setText("");
+        cepTxt.setText("");
+        enderecoTxt.setText("");
+        cidadeTxt.setText("");
+        usoComboBox.setSelectedIndex(0);
+        sex_group.clearSelection();
+        DesenvolvedorCheckBox.setSelected(false);
+        POCheckBox.setSelected(false);
+        ScrumMasterCheckBox.setSelected(false);
+        
         
     }
 
