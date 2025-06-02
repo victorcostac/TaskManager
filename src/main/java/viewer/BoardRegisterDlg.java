@@ -7,11 +7,14 @@ package viewer;
 import controller.GerenciadorInterGrafica;
 import controller.TMBoard;
 import domain.Board;
+import domain.Endereco;
 import domain.Proprietario;
 import domain.Usuario;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 import javax.swing.JOptionPane;
 
 /**
@@ -110,9 +113,9 @@ public class BoardRegisterDlg extends javax.swing.JDialog {
         });
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Register a new Board"));
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Registro de novo board"));
 
-        jLabel1.setText("Name");
+        jLabel1.setText("Nome");
 
         newBoardText.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -120,7 +123,7 @@ public class BoardRegisterDlg extends javax.swing.JDialog {
             }
         });
 
-        addBoardButton.setText("Add");
+        addBoardButton.setText("Adicionar");
         addBoardButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 addBoardButtonMouseClicked(evt);
@@ -132,9 +135,9 @@ public class BoardRegisterDlg extends javax.swing.JDialog {
             }
         });
 
-        jLabel2.setText("Description");
+        jLabel2.setText("Descrição");
 
-        jLabel3.setText("Owner");
+        jLabel3.setText("Proprietário");
 
         ownerComboBox.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -155,7 +158,7 @@ public class BoardRegisterDlg extends javax.swing.JDialog {
             }
         });
 
-        jButton1.setText("Cancel");
+        jButton1.setText("Cancelar");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -184,7 +187,7 @@ public class BoardRegisterDlg extends javax.swing.JDialog {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(ownerComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(statusComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(55, Short.MAX_VALUE))
+                .addContainerGap(37, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButton1)
@@ -218,7 +221,7 @@ public class BoardRegisterDlg extends javax.swing.JDialog {
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 6, 462, -1));
 
-        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Board list"));
+        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Lista de Boards"));
         jPanel2.setLayout(new java.awt.BorderLayout());
 
         boardsTable.setModel(new javax.swing.table.DefaultTableModel(
@@ -256,29 +259,63 @@ public class BoardRegisterDlg extends javax.swing.JDialog {
     }//GEN-LAST:event_addBoardButtonMouseClicked
 
     private void addBoardButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addBoardButtonActionPerformed
-        Boolean status;
-        System.out.println("COMBOX:"+statusComboBox.getSelectedItem().toString());
-        if(statusComboBox.getSelectedItem().toString().equals("active")){
-            status = true;
-        }else{
-            status = false;
+        boolean status = "active".equals(statusComboBox.getSelectedItem().toString());
+        Usuario userSelecionado = (Usuario) ownerComboBox.getSelectedItem();
+        Proprietario proprietarioDoBoard;
+        Board novoBoard;
+
+        // Verifica se o usuário selecionado já existe como Proprietario na base de dados
+        Proprietario proprietarioExistente = (Proprietario) gerGrafica.getGerenciadorDominio().findProprietarioComColecoes(userSelecionado.getId());
+
+        if (proprietarioExistente != null) {
+            System.out.println("USUÁRIO JÁ É UM PROPRIETÁRIO. USANDO O EXISTENTE.");
+            proprietarioDoBoard = proprietarioExistente;
+        } else {
+            System.out.println("USUÁRIO NÃO É PROPRIETÁRIO. PROMOVENDO PARA PROPRIETÁRIO.");
+            
+            gerGrafica.getGerenciadorDominio().promoverUsuarioParaProprietario(userSelecionado.getId());
+
+            proprietarioDoBoard = (Proprietario) gerGrafica.getGerenciadorDominio().findProprietarioComColecoes(userSelecionado.getId());
+            
+            if (proprietarioDoBoard == null) {
+                // Isso não deveria acontecer se a promoção e o recarregamento funcionarem.
+                System.err.println("ERRO: Falha ao recarregar o usuário como Proprietario após a promoção.");
+                JOptionPane.showMessageDialog(this, "ERRO: Falha ao recarregar o usuário como Proprietario após a promoção.", "Erro de promover Usuário", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
         }
-        
-        Board novoBoard = Board.builder().descricao(descriptionTextField.getText())
+
+        // Cria o novo Board
+        novoBoard = Board.builder()
+                .descricao(descriptionTextField.getText())
                 .nome(newBoardText.getText())
-                .proprietario((Proprietario) ownerComboBox.getSelectedItem())
+                .proprietario(proprietarioDoBoard)
                 .status(status)
+                .usuarios(new ArrayList<>()) 
                 .build();
-        gerGrafica.getGerenciadorDominio().criar(novoBoard);
-        this.boardList.add(novoBoard);
+        novoBoard.getUsuarios().add(proprietarioDoBoard);
+
+   
+        if (proprietarioDoBoard.getBoardsDesignados() == null) { 
+            proprietarioDoBoard.setBoardsDesignados(new ArrayList<>());
+        }
+        proprietarioDoBoard.getBoardsDesignados().add(novoBoard);
         
+        if (proprietarioDoBoard.getBoards() == null) {
+            proprietarioDoBoard.setBoards(new ArrayList<>());
+        }
+        proprietarioDoBoard.getBoards().add(novoBoard);
+
+        gerGrafica.getGerenciadorDominio().criar(novoBoard);
+
+        // Atualiza UI
+        this.boardList.add(novoBoard); // Lista local da UI
         newBoardText.setText("");
         descriptionTextField.setText("");
         ownerComboBox.setSelectedIndex(0);
         statusComboBox.setSelectedIndex(0);
-        
-        this.tmBoard.adicionar(novoBoard);
-        
+        this.tmBoard.adicionar(novoBoard); // JTable
+
     }//GEN-LAST:event_addBoardButtonActionPerformed
 
     private void ownerComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ownerComboBoxActionPerformed

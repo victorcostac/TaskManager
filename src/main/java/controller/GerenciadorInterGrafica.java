@@ -3,6 +3,10 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package controller;
+import domain.Board;
+import domain.Endereco;
+import domain.Tarefa;
+import domain.Usuario;
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 
@@ -14,6 +18,7 @@ import viewer.MainFrame;
 import viewer.TaskRegisterDlg;
 import java.awt.Frame;
 import java.lang.reflect.InvocationTargetException;
+import java.util.Date;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
@@ -106,6 +111,10 @@ public class GerenciadorInterGrafica { // Gerenciador de interface gráfica
      * @param args the command line arguments
      */
     public static void main(String args[]) {
+        
+        Usuario usuario = new Usuario();
+        usuario.setNome("VICTOR");
+        System.out.println("Nome do Usuario:  ==== "+usuario.getNome());  
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.

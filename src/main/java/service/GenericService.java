@@ -7,6 +7,7 @@ package service;
 import domain.Board;
 import infrastructure.GenericRepository;
 import java.util.List;
+import java.util.UUID;
 
 /**
  *
@@ -34,5 +35,9 @@ public class GenericService {
     
     public void alterar(Object obj) {
         repository.alterar(obj);
+    }
+    
+    public Object get(Class classe, UUID id) {
+        return repository.get(classe, id);
     }
 }

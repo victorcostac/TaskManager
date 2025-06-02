@@ -35,7 +35,7 @@ public class TMBoard extends AbstractTableModel{    private List lista  = new Ar
             case 1: return board.getNome();
             case 2: return board.getDescricao();
             case 3: return board.getProprietario();
-            case 4: return board.getStatus();
+            case 4: return board.getStatus().equals(true)? "Active" : "Unactive";
 
         }
         return null;

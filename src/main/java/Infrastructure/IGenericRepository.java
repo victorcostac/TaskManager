@@ -5,6 +5,7 @@
 package infrastructure;
 
 import java.util.List;
+import java.util.UUID;
 /**
  *
  * @author 2023122760093
@@ -13,6 +14,6 @@ public interface IGenericRepository {
     void inserir(Object obj);
     void alterar(Object obj);
     List listar(Class classe);
-    Object get(Class classe, int id);
+    public <T> T get(Class<T> clazz, UUID id);
     void excluir(Object obj);
 }

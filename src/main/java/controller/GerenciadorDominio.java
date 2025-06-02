@@ -5,6 +5,7 @@
 package controller;
 
 import domain.Board;
+import domain.Proprietario;
 import domain.Usuario;
 import infrastructure.GenericRepository;
 import infrastructure.IBoardRepositoryImpl;
@@ -13,13 +14,14 @@ import infrastructure.IUserRepositoryImpl;
 import infrastructure.SqlImplementations.ConexaoHibernate;
 
 import java.util.List;
+import java.util.UUID;
 
 import org.hibernate.HibernateException;
 
 import service.BoardService;
 import service.GenericService;
 import service.TarefaService;
-import service.UserService;
+import service.UsuarioService;
 
 /**
  *
@@ -29,7 +31,7 @@ public class GerenciadorDominio { // Gerenciador de domínio
     
     private final BoardService boardService;
     private final TarefaService tarefaService;
-    private final UserService usuarioService;
+    private final UsuarioService usuarioService;
     private final GenericService genericService;
     
     
@@ -38,7 +40,7 @@ public class GerenciadorDominio { // Gerenciador de domínio
         IBoardRepositoryImpl iBoardRepository = new IBoardRepositoryImpl();
         boardService = new BoardService(iBoardRepository);
         IUserRepositoryImpl iUserdRepository = new IUserRepositoryImpl();
-        usuarioService = new UserService(iUserdRepository);
+        usuarioService = new UsuarioService(iUserdRepository);
         ITarefaRepositoryImpl iTaskRepository = new ITarefaRepositoryImpl();
         tarefaService = new TarefaService(iTaskRepository);
         GenericRepository genericRepository = new GenericRepository();
@@ -64,4 +66,21 @@ public class GerenciadorDominio { // Gerenciador de domínio
     public void  deletar(Object obj){
         boardService.deletarBoard(obj);
     } 
+    
+    public Object get(Class classe, UUID id){
+        return genericService.get(classe,id);
+    }
+    
+    
+    public Usuario findUsuarioComColecoes(UUID id) {
+        return usuarioService.findUsuarioComColecoes(id);
+    }
+    
+    public Proprietario findProprietarioComColecoes(UUID id) {
+        return usuarioService.findProprietarioComColecoes(id);
+    }
+    
+    public void promoverUsuarioParaProprietario(UUID id) {
+        usuarioService.promoverUsuarioParaProprietario(id);
+    }
 }

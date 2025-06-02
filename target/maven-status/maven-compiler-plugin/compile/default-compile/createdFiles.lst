@@ -9,7 +9,10 @@ viewer\TaskRegisterDlg$1.class
 viewer\ClientRegisterDlg$14.class
 controller\GerenciadorInterGrafica.class
 viewer\MainFrame$6.class
+service\UsuarioService.class
 viewer\BoardRegisterDlg$11.class
+viewer\TaskRegisterDlg$8$1.class
+viewer\TaskRegisterDlg$8.class
 viewer\ClientRegisterDlg$8.class
 domain\Tarefa.class
 infrastructure\IUserRepository.class
@@ -41,7 +44,6 @@ domain\Usuario$UsuarioBuilderImpl.class
 viewer\TaskRegisterDlg$6.class
 viewer\BoardRegisterDlg$5.class
 domain\Board$BoardBuilder.class
-service\UserService.class
 viewer\ClientRegisterDlg$6.class
 domain\Proprietario.class
 infrastructure\ITarefaRepositoryImpl.class
@@ -50,7 +52,6 @@ viewer\BoardRegisterDlg$8.class
 viewer\ClientRegisterDlg$2.class
 infrastructure\SqlImplementations\ConexaoHibernate.class
 viewer\MainFrame$10.class
-viewer\TaskRegisterDlg$7$1.class
 viewer\TaskRegisterDlg.class
 viewer\BoardRegisterDlg$1.class
 viewer\ClientRegisterDlg$13.class

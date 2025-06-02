@@ -12,6 +12,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 import org.hibernate.annotations.Type;
 
 /**
@@ -42,6 +43,7 @@ public class Board implements Serializable {
     
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "proprietario_id")
+    //@ToString.Exclude
     private Proprietario proprietario;
     
     @ManyToMany(fetch = FetchType.LAZY)
@@ -50,6 +52,7 @@ public class Board implements Serializable {
         joinColumns = @JoinColumn(name = "board_id"),
         inverseJoinColumns = @JoinColumn(name = "usuario_id")
     )
+    @ToString.Exclude
     private List<Usuario> usuarios;
     
     private String verifyStatus(Boolean status){
@@ -63,6 +66,11 @@ public class Board implements Serializable {
     
     public Object[] getData() {
         return new Object[]{this.id, this.nome, this.descricao, this.proprietario, verifyStatus(this.status)};
+    }
+    
+    @Override
+    public String toString() {
+        return getNome();
     }
 
 }

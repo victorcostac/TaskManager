@@ -4,34 +4,36 @@
  */
 package service;
 
+import domain.Proprietario;
 import domain.Usuario;
 import infrastructure.GenericRepository;
 import infrastructure.IUserRepositoryImpl;
 
 import java.util.List;
+import java.util.UUID;
 
 /**
  *
  * @author Usuario
  */
-public class UserService  extends GenericService{
+public class UsuarioService  extends GenericService{
     private final IUserRepositoryImpl iUserRepository;
 
-    public UserService(IUserRepositoryImpl iUserRepository) {
+    public UsuarioService(IUserRepositoryImpl iUserRepository) {
         super(new GenericRepository());
         this.iUserRepository = iUserRepository;
     }
-    
-    public void criarUsuario(Usuario user){
-        iUserRepository.inserir(user);
+
+    public Usuario findUsuarioComColecoes(UUID id) {
+        return iUserRepository.findUsuarioComColecoes(id);
     }
     
-    public List<Usuario> getUsuarios(){
-        return iUserRepository.listar(Usuario.class);
+    public Proprietario findProprietarioComColecoes(UUID id) {
+        return iUserRepository.findProprietarioComColecoes(id);
     }
     
-    public void editarUsuario(Usuario user){
-        iUserRepository.alterar(user);
+    public void promoverUsuarioParaProprietario(UUID id) {
+        iUserRepository.promoverUsuarioParaProprietario(id);
     }
     
 }
