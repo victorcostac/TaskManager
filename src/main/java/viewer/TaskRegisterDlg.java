@@ -249,18 +249,19 @@ public class TaskRegisterDlg extends javax.swing.JDialog {
     private void formComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentShown
         GerenciadorInterGrafica.getMyInstance().loadCombo(taskResponsibleComboBox, Usuario.class);  
         GerenciadorInterGrafica.getMyInstance().loadCombo(boradComboBox, Board.class);
-        //GerenciadorInterGrafica.getMyInstance().loadCombo(categoriaComboBox, Categoria.class);
-        Categoria catProduto = Categoria.builder().nome("Produto").build();
-        Categoria catVale = Categoria.builder().nome("Vale").build();
-        Categoria catIntegracao = Categoria.builder().nome("Integração").build();
-        List listCategoria = new ArrayList<>(); 
-        listCategoria.add(catProduto);
-        listCategoria.add(catVale);
-        listCategoria.add(catIntegracao);
-        categoriaComboBox.setModel(new DefaultComboBoxModel(listCategoria.toArray()));
+        GerenciadorInterGrafica.getMyInstance().loadCombo(categoriaComboBox, Categoria.class);
+
     }//GEN-LAST:event_formComponentShown
 
     private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
+        taskNameTxt.setText("");
+        taskResponsibleComboBox.setSelectedIndex(0);
+        taskPriorityComboBox.setSelectedIndex(0);
+        boradComboBox.setSelectedIndex(0);
+        categoriaComboBox.setSelectedItem(0);
+        dateChooser.setDate(null);
+        upstreamPhaseComboBox.setSelectedIndex(0);
+        descriptionText.setText("");
         dispose();
     }//GEN-LAST:event_cancelButtonActionPerformed
 

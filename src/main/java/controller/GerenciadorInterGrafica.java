@@ -4,6 +4,7 @@
  */
 package controller;
 import domain.Board;
+import domain.Categoria;
 import domain.Endereco;
 import domain.Tarefa;
 import domain.Usuario;
@@ -46,6 +47,17 @@ public class GerenciadorInterGrafica { // Gerenciador de interface gráfica
             JOptionPane.showMessageDialog(null, ex, "Erro ao inicializar.", JOptionPane.ERROR_MESSAGE);
             System.exit(0);
         }
+        
+        //CRIAR CATEGORIA NO BANCO (ISSO É TEMPORÁRIO)
+        Categoria catProduto = Categoria.builder().nome("Produto").build();
+        Categoria catVale = Categoria.builder().nome("Vale").build();
+        Categoria catIntegracao = Categoria.builder().nome("Integração").build();
+        if(gerenciadorDominio.listar(Categoria.class).isEmpty()){
+            gerenciadorDominio.criar(catProduto);
+            gerenciadorDominio.criar(catVale);
+            gerenciadorDominio.criar(catIntegracao);
+        }
+        
     }
     
     public static GerenciadorInterGrafica getMyInstance(){
@@ -112,10 +124,7 @@ public class GerenciadorInterGrafica { // Gerenciador de interface gráfica
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-        
-        Usuario usuario = new Usuario();
-        usuario.setNome("VICTOR");
-        System.out.println("Nome do Usuario:  ==== "+usuario.getNome());  
+
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.

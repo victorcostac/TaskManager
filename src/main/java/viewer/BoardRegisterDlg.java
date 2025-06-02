@@ -78,7 +78,7 @@ public class BoardRegisterDlg extends javax.swing.JDialog {
         jLabel4 = new javax.swing.JLabel();
         statusComboBox = new javax.swing.JComboBox<>();
         jLabel5 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        cancelarButton = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         boardsTable = new javax.swing.JTable();
@@ -159,10 +159,10 @@ public class BoardRegisterDlg extends javax.swing.JDialog {
             }
         });
 
-        jButton1.setText("Cancelar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        cancelarButton.setText("Cancelar");
+        cancelarButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                cancelarButtonActionPerformed(evt);
             }
         });
 
@@ -191,7 +191,7 @@ public class BoardRegisterDlg extends javax.swing.JDialog {
                 .addContainerGap(37, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton1)
+                .addComponent(cancelarButton)
                 .addGap(83, 83, 83)
                 .addComponent(addBoardButton, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(106, 106, 106))
@@ -216,7 +216,7 @@ public class BoardRegisterDlg extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(addBoardButton)
-                    .addComponent(jButton1))
+                    .addComponent(cancelarButton))
                 .addContainerGap())
         );
 
@@ -353,9 +353,9 @@ public class BoardRegisterDlg extends javax.swing.JDialog {
         
     }//GEN-LAST:event_formComponentShown
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void cancelarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelarButtonActionPerformed
         dispose();
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_cancelarButtonActionPerformed
     
     /*private void setBoardTable() {
         this.boardDefaultTable = (DefaultTableModel) boardsTable.getModel();
@@ -367,10 +367,10 @@ public class BoardRegisterDlg extends javax.swing.JDialog {
     private javax.swing.JPopupMenu boardTablePopupMenu;
     private javax.swing.JTable boardsTable;
     private javax.swing.JMenuItem cadastrarMenuItem;
+    private javax.swing.JButton cancelarButton;
     private javax.swing.JMenuItem clearMenuItem;
     private javax.swing.JTextField descriptionTextField;
     private javax.swing.JMenuItem editarMenuItem;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

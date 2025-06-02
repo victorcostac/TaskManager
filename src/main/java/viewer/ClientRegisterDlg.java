@@ -24,7 +24,6 @@ import javax.swing.filechooser.FileNameExtensionFilter;
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JDialog.java to edit this template
  */
-
 /**
  *
  * @author Usuario
@@ -35,11 +34,11 @@ public class ClientRegisterDlg extends javax.swing.JDialog {
      * Creates new form ClientRegisterDlg
      */
     private static DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-    
+
     private String msgError = "";
-    
+
     private File file;
-    
+
     public ClientRegisterDlg(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
@@ -373,39 +372,38 @@ public class ClientRegisterDlg extends javax.swing.JDialog {
 
     private void OKButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_OKButtonActionPerformed
 
-        if (validateFields()){
+        if (validateFields()) {
 
+            Date data;
+            data = dateChooser.getDate();
 
-        Date data;
-        data = dateChooser.getDate();
-        
+            Endereco endereco = Endereco.builder().cep(cepTxt.getText()).cidade(cidadeTxt.getText()).logradouro(enderecoTxt.getText()).build();
 
-        Endereco endereco = Endereco.builder().cep(cepTxt.getText()).cidade(cidadeTxt.getText()).logradouro(enderecoTxt.getText()).build();
-        
+            System.out.println("Data formatada" + data);
+            Usuario newUser = Usuario.builder().
+                    endereco(endereco)
+                    .cpf(cpfTxt.getText())
+                    .dataNasc(data)
+                    .nome(nomeTxt.getText())
+                    .tarefasDesignadas(new ArrayList<>())
+                    .boards(new ArrayList<>())
+                    .build();
+            GerenciadorInterGrafica.getMyInstance().getGerenciadorDominio().criar(newUser.getEndereco());
+            GerenciadorInterGrafica.getMyInstance().getGerenciadorDominio().criar(newUser);
 
-        System.out.println("Data formatada" + data);
-        Usuario newUser = Usuario.builder().
-                endereco(endereco)
-                .cpf(cpfTxt.getText())
-                .dataNasc(data)
-                .nome(nomeTxt.getText())
-                .tarefasDesignadas(new ArrayList<>())
-                .boards(new ArrayList<>())
-                .build();
-        GerenciadorInterGrafica.getMyInstance().getGerenciadorDominio().criar(newUser.getEndereco());
-        GerenciadorInterGrafica.getMyInstance().getGerenciadorDominio().criar(newUser);
-        
-        limparCampos();
-        dispose();
-        }else{
-            JOptionPane.showMessageDialog(this, this.msgError, "Client Registered", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Usuário registrado com Sucesso", "Registro de usuário", JOptionPane.INFORMATION_MESSAGE);
+            dispose();
+            limparCampos();
+
+        } else {
+            JOptionPane.showMessageDialog(this, this.msgError, "Erro de Registro", JOptionPane.ERROR_MESSAGE);
             this.msgError = "";
             System.out.println("An error occurred in the user creation.");
         }
     }//GEN-LAST:event_OKButtonActionPerformed
-    private Boolean validateFields(){
+    private Boolean validateFields() {
         setDefaultColorToPanels();
-        
+
         if (dateChooser.getDate() == null) {
             this.msgError = this.msgError + "Birth date not informed. Try again.\n";
             bDateLabel.setForeground(Color.red);
@@ -419,7 +417,7 @@ public class ClientRegisterDlg extends javax.swing.JDialog {
             this.msgError = this.msgError + "Invalid name. Try again.\n";
             NameLabel.setForeground(Color.red);
         }
-        
+
         if (cidadeTxt.getText().isEmpty()) {
             this.msgError = this.msgError + "Invalid city name. Try again.\n";
             cityLabel.setForeground(Color.red);
@@ -428,19 +426,19 @@ public class ClientRegisterDlg extends javax.swing.JDialog {
             this.msgError = this.msgError + "Invalid address. Try again.\n";
             addressLabel.setForeground(Color.red);
         }
-        invalidateZipField(this.msgError);
 
-        
-        if(this.msgError.isEmpty()){
- 
+        verificarCEPTxt();
+
+        if (this.msgError.isEmpty()) {
+
             return true;
-        }else{
+        } else {
             //JOptionPane.showMessageDialog(this, this.msgError, "Client Registered", JOptionPane.INFORMATION_MESSAGE);
-            
             return false;
         }
     }
-    private void setDefaultColorToPanels(){
+
+    private void setDefaultColorToPanels() {
         addressLabel.setForeground(Color.black);
         bDateLabel.setForeground(Color.black);
         cityLabel.setForeground(Color.black);
@@ -448,20 +446,21 @@ public class ClientRegisterDlg extends javax.swing.JDialog {
         NameLabel.setForeground(Color.black);
         zipLabel.setForeground(Color.black);
     }
-    private String invalidateZipField(String msgParam){
-        if(!zipLabel.getForeground().equals(Color.red)){
-        zipLabel.setForeground(Color.red);
-        cepTxt.setText("");
-        return msgParam + "Invalid zip number. Try again.\n";
+
+    private String invalidateZipField(String msgParam) {
+        if (!zipLabel.getForeground().equals(Color.red)) {
+            zipLabel.setForeground(Color.red);
+            cepTxt.setText("");
+            return msgParam + "Invalid zip number. Try again.\n";
         }
         return msgParam;
     }
-    
-    private LocalDate parseLocalDate(String dateStr){
+
+    private LocalDate parseLocalDate(String dateStr) {
         return LocalDate.parse(dateStr, FORMATTER);
     }
-    
-    
+
+
     private void cidadeTxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cidadeTxtActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_cidadeTxtActionPerformed
@@ -473,58 +472,43 @@ public class ClientRegisterDlg extends javax.swing.JDialog {
     private void cepTxtFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_cepTxtFocusLost
         this.msgError = "";
         System.out.println("ZIP TXT: " + cepTxt.getText());
-        
-        if (!(Utils.searchAddress(cepTxt.getText()) == null)) {
-            //SE O CAMPO CEP NAÃO FOR NULO CAI AQUI
-            System.out.println("CEP: "+Utils.searchAddress(cepTxt.getText()));
-            if (!(Utils.searchAddress(cepTxt.getText()).getUf() != null)) {
-                //SE O CEP NÃO FOR NULO MAS NÃO FOR VÁLIDO CAI AQUI
-                this.msgError = invalidateZipField(this.msgError);
-                enderecoTxt.setText("");
-                cidadeTxt.setText("");
-            } else {
-                //SE O CEP FOR VÁLIDO CAI AQUI
-                enderecoTxt.setText(Utils.searchAddress(cepTxt.getText()).getLogradouro());
-                cidadeTxt.setText(Utils.searchAddress(cepTxt.getText()).getCidade());
-            }
-        }else{
-            //  SE FOR NULO CAI AQUI
-            this.msgError = invalidateZipField(this.msgError);
-        }
-        
+
+        verificarCEPTxt();
+
+
     }//GEN-LAST:event_cepTxtFocusLost
 
     private void picturePanelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_picturePanelMouseClicked
         JFileChooser fileChoser = new JFileChooser();
-        
+
         // Configuração da JANELA
         fileChoser.setMultiSelectionEnabled(false);
-        fileChoser.setFileFilter(  new FileNameExtensionFilter("Imagens", "png", "gif", "jpg", "jpeg" )  );
+        fileChoser.setFileFilter(new FileNameExtensionFilter("Imagens", "png", "gif", "jpg", "jpeg"));
         fileChoser.setAcceptAllFileFilterUsed(false);
-        
+
         // Abrir no último diretório aberto. Na primeira vez é NULL
         fileChoser.setCurrentDirectory(file);
-               
-        if ( fileChoser.showOpenDialog(this) == JFileChooser.APPROVE_OPTION ) {
+
+        if (fileChoser.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) {
             file = fileChoser.getSelectedFile();
-            
+
             // Imagem
-            Icon foto = new ImageIcon( file.getPath() );           
-            Utils.mostrarFoto(picturePanel,foto);
+            Icon foto = new ImageIcon(file.getPath());
+            Utils.mostrarFoto(picturePanel, foto);
         }
     }//GEN-LAST:event_picturePanelMouseClicked
 
     private void CancelarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CancelarButtonActionPerformed
         limparCampos();
         dispose();
-        
+
     }//GEN-LAST:event_CancelarButtonActionPerformed
 
     private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
         limparCampos();
         dispose();
     }//GEN-LAST:event_formWindowClosed
-    private void limparCampos(){
+    private void limparCampos() {
         setDefaultColorToPanels();
         nomeTxt.setText("");
         cpfTxt.setText("");
@@ -537,8 +521,27 @@ public class ClientRegisterDlg extends javax.swing.JDialog {
         DesenvolvedorCheckBox.setSelected(false);
         POCheckBox.setSelected(false);
         ScrumMasterCheckBox.setSelected(false);
-        
-        
+
+    }
+
+    private void verificarCEPTxt() {
+        if (!(Utils.searchAddress(cepTxt.getText()) == null)) {
+            //SE O CAMPO CEP NAÃO FOR NULO CAI AQUI
+            if (!(Utils.searchAddress(cepTxt.getText()).getUf() != null)) {
+                //SE O CEP NÃO FOR NULO MAS NÃO FOR VÁLIDO CAI AQUI
+                this.msgError = invalidateZipField(this.msgError);
+                enderecoTxt.setText("");
+                cidadeTxt.setText("");
+            } else {
+                //SE O CEP FOR VÁLIDO CAI AQUI
+                enderecoTxt.setText(Utils.searchAddress(cepTxt.getText()).getLogradouro());
+                cidadeTxt.setText(Utils.searchAddress(cepTxt.getText()).getCidade());
+            }
+        } else {
+            //  SE FOR NULO CAI AQUI
+            this.msgError = invalidateZipField(this.msgError);
+        }
+
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
