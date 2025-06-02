@@ -5,9 +5,10 @@ import domain.Board;
 import domain.Categoria;
 import domain.Tarefa;
 import domain.Usuario;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
+import javax.swing.DefaultComboBoxModel;
 
 
 /*
@@ -29,6 +30,7 @@ public class TaskRegisterDlg extends javax.swing.JDialog {
     public TaskRegisterDlg(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        
     }
 
     /**
@@ -52,11 +54,11 @@ public class TaskRegisterDlg extends javax.swing.JDialog {
         jLabel6 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         descriptionText = new javax.swing.JTextArea();
-        dueDateFormattedTextField = new javax.swing.JFormattedTextField();
         jLabel7 = new javax.swing.JLabel();
         boradComboBox = new javax.swing.JComboBox<>();
         jLabel8 = new javax.swing.JLabel();
         categoriaComboBox = new javax.swing.JComboBox<>();
+        dateChooser = new com.toedter.calendar.JDateChooser();
         cancelButton = new javax.swing.JButton();
         createButton = new javax.swing.JButton();
 
@@ -94,17 +96,6 @@ public class TaskRegisterDlg extends javax.swing.JDialog {
         descriptionText.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Description", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 12), new java.awt.Color(102, 102, 102))); // NOI18N
         jScrollPane1.setViewportView(descriptionText);
 
-        try {
-            dueDateFormattedTextField.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
-        } catch (java.text.ParseException ex) {
-            ex.printStackTrace();
-        }
-        dueDateFormattedTextField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                dueDateFormattedTextFieldActionPerformed(evt);
-            }
-        });
-
         jLabel7.setText("Board");
 
         boradComboBox.addActionListener(new java.awt.event.ActionListener() {
@@ -124,7 +115,6 @@ public class TaskRegisterDlg extends javax.swing.JDialog {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(19, 19, 19)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(jPanel1Layout.createSequentialGroup()
@@ -152,10 +142,12 @@ public class TaskRegisterDlg extends javax.swing.JDialog {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(upstreamPhaseComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(dueDateFormattedTextField)
-                            .addComponent(categoriaComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
+                            .addComponent(categoriaComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(dateChooser, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                        .addGap(18, 18, 18))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jScrollPane1)
+                        .addContainerGap())))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -173,8 +165,8 @@ public class TaskRegisterDlg extends javax.swing.JDialog {
                         .addComponent(jLabel2))
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(taskResponsibleComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel6)
-                        .addComponent(dueDateFormattedTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jLabel6))
+                    .addComponent(dateChooser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(6, 6, 6)
@@ -220,26 +212,26 @@ public class TaskRegisterDlg extends javax.swing.JDialog {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(103, 103, 103)
+                .addGap(91, 91, 91)
                 .addComponent(cancelButton, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 129, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(createButton, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(110, 110, 110))
+                .addGap(106, 106, 106))
             .addGroup(layout.createSequentialGroup()
-                .addGap(16, 16, 16)
+                .addGap(24, 24, 24)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(18, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cancelButton)
                     .addComponent(createButton))
-                .addGap(15, 15, 15))
+                .addGap(27, 27, 27))
         );
 
         pack();
@@ -254,14 +246,18 @@ public class TaskRegisterDlg extends javax.swing.JDialog {
         
     }//GEN-LAST:event_createButtonMouseClicked
 
-    private void dueDateFormattedTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dueDateFormattedTextFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_dueDateFormattedTextFieldActionPerformed
-
     private void formComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentShown
         GerenciadorInterGrafica.getMyInstance().loadCombo(taskResponsibleComboBox, Usuario.class);  
         GerenciadorInterGrafica.getMyInstance().loadCombo(boradComboBox, Board.class);
-        GerenciadorInterGrafica.getMyInstance().loadCombo(categoriaComboBox, Categoria.class);
+        //GerenciadorInterGrafica.getMyInstance().loadCombo(categoriaComboBox, Categoria.class);
+        Categoria catProduto = Categoria.builder().nome("Produto").build();
+        Categoria catVale = Categoria.builder().nome("Vale").build();
+        Categoria catIntegracao = Categoria.builder().nome("Integração").build();
+        List listCategoria = new ArrayList<>(); 
+        listCategoria.add(catProduto);
+        listCategoria.add(catVale);
+        listCategoria.add(catIntegracao);
+        categoriaComboBox.setModel(new DefaultComboBoxModel(listCategoria.toArray()));
     }//GEN-LAST:event_formComponentShown
 
     private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
@@ -273,15 +269,9 @@ public class TaskRegisterDlg extends javax.swing.JDialog {
     }//GEN-LAST:event_boradComboBoxActionPerformed
 
     private void createButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createButtonActionPerformed
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-        Date data;
-        try {
-            data = sdf.parse(dueDateFormattedTextField.getText());
-        } catch (ParseException e) {
-            e.printStackTrace();
-            throw new RuntimeException(e.getMessage());
-        }
-        
+
+        Date data = dateChooser.getDate();
+
         Tarefa tarefa = Tarefa.builder().build();
         tarefa.setNome(taskNameTxt.getText());
         tarefa.setResponsavel((Usuario)taskResponsibleComboBox.getSelectedItem());
@@ -291,6 +281,17 @@ public class TaskRegisterDlg extends javax.swing.JDialog {
         tarefa.setDataVencimento(data);
         tarefa.setFase((String)upstreamPhaseComboBox.getSelectedItem());
         tarefa.setDescricao(descriptionText.getText());
+        
+        GerenciadorInterGrafica.getMyInstance().getGerenciadorDominio().criar(tarefa);
+        
+        taskNameTxt.setText("");
+        taskResponsibleComboBox.setSelectedIndex(0);
+        taskPriorityComboBox.setSelectedIndex(0);
+        boradComboBox.setSelectedIndex(0);
+        categoriaComboBox.setSelectedItem(0);
+        dateChooser.setDate(null);
+        upstreamPhaseComboBox.setSelectedIndex(0);
+        descriptionText.setText("");
     }//GEN-LAST:event_createButtonActionPerformed
 
     /**
@@ -340,8 +341,8 @@ public class TaskRegisterDlg extends javax.swing.JDialog {
     private javax.swing.JButton cancelButton;
     private javax.swing.JComboBox<String> categoriaComboBox;
     private javax.swing.JButton createButton;
+    private com.toedter.calendar.JDateChooser dateChooser;
     private javax.swing.JTextArea descriptionText;
-    private javax.swing.JFormattedTextField dueDateFormattedTextField;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

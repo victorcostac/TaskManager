@@ -11,8 +11,6 @@ controller\GerenciadorInterGrafica.class
 viewer\MainFrame$6.class
 service\UsuarioService.class
 viewer\BoardRegisterDlg$11.class
-viewer\TaskRegisterDlg$8$1.class
-viewer\TaskRegisterDlg$8.class
 viewer\ClientRegisterDlg$8.class
 domain\Tarefa.class
 infrastructure\IUserRepository.class
@@ -68,7 +66,6 @@ viewer\MainFrame$3.class
 viewer\ClientRegisterDlg$5.class
 infrastructure\GenericRepository.class
 domain\Endereco$EnderecoBuilder.class
-viewer\ClientRegisterDlg$15.class
 infrastructure\IUserRepositoryImpl.class
 viewer\BoardRegisterDlg$4.class
 viewer\TaskRegisterDlg$5.class

@@ -106,6 +106,7 @@ public class BoardRegisterDlg extends javax.swing.JDialog {
         boardTablePopupMenu.add(cadastrarMenuItem);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setLocation(new java.awt.Point(800, 300));
         addComponentListener(new java.awt.event.ComponentAdapter() {
             public void componentShown(java.awt.event.ComponentEvent evt) {
                 formComponentShown(evt);

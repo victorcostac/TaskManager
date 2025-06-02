@@ -62,7 +62,8 @@ public class GerenciadorInterGrafica { // Gerenciador de interface gráfica
             } catch (NoSuchMethodException | SecurityException | InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException ex) {
                 JOptionPane.showMessageDialog(parent, "Erro ao abrir a janela " + classe.getName() + ". " + ex.getMessage() );
             } 
-        }               
+        }    
+        dlg.setLocation(parent.getLocation());
         dlg.setVisible(true); 
         return dlg;
     }   

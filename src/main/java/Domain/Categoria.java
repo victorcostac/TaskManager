@@ -13,6 +13,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.Type;
 
@@ -23,6 +24,7 @@ import org.hibernate.annotations.Type;
 @Entity(name = "categoria")
 @AllArgsConstructor
 @NoArgsConstructor
+@Getter
 @Builder
 public class Categoria implements Serializable {
     
@@ -33,5 +35,10 @@ public class Categoria implements Serializable {
   
   @Column
   private String nome;
+  
+  @Override
+  public String toString(){
+      return getNome();
+  }
 
 }
