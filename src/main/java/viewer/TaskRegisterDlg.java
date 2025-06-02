@@ -5,6 +5,8 @@ import domain.Board;
 import domain.Categoria;
 import domain.Tarefa;
 import domain.Usuario;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 
@@ -259,7 +261,7 @@ public class TaskRegisterDlg extends javax.swing.JDialog {
     private void formComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentShown
         GerenciadorInterGrafica.getMyInstance().loadCombo(taskResponsibleComboBox, Usuario.class);  
         GerenciadorInterGrafica.getMyInstance().loadCombo(boradComboBox, Board.class);
-        
+        GerenciadorInterGrafica.getMyInstance().loadCombo(categoriaComboBox, Categoria.class);
     }//GEN-LAST:event_formComponentShown
 
     private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
@@ -271,13 +273,24 @@ public class TaskRegisterDlg extends javax.swing.JDialog {
     }//GEN-LAST:event_boradComboBoxActionPerformed
 
     private void createButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createButtonActionPerformed
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        Date data;
+        try {
+            data = sdf.parse(dueDateFormattedTextField.getText());
+        } catch (ParseException e) {
+            e.printStackTrace();
+            throw new RuntimeException(e.getMessage());
+        }
+        
         Tarefa tarefa = Tarefa.builder().build();
         tarefa.setNome(taskNameTxt.getText());
         tarefa.setResponsavel((Usuario)taskResponsibleComboBox.getSelectedItem());
         tarefa.setPrioridade((String)taskPriorityComboBox.getSelectedItem());
         tarefa.setBoard((Board)boradComboBox.getSelectedItem());
         tarefa.setCategoria((Categoria)categoriaComboBox.getSelectedItem());
-        tarefa.setDataVencimento(new Date());
+        tarefa.setDataVencimento(data);
+        tarefa.setFase((String)upstreamPhaseComboBox.getSelectedItem());
+        tarefa.setDescricao(descriptionText.getText());
     }//GEN-LAST:event_createButtonActionPerformed
 
     /**
