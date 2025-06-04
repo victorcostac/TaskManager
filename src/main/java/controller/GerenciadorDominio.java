@@ -83,4 +83,8 @@ public class GerenciadorDominio { // Gerenciador de domínio
     public void promoverUsuarioParaProprietario(UUID id) {
         usuarioService.promoverUsuarioParaProprietario(id);
     }
+    
+    public List<Board> listarBoardsPorUsuario(UUID id) {
+        return boardService.listarBoardsPorUsuario(id);
+    }
 }

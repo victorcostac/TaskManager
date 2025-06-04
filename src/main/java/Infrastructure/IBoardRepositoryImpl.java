@@ -6,7 +6,15 @@ package infrastructure;
 
 import domain.Board;
 import domain.Tarefa;
+import infrastructure.SqlImplementations.ConexaoHibernate;
 import java.util.List;
+import java.util.UUID;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Predicate;
+import javax.persistence.criteria.Root;
+import org.hibernate.HibernateException;
+import org.hibernate.Session;
 
 /**
  *
@@ -31,6 +39,39 @@ public class IBoardRepositoryImpl extends GenericRepository implements IBoardRep
     @Override
     public List<Tarefa> getTarefasDoBoard(Board board) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+    @Override
+    public List<Board> listarBoardsPorUsuario(UUID usuarioId) throws HibernateException {
+        List<Board> lista = null;
+        Session sessao = null;
+
+        try {
+            sessao = ConexaoHibernate.getSessionFactory().openSession();
+            sessao.beginTransaction();
+
+            CriteriaBuilder builder = sessao.getCriteriaBuilder();
+            CriteriaQuery<Board> consulta = builder.createQuery(Board.class);
+            Root<Board> tabela = consulta.from(Board.class);
+
+            Predicate restricoes = builder.equal(tabela.get("proprietario").get("id"), usuarioId);
+
+            consulta.where(restricoes);
+
+            lista = sessao.createQuery(consulta).getResultList();
+
+            sessao.getTransaction().commit();
+        } catch (HibernateException ex) {
+            if (sessao != null) {
+                sessao.getTransaction().rollback();
+            }
+            throw new HibernateException(ex);
+        } finally {
+            if (sessao != null && sessao.isOpen()) {
+                sessao.close();
+            }
+        }
+
+        return lista;
     }
 
 }

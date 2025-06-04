@@ -48,7 +48,7 @@ public class MainFrame extends javax.swing.JFrame {
         jSeparator1 = new javax.swing.JPopupMenu.Separator();
         ExitMenuItem = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
-        boardMenu = new javax.swing.JMenu();
+        listarBoardPorUsuario = new javax.swing.JMenuItem();
         jMenu4 = new javax.swing.JMenu();
         jMenu5 = new javax.swing.JMenu();
         jRadioButtonMenuItem1 = new javax.swing.JRadioButtonMenuItem();
@@ -116,18 +116,13 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
 
-        boardMenu.setText("Boards");
-        boardMenu.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                boardMenuMouseClicked(evt);
-            }
-        });
-        boardMenu.addActionListener(new java.awt.event.ActionListener() {
+        listarBoardPorUsuario.setText("Listar boards por usuário");
+        listarBoardPorUsuario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                boardMenuActionPerformed(evt);
+                listarBoardPorUsuarioActionPerformed(evt);
             }
         });
-        jMenu2.add(boardMenu);
+        jMenu2.add(listarBoardPorUsuario);
 
         jMenuBar1.add(jMenu2);
 
@@ -178,14 +173,6 @@ public class MainFrame extends javax.swing.JFrame {
 
     }//GEN-LAST:event_UserRegisterMenuItemMouseClicked
 
-    private void boardMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boardMenuActionPerformed
-
-    }//GEN-LAST:event_boardMenuActionPerformed
-
-    private void boardMenuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_boardMenuMouseClicked
-
-    }//GEN-LAST:event_boardMenuMouseClicked
-
     private void jMenu2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu2MouseClicked
 
     }//GEN-LAST:event_jMenu2MouseClicked
@@ -216,6 +203,10 @@ public class MainFrame extends javax.swing.JFrame {
         GerenciadorInterGrafica.getMyInstance().exit();
     }//GEN-LAST:event_ExitMenuItemActionPerformed
 
+    private void listarBoardPorUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_listarBoardPorUsuarioActionPerformed
+        GerenciadorInterGrafica.getMyInstance().openBoardsDlg();
+    }//GEN-LAST:event_listarBoardPorUsuarioActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -245,7 +236,6 @@ public class MainFrame extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem ExitMenuItem;
     private javax.swing.JMenuItem UserRegisterMenuItem;
-    private javax.swing.JMenu boardMenu;
     private javax.swing.JMenuItem boardRegisterMenuItem;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JMenu jMenu1;
@@ -256,6 +246,7 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JRadioButtonMenuItem jRadioButtonMenuItem1;
     private javax.swing.JRadioButtonMenuItem jRadioButtonMenuItem2;
     private javax.swing.JPopupMenu.Separator jSeparator1;
+    private javax.swing.JMenuItem listarBoardPorUsuario;
     private javax.swing.JMenuItem taskRegisterMenuItem;
     // End of variables declaration//GEN-END:variables
 }

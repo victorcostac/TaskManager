@@ -55,15 +55,14 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenu2ActionPerformed"/>
           </Events>
           <SubComponents>
-            <Menu class="javax.swing.JMenu" name="boardMenu">
+            <MenuItem class="javax.swing.JMenuItem" name="listarBoardPorUsuario">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Boards"/>
+                <Property name="text" type="java.lang.String" value="Listar boards por usu&#xe1;rio"/>
               </Properties>
               <Events>
-                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="boardMenuMouseClicked"/>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="boardMenuActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="listarBoardPorUsuarioActionPerformed"/>
               </Events>
-            </Menu>
+            </MenuItem>
           </SubComponents>
         </Menu>
         <Menu class="javax.swing.JMenu" name="jMenu4">

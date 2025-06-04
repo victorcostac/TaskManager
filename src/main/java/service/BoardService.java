@@ -9,6 +9,7 @@ import infrastructure.GenericRepository;
 import infrastructure.IBoardRepositoryImpl;
 
 import java.util.List;
+import java.util.UUID;
 
 /**
  *
@@ -36,6 +37,10 @@ public class BoardService extends GenericService{
     
     public void deletarBoard(Object board) {
         iBoardRepository.excluir(board);
+    }
+    
+    public List<Board> listarBoardsPorUsuario(UUID usarioId) {
+        return iBoardRepository.listarBoardsPorUsuario(usarioId);
     }
 
 }

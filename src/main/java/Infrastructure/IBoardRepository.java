@@ -8,6 +8,7 @@ import java.util.List;
 
 import domain.Board;
 import domain.Tarefa;
+import java.util.UUID;
 
 /**
  *
@@ -18,5 +19,6 @@ public interface IBoardRepository { //EQUIVALENTE A UM DAO
     void adicionarTarefaNaLista(Tarefa task);
     void deletarTarefadaLista(Tarefa task);
     List<Tarefa> getTarefasDoBoard(Board board);
+    List<Board> listarBoardsPorUsuario(UUID usuarioId);
     
 }

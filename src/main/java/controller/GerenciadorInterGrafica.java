@@ -23,6 +23,7 @@ import java.util.Date;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
+import viewer.BoardsDlg;
 
 /**
  *
@@ -33,6 +34,7 @@ public class GerenciadorInterGrafica { // Gerenciador de interface gráfica
     private ClientRegisterDlg userRegisterDlg = null;
     private MainFrame mainFrame = null;
     private TaskRegisterDlg taskRegisterDlg = null;
+    private BoardsDlg boardsDlg = null;
     
     private GerenciadorDominio gerenciadorDominio; // Gerenciador de Dompinio
     
@@ -95,6 +97,10 @@ public class GerenciadorInterGrafica { // Gerenciador de interface gráfica
     
     public void openTaskRegisterDlg() {
         taskRegisterDlg = (TaskRegisterDlg) openWindow(mainFrame, taskRegisterDlg, TaskRegisterDlg.class);
+    }
+    
+    public void openBoardsDlg() {
+        boardsDlg = (BoardsDlg) openWindow(mainFrame, boardsDlg, BoardsDlg.class);
     }
     
     /*public void loadComboUsers(JComboBox combo){
