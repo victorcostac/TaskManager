@@ -42,6 +42,8 @@ public class BoardsDlg extends javax.swing.JDialog {
     private void initComponents() {
 
         tabelaListagemBoardPopupMenu = new javax.swing.JPopupMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
+        jMenuItem2 = new javax.swing.JMenuItem();
         jPanel1 = new javax.swing.JPanel();
         jPanel = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -50,6 +52,12 @@ public class BoardsDlg extends javax.swing.JDialog {
         jPanel5 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         usuariosComboBox = new javax.swing.JComboBox<>();
+
+        jMenuItem1.setText("jMenuItem1");
+        tabelaListagemBoardPopupMenu.add(jMenuItem1);
+
+        jMenuItem2.setText("jMenuItem2");
+        tabelaListagemBoardPopupMenu.add(jMenuItem2);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         addComponentListener(new java.awt.event.ComponentAdapter() {
@@ -236,6 +244,8 @@ public class BoardsDlg extends javax.swing.JDialog {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JPanel jPanel;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel3;
