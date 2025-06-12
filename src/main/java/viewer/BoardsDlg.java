@@ -41,6 +41,7 @@ public class BoardsDlg extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        tabelaListagemBoardPopupMenu = new javax.swing.JPopupMenu();
         jPanel1 = new javax.swing.JPanel();
         jPanel = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -240,6 +241,7 @@ public class BoardsDlg extends javax.swing.JDialog {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JPopupMenu tabelaListagemBoardPopupMenu;
     private javax.swing.JTable table;
     private javax.swing.JComboBox<String> usuariosComboBox;
     // End of variables declaration//GEN-END:variables
