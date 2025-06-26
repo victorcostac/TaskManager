@@ -42,7 +42,7 @@ public class BoardsDlg extends javax.swing.JDialog {
     private void initComponents() {
 
         tabelaListagemBoardPopupMenu = new javax.swing.JPopupMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
+        irParaTarefasMenuItem = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
         jPanel1 = new javax.swing.JPanel();
         jPanel = new javax.swing.JPanel();
@@ -53,8 +53,13 @@ public class BoardsDlg extends javax.swing.JDialog {
         jLabel1 = new javax.swing.JLabel();
         usuariosComboBox = new javax.swing.JComboBox<>();
 
-        jMenuItem1.setText("jMenuItem1");
-        tabelaListagemBoardPopupMenu.add(jMenuItem1);
+        irParaTarefasMenuItem.setText("Ir para tarefas");
+        irParaTarefasMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                irParaTarefasMenuItemActionPerformed(evt);
+            }
+        });
+        tabelaListagemBoardPopupMenu.add(irParaTarefasMenuItem);
 
         jMenuItem2.setText("jMenuItem2");
         tabelaListagemBoardPopupMenu.add(jMenuItem2);
@@ -78,6 +83,7 @@ public class BoardsDlg extends javax.swing.JDialog {
                 "Id", "Nome", "Descrição", "Proprietário", "Status"
             }
         ));
+        table.setComponentPopupMenu(tabelaListagemBoardPopupMenu);
         jScrollPane1.setViewportView(table);
 
         javax.swing.GroupLayout jPanelLayout = new javax.swing.GroupLayout(jPanel);
@@ -199,6 +205,10 @@ public class BoardsDlg extends javax.swing.JDialog {
         this.tmListagemBoards.setLista(listaBoards);
     }//GEN-LAST:event_usuariosComboBoxActionPerformed
 
+    private void irParaTarefasMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_irParaTarefasMenuItemActionPerformed
+       gerGrafica.openListagemTarefaDlg();
+    }//GEN-LAST:event_irParaTarefasMenuItemActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -243,8 +253,8 @@ public class BoardsDlg extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenuItem irParaTarefasMenuItem;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JPanel jPanel;
     private javax.swing.JPanel jPanel1;
