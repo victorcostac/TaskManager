@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JDialog;
 
 
 /*
@@ -31,6 +32,21 @@ public class TaskRegisterDlg extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         
+    }
+    
+    public TaskRegisterDlg(JDialog parent, boolean modal, Tarefa obj) {
+        super(parent, modal);
+        initComponents();
+        
+        taskNameTxt.setText(obj.getNome());
+        taskResponsibleComboBox.setSelectedItem(obj.getResponsavel());
+        taskPriorityComboBox.setSelectedItem(obj.getPrioridade());
+        boradComboBox.setSelectedItem(obj.getBoard());
+        upstreamPhaseComboBox.setSelectedItem(obj.getFase());
+        dateChooser.setDate(obj.getDataVencimento());
+        categoriaComboBox.setSelectedItem(obj.getCategoria());
+        descriptionText.setText(obj.getDescricao());
+
     }
 
     /**

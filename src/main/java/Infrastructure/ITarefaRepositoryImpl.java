@@ -4,6 +4,52 @@
  */
 package infrastructure;
 
+import domain.Board;
+import domain.Tarefa;
+import infrastructure.SqlImplementations.ConexaoHibernate;
+import java.util.List;
+import java.util.UUID;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Predicate;
+import javax.persistence.criteria.Root;
+import org.hibernate.HibernateException;
+import org.hibernate.Session;
+
 public class ITarefaRepositoryImpl extends GenericRepository implements ITarefaRepository{
+    
+    @Override
+    public List<Tarefa> listarTarefasPorBoard(UUID boardId) throws HibernateException {
+        List<Tarefa> lista = null;
+        Session sessao = null;
+
+        try {
+            sessao = ConexaoHibernate.getSessionFactory().openSession();
+            sessao.beginTransaction();
+
+            CriteriaBuilder builder = sessao.getCriteriaBuilder();
+            CriteriaQuery<Tarefa> consulta = builder.createQuery(Tarefa.class);
+            Root<Tarefa> tabela = consulta.from(Tarefa.class);
+
+            Predicate restricoes = builder.equal(tabela.get("board").get("id"), boardId);
+
+            consulta.where(restricoes);
+
+            lista = sessao.createQuery(consulta).getResultList();
+
+            sessao.getTransaction().commit();
+        } catch (HibernateException ex) {
+            if (sessao != null) {
+                sessao.getTransaction().rollback();
+            }
+            throw new HibernateException(ex);
+        } finally {
+            if (sessao != null && sessao.isOpen()) {
+                sessao.close();
+            }
+        }
+
+        return lista;
+    }
 
 }

@@ -6,6 +6,7 @@ package controller;
 
 import domain.Board;
 import domain.Proprietario;
+import domain.Tarefa;
 import domain.Usuario;
 import infrastructure.GenericRepository;
 import infrastructure.IBoardRepositoryImpl;
@@ -86,5 +87,9 @@ public class GerenciadorDominio { // Gerenciador de domínio
     
     public List<Board> listarBoardsPorUsuario(UUID id) {
         return boardService.listarBoardsPorUsuario(id);
+    }
+    
+    public List<Tarefa> listarTarefasPorBoard(UUID id) {
+        return tarefaService.listarTarefasPorBoard(id);
     }
 }

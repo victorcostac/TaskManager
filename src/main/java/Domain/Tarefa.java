@@ -45,11 +45,11 @@ public class Tarefa implements Serializable {
     @Column
     private String descricao;
     
-    @ManyToOne ( fetch = FetchType.LAZY )
+    @ManyToOne ( fetch = FetchType.EAGER )
     @JoinColumn ( name = "board_id" ) 
     private Board board;
     
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "categoria_id")
     private Categoria categoria;
 

@@ -32,7 +32,6 @@ domain\Proprietario$ProprietarioBuilder.class
 viewer\MainFrame$3.class
 viewer\BoardRegisterDlg$4.class
 viewer\TaskRegisterDlg$2.class
-viewer\TasksDlg$2$1.class
 controller\TMBoard.class
 viewer\MainFrame.class
 viewer\ClientRegisterDlg$9.class
@@ -76,6 +75,7 @@ viewer\MainFrame$10.class
 viewer\TaskRegisterDlg.class
 viewer\BoardRegisterDlg$1.class
 viewer\ClientRegisterDlg$13.class
+viewer\TasksDlg$3.class
 viewer\MainFrame$1.class
 infrastructure\IGenericRepository.class
 viewer\ClientRegisterDlg$5.class

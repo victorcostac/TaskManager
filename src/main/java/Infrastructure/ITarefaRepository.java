@@ -4,10 +4,13 @@
  */
 package infrastructure;
 
+import java.util.List;
+import java.util.UUID;
+
 /**
  *
  * @author Usuário
  */
 public interface ITarefaRepository { //EQUIVALENTE A UM DAO
-    
+    List listarTarefasPorBoard(UUID id);
 }

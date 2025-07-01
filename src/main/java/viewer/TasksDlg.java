@@ -4,8 +4,10 @@ import controller.GerenciadorInterGrafica;
 import controller.TMListagemBoards;
 import controller.TMListagemTarefas;
 import domain.Board;
+import domain.Tarefa;
 import domain.Usuario;
 import java.awt.Color;
+import java.util.ArrayList;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JDialog;
@@ -53,7 +55,7 @@ public class TasksDlg extends javax.swing.JDialog {
     
     private void amarrarAbstractTableModel(){
         tmListagemTarefas = new TMListagemTarefas();
-        tarefasJTable.setModel(tmListagemTarefas);
+        table.setModel(tmListagemTarefas);
     }
     
     
@@ -67,8 +69,6 @@ public class TasksDlg extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
         tabelaListagemTarefaPopupMenu = new javax.swing.JPopupMenu();
         irParaTarefaMenuItem = new javax.swing.JMenuItem();
         jPanel1 = new javax.swing.JPanel();
@@ -76,20 +76,7 @@ public class TasksDlg extends javax.swing.JDialog {
         boardsComboBox = new javax.swing.JComboBox<>();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        tarefasJTable = new javax.swing.JTable();
-
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
-        jScrollPane1.setViewportView(jTable1);
+        table = new javax.swing.JTable();
 
         irParaTarefaMenuItem.setText("Ir para tarefa");
         irParaTarefaMenuItem.addActionListener(new java.awt.event.ActionListener() {
@@ -109,6 +96,11 @@ public class TasksDlg extends javax.swing.JDialog {
         boardsComboBox.addComponentListener(new java.awt.event.ComponentAdapter() {
             public void componentShown(java.awt.event.ComponentEvent evt) {
                 boardsComboBoxComponentShown(evt);
+            }
+        });
+        boardsComboBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                boardsComboBoxActionPerformed(evt);
             }
         });
 
@@ -135,7 +127,7 @@ public class TasksDlg extends javax.swing.JDialog {
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Tarefas"));
 
-        tarefasJTable.setModel(new javax.swing.table.DefaultTableModel(
+        table.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -143,7 +135,8 @@ public class TasksDlg extends javax.swing.JDialog {
                 "Id", "Nome", "Responsável", "Prioridade", "Fase", "Vencimento"
             }
         ));
-        jScrollPane2.setViewportView(tarefasJTable);
+        table.setComponentPopupMenu(tabelaListagemTarefaPopupMenu);
+        jScrollPane2.setViewportView(table);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -191,8 +184,19 @@ public class TasksDlg extends javax.swing.JDialog {
     }//GEN-LAST:event_boardsComboBoxComponentShown
 
     private void irParaTarefaMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_irParaTarefaMenuItemActionPerformed
-        
+       ArrayList<Tarefa> list = (ArrayList<Tarefa>) tmListagemTarefas.getLista();
+       Tarefa item = (Tarefa)/*list.stream().filter(obj -> obj.equals(*/tmListagemTarefas.getItem(table.getSelectedRow())/*)).findFirst();*/;
+
+       gerGrafica.openTarefaDlg(list, item, this);        
     }//GEN-LAST:event_irParaTarefaMenuItemActionPerformed
+
+    private void boardsComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boardsComboBoxActionPerformed
+        Board board = (Board) boardsComboBox.getSelectedItem();
+        List<Tarefa> listaTarefas = gerGrafica.getGerenciadorDominio().listarTarefasPorBoard(board.getId());
+        this.tmListagemTarefas.setLista(null);
+
+        this.tmListagemTarefas.setLista(listaTarefas);
+    }//GEN-LAST:event_boardsComboBoxActionPerformed
 
     /**
      * @param args the command line arguments
@@ -245,10 +249,8 @@ public class TasksDlg extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable jTable1;
     private javax.swing.JPopupMenu tabelaListagemTarefaPopupMenu;
-    private javax.swing.JTable tarefasJTable;
+    private javax.swing.JTable table;
     // End of variables declaration//GEN-END:variables
 }

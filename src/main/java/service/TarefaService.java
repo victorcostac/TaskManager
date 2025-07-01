@@ -9,6 +9,7 @@ import java.util.List;
 import domain.Tarefa;
 import infrastructure.GenericRepository;
 import infrastructure.ITarefaRepositoryImpl;
+import java.util.UUID;
 
 /**
  *
@@ -26,12 +27,16 @@ public class TarefaService  extends GenericService {
         iTaskRepository.inserir(tarefa);
     }
     
-    void deletarTarefa(Class task){
+    public void deletarTarefa(Class task){
         iTaskRepository.excluir(task);
     }    
     
-    List<Tarefa> getTarefas(Class classe){
+    public List<Tarefa> getTarefas(Class classe){
         return iTaskRepository.listar(classe);
+    }
+    
+    public List<Tarefa> listarTarefasPorBoard(UUID id) {
+        return iTaskRepository.listarTarefasPorBoard(id);
     }
        
 }

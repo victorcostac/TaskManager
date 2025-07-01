@@ -4,6 +4,9 @@
  */
 package viewer;
 
+import domain.Tarefa;
+import javax.swing.JDialog;
+
 /**
  *
  * @author Usuario
@@ -14,6 +17,12 @@ public class TaskDlg extends javax.swing.JDialog {
      * Creates new form TaskDlg
      */
     public TaskDlg(java.awt.Frame parent, boolean modal) {
+        super(parent, modal);
+        initComponents();
+    }
+    
+    
+    public TaskDlg(JDialog parent, boolean modal, Object tarefa) {
         super(parent, modal);
         initComponents();
     }

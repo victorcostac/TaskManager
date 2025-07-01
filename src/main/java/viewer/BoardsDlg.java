@@ -210,10 +210,9 @@ public class BoardsDlg extends javax.swing.JDialog {
     private void irParaTarefasMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_irParaTarefasMenuItemActionPerformed
        ArrayList<Board> list = (ArrayList<Board>) tmListagemBoards.getLista();
        Board item = (Board)/*list.stream().filter(obj -> obj.equals(*/tmListagemBoards.getItem(table.getSelectedRow())/*)).findFirst();*/;
-       System.out.println(item.toString());
+
        gerGrafica.openListagemTarefaDlg(list, item, this);
        
-       System.out.println("TO AQUI KKKKKKKKKKKKKKKKKKKK");
     }//GEN-LAST:event_irParaTarefasMenuItemActionPerformed
 
     /**
