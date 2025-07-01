@@ -6,6 +6,9 @@ import controller.TMListagemTarefas;
 import domain.Board;
 import domain.Usuario;
 import java.awt.Color;
+import java.util.List;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JDialog;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -27,25 +30,33 @@ public class TasksDlg extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         
-        tmListagemTarefas = new TMListagemTarefas();
-        tarefasJTable.setModel(tmListagemTarefas);
+        amarrarAbstractTableModel();
  
         //tarefasJTable.setShowGrid(true); // Exibe a grade
         //tarefasJTable.setGridColor(Color.BLACK); // Define a cor da grade
 
     }
     
-    public TasksDlg(java.awt.Frame parent, boolean modal, Object selectedComboItem) {
+    public TasksDlg(JDialog parent, boolean modal, List list,Object selectedComboItem) {
         super(parent, modal);
         initComponents();
         
-        tmListagemTarefas = new TMListagemTarefas();
-        tarefasJTable.setModel(tmListagemTarefas);
- 
+        amarrarAbstractTableModel();
+        boardsComboBox.setModel(new DefaultComboBoxModel(list.toArray()));
+        
+        boardsComboBox.setSelectedItem(selectedComboItem);
+        
         //tarefasJTable.setShowGrid(true); // Exibe a grade
         //tarefasJTable.setGridColor(Color.BLACK); // Define a cor da grade
 
     }
+    
+    private void amarrarAbstractTableModel(){
+        tmListagemTarefas = new TMListagemTarefas();
+        tarefasJTable.setModel(tmListagemTarefas);
+    }
+    
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -58,6 +69,8 @@ public class TasksDlg extends javax.swing.JDialog {
 
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
+        tabelaListagemTarefaPopupMenu = new javax.swing.JPopupMenu();
+        irParaTarefaMenuItem = new javax.swing.JMenuItem();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         boardsComboBox = new javax.swing.JComboBox<>();
@@ -77,6 +90,14 @@ public class TasksDlg extends javax.swing.JDialog {
             }
         ));
         jScrollPane1.setViewportView(jTable1);
+
+        irParaTarefaMenuItem.setText("Ir para tarefa");
+        irParaTarefaMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                irParaTarefaMenuItemActionPerformed(evt);
+            }
+        });
+        tabelaListagemTarefaPopupMenu.add(irParaTarefaMenuItem);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setBackground(new java.awt.Color(204, 204, 255));
@@ -169,6 +190,10 @@ public class TasksDlg extends javax.swing.JDialog {
         gerGrafica.loadCombo(boardsComboBox, Board.class);
     }//GEN-LAST:event_boardsComboBoxComponentShown
 
+    private void irParaTarefaMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_irParaTarefaMenuItemActionPerformed
+        
+    }//GEN-LAST:event_irParaTarefaMenuItemActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -216,12 +241,14 @@ public class TasksDlg extends javax.swing.JDialog {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> boardsComboBox;
+    private javax.swing.JMenuItem irParaTarefaMenuItem;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable1;
+    private javax.swing.JPopupMenu tabelaListagemTarefaPopupMenu;
     private javax.swing.JTable tarefasJTable;
     // End of variables declaration//GEN-END:variables
 }

@@ -105,8 +105,10 @@ public class GerenciadorInterGrafica { // Gerenciador de interface gráfica
         boardsDlg = (BoardsDlg) openWindow(mainFrame, boardsDlg, BoardsDlg.class);
     }
    
-    public void openListagemTarefaDlg() {
-        listagemTarefasDlg = (TasksDlg) openWindow(mainFrame, listagemTarefasDlg, TasksDlg.class);
+    public void openListagemTarefaDlg(List list, Object obj, JDialog dlg) {
+        listagemTarefasDlg = new TasksDlg(dlg, true, list, obj);
+        listagemTarefasDlg.setLocation(dlg.getLocation());
+        listagemTarefasDlg.setVisible(true); 
     }
     
     /*public void loadComboUsers(JComboBox combo){
