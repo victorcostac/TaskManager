@@ -25,7 +25,6 @@ import java.util.List;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
 import viewer.BoardsDlg;
-import viewer.TaskDlg;
 import viewer.TasksDlg;
 
 /**
@@ -42,8 +41,9 @@ public class GerenciadorInterGrafica { // Gerenciador de interface gráfica
     private TasksDlg listagemTarefasDlg = null;
 
     private GerenciadorDominio gerenciadorDominio; // Gerenciador de Dompinio
+    private GerenciadorRelatorios gerenciadorRelatorios;
 
-    // ########  SINGLETON  #########
+    // ######## SINGLETON #########
     private static final GerenciadorInterGrafica myInstance = new GerenciadorInterGrafica();
 
     private GerenciadorInterGrafica() {
@@ -55,7 +55,9 @@ public class GerenciadorInterGrafica { // Gerenciador de interface gráfica
             System.exit(0);
         }
 
-        //CRIAR CATEGORIA NO BANCO (ISSO É TEMPORÁRIO)
+        this.gerenciadorRelatorios = new GerenciadorRelatorios();
+
+        // CRIAR CATEGORIA NO BANCO (ISSO É TEMPORÁRIO)
         Categoria catProduto = Categoria.builder().nome("Produto").build();
         Categoria catVale = Categoria.builder().nome("Vale").build();
         Categoria catIntegracao = Categoria.builder().nome("Integração").build();
@@ -77,16 +79,19 @@ public class GerenciadorInterGrafica { // Gerenciador de interface gráfica
         if (dlg == null) {
             try {
                 dlg = (JDialog) classe.getConstructor(Frame.class, boolean.class).newInstance(parent, true);
-            } catch (NoSuchMethodException | SecurityException | InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException ex) {
-                JOptionPane.showMessageDialog(parent, "Erro ao abrir a janela " + classe.getName() + ". " + ex.getMessage());
+            } catch (NoSuchMethodException | SecurityException | InstantiationException | IllegalAccessException
+                    | IllegalArgumentException | InvocationTargetException ex) {
+                JOptionPane.showMessageDialog(parent,
+                        "Erro ao abrir a janela " + classe.getName() + ". " + ex.getMessage());
             }
         }
+        System.out.println("------==============================="+dlg);
         dlg.setLocation(parent.getLocation());
         dlg.setVisible(true);
         return dlg;
     }
 
-    public void openMainFrame() { //ABRIR JANELA PRINCIPAL
+    public void openMainFrame() { // ABRIR JANELA PRINCIPAL
         mainFrame = new MainFrame();
         mainFrame.setVisible(true);
     }
@@ -106,49 +111,63 @@ public class GerenciadorInterGrafica { // Gerenciador de interface gráfica
     public void openBoardsDlg() {
         boardsDlg = (BoardsDlg) openWindow(mainFrame, boardsDlg, BoardsDlg.class);
     }
-    
-    private JDialog openDlgWithCombo(List list, Object obj, JDialog parent, JDialog dlg,Class classe){
+
+    public void openTasksDlgFromFrm() {
+        listagemTarefasDlg = (TasksDlg) openWindow(mainFrame, listagemTarefasDlg, TasksDlg.class);
+    }
+
+    private JDialog openDlgWithCombo(List list, Object obj, Frame parent, JDialog dlg, Class classe) {
         if (dlg == null) {
             try {
-        dlg = (JDialog) classe.getConstructor(JDialog.class, boolean.class, List.class, Object.class).newInstance(parent, true, list, obj);
-            } catch (NoSuchMethodException | SecurityException | InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException ex) {
-                JOptionPane.showMessageDialog(parent, "Erro ao abrir a janela " + classe.getName() + ". " + ex.getMessage());
+                dlg = (JDialog) classe.getConstructor(Frame.class, boolean.class, List.class, Object.class)
+                        .newInstance(parent, true, list, obj);
+            } catch (NoSuchMethodException | SecurityException | InstantiationException | IllegalAccessException
+                    | IllegalArgumentException | InvocationTargetException ex) {
+                JOptionPane.showMessageDialog(parent,
+                        "Erro ao abrir a janela " + classe.getName() + ". " + ex.getMessage());
             }
         }
         dlg.setLocation(parent.getLocation());
         dlg.setVisible(true);
         return dlg;
-        }
-    
+    }
 
-    public void openListagemTarefaDlg(List list, Object obj, JDialog dlg) {
-        listagemTarefasDlg = (TasksDlg)openDlgWithCombo(list, obj, dlg, listagemTarefasDlg, TasksDlg.class);
-        listagemTarefasDlg = new TasksDlg(dlg, true, list, obj);
-        listagemTarefasDlg.setLocation(dlg.getLocation());
+    public void openTasksDlgFromDlg(List list, Object obj, Frame parent) {
+        // listagemTarefasDlg = (TasksDlg)openDlgWithCombo(list, obj, dlg,
+        // listagemTarefasDlg, TasksDlg.class);
+        listagemTarefasDlg = new TasksDlg(parent, true, list, obj);
+        listagemTarefasDlg.setLocation(parent.getLocation());
         listagemTarefasDlg.setVisible(true);
     }
 
-    public void openTarefaDlg(List list, Object obj, JDialog dlg) {
-        taskRegisterDlg = new TaskRegisterDlg(dlg, true, (Tarefa)obj);
-        taskRegisterDlg.setLocation(dlg.getLocation());
+    public void openTarefaDlg(List list, Object obj, Frame parent) {
+        taskRegisterDlg = new TaskRegisterDlg(parent, true, (Tarefa) obj);
+        taskRegisterDlg.setLocation(parent.getLocation());
         taskRegisterDlg.setVisible(true);
     }
 
-    /*public void loadComboUsers(JComboBox combo){
-        try {
-            List list = getUsuarios();
-            combo.setModel(new DefaultComboBoxModel(list.toArray()));
-        } catch (Exception ex) {// adiconar  as exceptions depois 
-            JOptionPane.showMessageDialog(boardRegisterDlg, ex, "board registration", JOptionPane.ERROR_MESSAGE);
-        }
-    }*/
+    /*
+     * public void loadComboUsers(JComboBox combo){
+     * try {
+     * List list = getUsuarios();
+     * combo.setModel(new DefaultComboBoxModel(list.toArray()));
+     * } catch (Exception ex) {// adiconar as exceptions depois
+     * JOptionPane.showMessageDialog(boardRegisterDlg, ex, "board registration",
+     * JOptionPane.ERROR_MESSAGE);
+     * }
+     * }
+     */
     public void loadCombo(JComboBox combo, Class classe) {
         try {
             List list = this.gerenciadorDominio.listar(classe);
             combo.setModel(new DefaultComboBoxModel(list.toArray()));
-        } catch (Exception ex) {// adiconar  as exceptions depois 
+        } catch (Exception ex) {// adiconar as exceptions depois
             JOptionPane.showMessageDialog(taskRegisterDlg, ex, "Task registration", JOptionPane.ERROR_MESSAGE);
         }
+    }
+
+    public List<Tarefa> pesquisarTarefasPorNome(String pesq) {
+        return gerenciadorDominio.pesquisarTarefasPorNome(pesq);
     }
 
     public void exit() {
@@ -161,29 +180,40 @@ public class GerenciadorInterGrafica { // Gerenciador de interface gráfica
     public static void main(String args[]) {
 
         /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+        // <editor-fold defaultstate="collapsed" desc=" Look and feel setting code
+        // (optional) ">
+        /*
+         * If Nimbus (introduced in Java SE 6) is not available, stay with the default
+         * look and feel.
+         * For details see
+         * http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
          */
- /*try {
-            UIManager.setLookAndFeel(new FlatDarkLaf());
-        } catch (UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(MainFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }*/
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
+        /*
+         * try {
+         * UIManager.setLookAndFeel(new FlatDarkLaf());
+         * } catch (UnsupportedLookAndFeelException ex) {
+         * java.util.logging.Logger.getLogger(MainFrame.class.getName()).log(java.util.
+         * logging.Level.SEVERE, null, ex);
+         * }
+         */
+        // </editor-fold>
+        // </editor-fold>
+        // </editor-fold>
+        // </editor-fold>
         // TRADUÇÃO
         /*
-        javax.swing.UIManager.put("OptionPane.yesButtonText", "Sim");
-        javax.swing.UIManager.put("OptionPane.noButtonText", "Não");
-        javax.swing.UIManager.put("OptionPane.cancelButtonText", "Cancelar");
+         * javax.swing.UIManager.put("OptionPane.yesButtonText", "Sim");
+         * javax.swing.UIManager.put("OptionPane.noButtonText", "Não");
+         * javax.swing.UIManager.put("OptionPane.cancelButtonText", "Cancelar");
          */
- /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+        /* Set the Nimbus look and feel */
+        // <editor-fold defaultstate="collapsed" desc=" Look and feel setting code
+        // (optional) ">
+        /*
+         * If Nimbus (introduced in Java SE 6) is not available, stay with the default
+         * look and feel.
+         * For details see
+         * http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
@@ -192,8 +222,10 @@ public class GerenciadorInterGrafica { // Gerenciador de interface gráfica
                     break;
                 }
             }
-        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(GerenciadorInterGrafica.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException
+                | javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(GerenciadorInterGrafica.class.getName())
+                    .log(java.util.logging.Level.SEVERE, null, ex);
         }
         /* Create and display the form */
         GerenciadorInterGrafica GIManager = GerenciadorInterGrafica.getMyInstance();
@@ -203,5 +235,10 @@ public class GerenciadorInterGrafica { // Gerenciador de interface gráfica
 
     public GerenciadorDominio getGerenciadorDominio() {
         return gerenciadorDominio;
+    }
+
+
+        public GerenciadorRelatorios getGerenciadorRelatorios() {
+        return gerenciadorRelatorios;
     }
 }

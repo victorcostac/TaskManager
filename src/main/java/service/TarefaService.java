@@ -38,5 +38,9 @@ public class TarefaService  extends GenericService {
     public List<Tarefa> listarTarefasPorBoard(UUID id) {
         return iTaskRepository.listarTarefasPorBoard(id);
     }
-       
+
+    public List<Tarefa> pesquisarTarefasPorNome(String nome) {
+        return iTaskRepository.pesquisarTarefasPorNome(nome);
+    }
+
 }

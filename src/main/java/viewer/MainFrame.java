@@ -3,6 +3,7 @@ package viewer;
 
 import controller.GerenciadorInterGrafica;
 import domain.Board;
+import domain.Tarefa;
 import domain.Usuario;
 import infrastructure.IBoardRepository;
 import infrastructure.IBoardRepositoryImpl;
@@ -49,10 +50,10 @@ public class MainFrame extends javax.swing.JFrame {
         ExitMenuItem = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         listarBoardPorUsuario = new javax.swing.JMenuItem();
+        jMenu3 = new javax.swing.JMenu();
+        listagemTarefasPorBoard = new javax.swing.JMenuItem();
         jMenu4 = new javax.swing.JMenu();
-        jMenu5 = new javax.swing.JMenu();
-        jRadioButtonMenuItem1 = new javax.swing.JRadioButtonMenuItem();
-        jRadioButtonMenuItem2 = new javax.swing.JRadioButtonMenuItem();
+        jMenuItem1 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Início");
@@ -126,29 +127,27 @@ public class MainFrame extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu2);
 
+        jMenu3.setText("Tarefas");
+
+        listagemTarefasPorBoard.setText("Listagem de tarefas por board");
+        listagemTarefasPorBoard.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                listagemTarefasPorBoardActionPerformed(evt);
+            }
+        });
+        jMenu3.add(listagemTarefasPorBoard);
+
+        jMenuBar1.add(jMenu3);
+
         jMenu4.setText("Reports");
 
-        jMenu5.setText("display");
-
-        jRadioButtonMenuItem1.setSelected(true);
-        jRadioButtonMenuItem1.setText("Mais recentes");
-        jRadioButtonMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+        jMenuItem1.setText("display");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jRadioButtonMenuItem1ActionPerformed(evt);
+                jMenuItem1ActionPerformed(evt);
             }
         });
-        jMenu5.add(jRadioButtonMenuItem1);
-
-        jRadioButtonMenuItem2.setSelected(true);
-        jRadioButtonMenuItem2.setText("Antigos");
-        jRadioButtonMenuItem2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jRadioButtonMenuItem2ActionPerformed(evt);
-            }
-        });
-        jMenu5.add(jRadioButtonMenuItem2);
-
-        jMenu4.add(jMenu5);
+        jMenu4.add(jMenuItem1);
 
         jMenuBar1.add(jMenu4);
 
@@ -160,14 +159,6 @@ public class MainFrame extends javax.swing.JFrame {
     private void UserRegisterMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UserRegisterMenuItemActionPerformed
         GerenciadorInterGrafica.getMyInstance().openClientRegisterDlg();
     }//GEN-LAST:event_UserRegisterMenuItemActionPerformed
-
-    private void jRadioButtonMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonMenuItem1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jRadioButtonMenuItem1ActionPerformed
-
-    private void jRadioButtonMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonMenuItem2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jRadioButtonMenuItem2ActionPerformed
 
     private void UserRegisterMenuItemMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_UserRegisterMenuItemMouseClicked
 
@@ -207,6 +198,16 @@ public class MainFrame extends javax.swing.JFrame {
         GerenciadorInterGrafica.getMyInstance().openBoardsDlg();
     }//GEN-LAST:event_listarBoardPorUsuarioActionPerformed
 
+    private void listagemTarefasPorBoardActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_listagemTarefasPorBoardActionPerformed
+        GerenciadorInterGrafica.getMyInstance().openTasksDlgFromFrm();
+    }//GEN-LAST:event_listagemTarefasPorBoardActionPerformed
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        List list = GerenciadorInterGrafica.getMyInstance().getGerenciadorDominio().listar(Tarefa.class);
+        
+        GerenciadorInterGrafica.getMyInstance().getGerenciadorRelatorios().relComLista(list, "tarefas_criadas.jasper");
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -240,12 +241,12 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;
-    private javax.swing.JMenu jMenu5;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JRadioButtonMenuItem jRadioButtonMenuItem1;
-    private javax.swing.JRadioButtonMenuItem jRadioButtonMenuItem2;
+    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JPopupMenu.Separator jSeparator1;
+    private javax.swing.JMenuItem listagemTarefasPorBoard;
     private javax.swing.JMenuItem listarBoardPorUsuario;
     private javax.swing.JMenuItem taskRegisterMenuItem;
     // End of variables declaration//GEN-END:variables

@@ -4,7 +4,6 @@
  */
 package infrastructure;
 
-import domain.Board;
 import domain.Tarefa;
 import infrastructure.SqlImplementations.ConexaoHibernate;
 import java.util.List;
@@ -16,8 +15,8 @@ import javax.persistence.criteria.Root;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 
-public class ITarefaRepositoryImpl extends GenericRepository implements ITarefaRepository{
-    
+public class ITarefaRepositoryImpl extends GenericRepository implements ITarefaRepository {
+
     @Override
     public List<Tarefa> listarTarefasPorBoard(UUID boardId) throws HibernateException {
         List<Tarefa> lista = null;
@@ -50,6 +49,45 @@ public class ITarefaRepositoryImpl extends GenericRepository implements ITarefaR
         }
 
         return lista;
+    }
+
+    public List<Tarefa> pesquisarTarefasPorNome(String pesq) throws HibernateException {
+
+        List lista = null;
+        Session sessao = null;
+
+        String lower = pesq.toLowerCase();
+
+        try {
+            sessao = ConexaoHibernate.getSessionFactory().openSession();
+            sessao.beginTransaction();
+
+            // OPERAÇÃO
+            CriteriaBuilder builder = sessao.getCriteriaBuilder();
+            CriteriaQuery consulta = builder.createQuery(Tarefa.class);
+            Root tabela = consulta.from(Tarefa.class);
+
+            // Restrições
+            Predicate restricoes = null;
+            restricoes = builder.like(builder.lower(tabela.get("nome")), '%' + lower + '%');
+
+            consulta.where(restricoes);
+
+            // Executar a query
+            lista = sessao.createQuery(consulta).getResultList();
+
+            sessao.getTransaction().commit();
+            sessao.close();
+        } catch (HibernateException ex) {
+            if (sessao != null) {
+                sessao.getTransaction().rollback();
+                sessao.close();
+            }
+            throw new HibernateException(ex);
+        }
+
+        return lista;
+
     }
 
 }

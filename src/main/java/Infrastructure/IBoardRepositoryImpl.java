@@ -21,25 +21,29 @@ import org.hibernate.Session;
  * @author Usuario
  */
 
-public class IBoardRepositoryImpl extends GenericRepository implements IBoardRepository{ //EQUIVALENTE A UM DAO
+public class IBoardRepositoryImpl extends GenericRepository implements IBoardRepository { // EQUIVALENTE A UM DAO
 
     public IBoardRepositoryImpl() {
     }
 
     @Override
     public void adicionarTarefaNaLista(Tarefa task) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from
+                                                                       // nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
     public void deletarTarefadaLista(Tarefa task) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from
+                                                                       // nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
     public List<Tarefa> getTarefasDoBoard(Board board) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from
+                                                                       // nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
+
     @Override
     public List<Board> listarBoardsPorUsuario(UUID usuarioId) throws HibernateException {
         List<Board> lista = null;
@@ -72,6 +76,45 @@ public class IBoardRepositoryImpl extends GenericRepository implements IBoardRep
         }
 
         return lista;
+    }
+
+    public List<Board> pesquisarBoardsPorNome(String pesq) throws HibernateException {
+
+        List lista = null;
+        Session sessao = null;
+
+        String lower = pesq.toLowerCase();
+
+        try {
+            sessao = ConexaoHibernate.getSessionFactory().openSession();
+            sessao.beginTransaction();
+
+            // OPERAÇÃO
+            CriteriaBuilder builder = sessao.getCriteriaBuilder();
+            CriteriaQuery consulta = builder.createQuery(Board.class);
+            Root tabela = consulta.from(Board.class);
+
+            // Restrições
+            Predicate restricoes = null;
+            restricoes = builder.like(builder.lower(tabela.get("nome")), '%' + lower + '%');
+
+            consulta.where(restricoes);
+
+            // Executar a query
+            lista = sessao.createQuery(consulta).getResultList();
+
+            sessao.getTransaction().commit();
+            sessao.close();
+        } catch (HibernateException ex) {
+            if (sessao != null) {
+                sessao.getTransaction().rollback();
+                sessao.close();
+            }
+            throw new HibernateException(ex);
+        }
+
+        return lista;
+
     }
 
 }

@@ -15,32 +15,36 @@ import java.util.UUID;
  *
  * @author Usuario
  */
-public class BoardService extends GenericService{
+public class BoardService extends GenericService {
     private final IBoardRepositoryImpl iBoardRepository;
-    
+
     /**
      *
      * @param iBoardRepository
      */
-    public BoardService(IBoardRepositoryImpl iBoardRepository){
+    public BoardService(IBoardRepositoryImpl iBoardRepository) {
         super(new GenericRepository());
         this.iBoardRepository = iBoardRepository;
     }
-    
-    public void criarBoard(Board board){
+
+    public void criarBoard(Board board) {
         iBoardRepository.inserir(board);
     }
-    
-    public List<Board> listar(){
+
+    public List<Board> listar() {
         return iBoardRepository.listar(Board.class);
     }
-    
+
     public void deletarBoard(Object board) {
         iBoardRepository.excluir(board);
     }
-    
+
     public List<Board> listarBoardsPorUsuario(UUID usarioId) {
         return iBoardRepository.listarBoardsPorUsuario(usarioId);
+    }
+
+    public List<Board> pesquisarBoardsPorNome(String nome) {
+        return iBoardRepository.pesquisarBoardsPorNome(nome);
     }
 
 }

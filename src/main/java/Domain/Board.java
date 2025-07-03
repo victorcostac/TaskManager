@@ -26,7 +26,7 @@ import org.hibernate.annotations.Type;
 @NoArgsConstructor
 @Builder
 public class Board implements Serializable {
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Type(type = "uuid-char")
@@ -37,37 +37,28 @@ public class Board implements Serializable {
     private String descricao;
     @Column
     private Boolean status;
-    
+
     @OneToMany(mappedBy = "board", fetch = FetchType.LAZY)
-    private List<Tarefa> tarefas;    
-    
+    private List<Tarefa> tarefas;
+
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "proprietario_id")
-    //@ToString.Exclude
+    // @ToString.Exclude
     private Proprietario proprietario;
-    
+
     @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(
-        name = "usuario_board",
-        joinColumns = @JoinColumn(name = "board_id"),
-        inverseJoinColumns = @JoinColumn(name = "usuario_id")
-    )
+    @JoinTable(name = "usuario_board", joinColumns = @JoinColumn(name = "board_id"), inverseJoinColumns = @JoinColumn(name = "usuario_id"))
     @ToString.Exclude
     private List<Usuario> usuarios;
-    
-    private String verifyStatus(Boolean status){
-        if(status.equals(Boolean.TRUE)){
+
+    private String verifyStatus(Boolean status) {
+        if (status.equals(Boolean.TRUE)) {
             return "active";
-        }else{
-             return "unactive";
+        } else {
+            return "unactive";
         }
     }
-        
-    
-    public Object[] getData() {
-        return new Object[]{this.id, this.nome, this.descricao, this.proprietario, verifyStatus(this.status)};
-    }
-    
+
     @Override
     public String toString() {
         return getNome();

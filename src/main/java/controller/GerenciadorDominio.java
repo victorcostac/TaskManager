@@ -92,4 +92,16 @@ public class GerenciadorDominio { // Gerenciador de domínio
     public List<Tarefa> listarTarefasPorBoard(UUID id) {
         return tarefaService.listarTarefasPorBoard(id);
     }
+    
+    public List<Usuario> pesquisarUsuariosPorNome(String pesq){
+        return usuarioService.pesquisarUsuariosPorNome(pesq);
+    }
+
+    public List<Tarefa> pesquisarTarefasPorNome(String pesq) {
+        return tarefaService.pesquisarTarefasPorNome(pesq);
+    }
+
+    public List<Board> pesquisarBoardsPorNome(String pesq) {
+        return boardService.pesquisarBoardsPorNome(pesq);
+    }
 }

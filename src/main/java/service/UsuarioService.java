@@ -36,4 +36,8 @@ public class UsuarioService  extends GenericService{
         iUserRepository.promoverUsuarioParaProprietario(id);
     }
     
+    public List<Usuario> pesquisarUsuariosPorNome(String pesq){
+        return iUserRepository.pesquisarUsuariosPorNome(pesq);
+    }
+    
 }

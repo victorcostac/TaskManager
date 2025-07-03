@@ -64,4 +64,9 @@ public class Tarefa implements Serializable {
         this.categoria = categoria;
     }
     
+    @Override
+    public  String toString(){
+        return getNome();
+    }
+    
 }

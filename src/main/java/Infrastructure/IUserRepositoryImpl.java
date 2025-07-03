@@ -7,7 +7,13 @@ package infrastructure;
 import domain.Proprietario;
 import domain.Usuario;
 import infrastructure.SqlImplementations.ConexaoHibernate;
+import java.util.List;
 import java.util.UUID;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Expression;
+import javax.persistence.criteria.Predicate;
+import javax.persistence.criteria.Root;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.Hibernate;
@@ -36,7 +42,8 @@ public class IUserRepositoryImpl extends GenericRepository implements IUserRepos
             if (usuario != null) {
                 // Passo 2: Inicializar as coleções explicitamente.
                 // Isso fará com que o Hibernate execute consultas separadas para cada coleção,
-                // mas somente se elas não tiverem sido carregadas ainda e a sessão estiver ativa.
+                // mas somente se elas não tiverem sido carregadas ainda e a sessão estiver
+                // ativa.
                 if (usuario.getTarefasDesignadas() != null) {
                     Hibernate.initialize(usuario.getTarefasDesignadas());
                 }
@@ -58,9 +65,8 @@ public class IUserRepositoryImpl extends GenericRepository implements IUserRepos
         }
         return usuario;
     }
-    
-    
-        public Proprietario findProprietarioComColecoes(UUID id) {
+
+    public Proprietario findProprietarioComColecoes(UUID id) {
         Proprietario proprietario = null;
         Session session = null; // Ou EntityManager em JPA
         Transaction tx = null;
@@ -76,14 +82,15 @@ public class IUserRepositoryImpl extends GenericRepository implements IUserRepos
             if (proprietario != null) {
                 // Passo 2: Inicializar as coleções explicitamente.
                 // Isso fará com que o Hibernate execute consultas separadas para cada coleção,
-                // mas somente se elas não tiverem sido carregadas ainda e a sessão estiver ativa.
+                // mas somente se elas não tiverem sido carregadas ainda e a sessão estiver
+                // ativa.
                 if (proprietario.getTarefasDesignadas() != null) {
                     Hibernate.initialize(proprietario.getTarefasDesignadas());
                 }
                 if (proprietario.getBoards() != null) {
                     Hibernate.initialize(proprietario.getBoards());
                 }
-                if (proprietario.getBoardsDesignados()!= null) {
+                if (proprietario.getBoardsDesignados() != null) {
                     Hibernate.initialize(proprietario.getBoardsDesignados());
                 }
             }
@@ -128,4 +135,44 @@ public class IUserRepositoryImpl extends GenericRepository implements IUserRepos
             }
         }
     }
+
+    public List<Usuario> pesquisarUsuariosPorNome(String pesq) throws HibernateException {
+
+        List lista = null;
+        Session sessao = null;
+
+        String lower = pesq.toLowerCase();
+
+        try {
+            sessao = ConexaoHibernate.getSessionFactory().openSession();
+            sessao.beginTransaction();
+
+            // OPERAÇÃO
+            CriteriaBuilder builder = sessao.getCriteriaBuilder();
+            CriteriaQuery consulta = builder.createQuery(Usuario.class);
+            Root tabela = consulta.from(Usuario.class);
+
+            // Restrições
+            Predicate restricoes = null;
+            restricoes = builder.like(builder.lower(tabela.get("nome")), '%' + lower + '%');
+
+            consulta.where(restricoes);
+
+            // Executar a query
+            lista = sessao.createQuery(consulta).getResultList();
+
+            sessao.getTransaction().commit();
+            sessao.close();
+        } catch (HibernateException ex) {
+            if (sessao != null) {
+                sessao.getTransaction().rollback();
+                sessao.close();
+            }
+            throw new HibernateException(ex);
+        }
+
+        return lista;
+
+    }
+
 }
